@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 08:48:50 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/02/07 02:25:49 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/02/07 02:58:26 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void PhoneBook::add(void)
 void PhoneBook::search()
 {
 	int i;
+	int saved = 0;
 
 	for (i = 0; i < 8; i++)
 	{
@@ -41,20 +42,24 @@ void PhoneBook::search()
 				std::cout << " ";
 			std::cout << i << "|";
 			this->contacts[i].column();
+			saved++;
 		}
 	}
-	while (true)
+	if (saved == 0)
+		std::cout << "ERROR: No contacts found!" << std::endl;
+	while (saved != 0)
 	{
 		std::cout << "Enter valid index: ";
 		std::cin >> i;
-		std::cout << "DEBUG: index: [" << i << "]" << std::endl;
 		if (std::cin.fail())
 		{
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "ERROR: Not a valid index!" << std::endl;
 		}
 		else if (i >= 0 && i < 8 && this->contacts[i].getInitialized())
 			break;
 	}
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	this->contacts[i].print();
 }

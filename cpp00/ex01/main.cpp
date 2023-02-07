@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 08:19:00 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/02/06 17:39:36 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/02/07 02:54:37 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ int main()
 	std::string input;
 	PhoneBook pb;
 	
-	input = "GO";
-	while (input != "EXIT")
+	while (true)
 	{
 		std::cout << "Type 'ADD', 'SEARCH' or 'EXIT': ";
-		std::cin >> input;
+		std::getline(std::cin, input);
 		if (input == "ADD")
 			pb.add();
 		else if (input == "SEARCH")
