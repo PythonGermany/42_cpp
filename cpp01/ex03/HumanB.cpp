@@ -12,9 +12,8 @@
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name)
+HumanB::HumanB(std::string name) : name(name)
 {
-   this->name = name;
    std::cout << "HumanB '" << this->name << "' is being created" << std::endl;
 }
 

@@ -12,10 +12,8 @@
 
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon& weapon)
+HumanA::HumanA(std::string name, Weapon& weapon) : name(name), weapon(&weapon)
 {
-   this->name = name;
-   this->weapon = &weapon;
    std::cout << "HumanA '" << this->name << "' is being created" << std::endl;
 }
 
