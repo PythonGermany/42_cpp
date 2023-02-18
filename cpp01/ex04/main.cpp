@@ -42,14 +42,14 @@ int main(int argc, char** argv)
 	std::string outfile;
 
 	if (argc != 4)
-		return (std::cerr << "Use: " << argv[0] << " <filename> <s1> <s2>" << std::endl, 1);
+		return (std::cout << "Use: " << argv[0] << " <filename> <s1> <s2>" << std::endl, 1);
 	in.open(argv[1], std::fstream::in);
 	if (in.fail())
-		return (std::cerr << "Failed to open input file" << std::endl, 1);
+		return (std::cout << "Failed to open input file" << std::endl, 1);
 	outfile = argv[1];
 	out.open(outfile.append(".replace"), std::fstream::out);
 	if (out.fail())
-		return (std::cerr << "Failed to create/open output file" << std::endl, 1);
+		return (std::cout << "Failed to create/open output file" << std::endl, 1);
 	while (true)
 	{
 		std::getline(in, read);
