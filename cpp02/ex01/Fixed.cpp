@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include <cmath>
 
 const int Fixed::fractionalBits = 8;
 
@@ -27,7 +28,7 @@ Fixed::Fixed(const int nb) : number(nb << 8)
 Fixed::Fixed(const float nb)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->number = nb * (1 << this->fractionalBits);
+	this->number = roundf(nb * (1 << this->fractionalBits));
 }
 
 Fixed::Fixed(Fixed const& src)
