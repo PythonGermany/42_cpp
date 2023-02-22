@@ -62,7 +62,7 @@ int Fixed::getRawBits(void) const
 
 float Fixed::toFloat(void) const
 {
-	return ((double)this->number / (double)(1 << this->fractionalBits));
+	return ((float)this->number / (1 << this->fractionalBits));
 }
 
 int Fixed::toInt(void) const
