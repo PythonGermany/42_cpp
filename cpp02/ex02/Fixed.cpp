@@ -74,6 +74,22 @@ bool Fixed::operator!=(Fixed const& rhs)
 	return (this->number != rhs.number);
 }
 
+Fixed Fixed::operator+(Fixed const& rhs)
+{
+	Fixed ret;
+
+	ret.setRawBits(this->number + rhs.number);
+	return (ret);
+}
+
+Fixed Fixed::operator-(Fixed const& rhs)
+{
+	Fixed ret;
+
+	ret.setRawBits(this->number - rhs.number);
+	return (ret);
+}
+
 Fixed& Fixed::min(Fixed& nb1, Fixed& nb2)
 {
 	if (nb1 <= nb2)
