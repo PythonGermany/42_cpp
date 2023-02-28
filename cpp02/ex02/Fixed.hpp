@@ -39,6 +39,11 @@ public:
 	Fixed operator*(Fixed const& rhs);
 	Fixed operator/(Fixed const& rhs);
 
+	Fixed& operator++(void);
+	Fixed& operator--(void);
+	Fixed operator++(int);
+	Fixed operator--(int);
+
 	~Fixed();
 
 	void setRawBits(int const raw);
