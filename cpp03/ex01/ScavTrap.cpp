@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:49:18 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/03 19:57:49 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:00:04 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 
 ScavTrap::ScavTrap(ScavTrap const& src)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "ScavTrap copy constructor called" << std::endl;
 	*this = src;
 }
 
 ScavTrap& ScavTrap::operator=(ScavTrap const& rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "ScavTrap copy assignment operator called" << std::endl;
 	this->name = rhs.name;
 	this->hit_points = rhs.hit_points;
 	this->energy_points = rhs.energy_points;

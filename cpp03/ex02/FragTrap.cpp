@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:49:18 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/03 20:08:28 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:00:54 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 
 FragTrap::FragTrap(FragTrap const& src)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "FragTrap copy constructor called" << std::endl;
 	*this = src;
 }
 
 FragTrap& FragTrap::operator=(FragTrap const& rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "FragTrap copy assignment operator called" << std::endl;
 	this->name = rhs.name;
 	this->hit_points = rhs.hit_points;
 	this->energy_points = rhs.energy_points;
@@ -65,5 +65,5 @@ void FragTrap::attack(const std::string& target)
 
 void FragTrap::highFivesGuys(void)
 {
-	std::cout << "High five!!!" << std::endl;
+	std::cout << "High five?" << std::endl;
 }
