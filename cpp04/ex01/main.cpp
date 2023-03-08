@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:25:11 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/08 19:47:27 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/08 19:53:46 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,15 @@ int main()
 	size_t array_size = 4;
 	Animal *a[array_size];
 	size_t i = 0;
-	
-	std::cout << "\x1B[31mConstruct array:\x1B[0m" << std::endl;
+
+	std::cout << "\x1B[31mSubject construction:\x1B[0m" << std::endl;
+	const Animal *j1 = new Dog();
+	const Animal *i1 = new Cat();
+	std::cout << std::endl << "\x1B[31mSubject destruction:\x1B[0m" << std::endl;
+	delete j1; // should not create a leak
+	delete i1;
+
+	std::cout << std::endl << "\x1B[31mConstruct array:\x1B[0m" << std::endl;
 	for (; i < array_size / 2; i++)
 		a[i] = new Dog();
 	for (; i < array_size; i++)
