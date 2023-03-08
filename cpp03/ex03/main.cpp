@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:14:39 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/06 16:20:43 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/08 16:26:37 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int main(void)
 	st.guardGate();
 
 	std::cout << std::endl << "\x1B[31mDiamondTrap:\x1B[0m" << std::endl;
+	dt.attack("Bob");
 	dt.whoAmI();
 	std::cout << std::endl;
 	return (0);

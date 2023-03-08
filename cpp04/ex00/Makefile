@@ -6,16 +6,16 @@
 #    By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:38:03 by rburgsta          #+#    #+#              #
-#    Updated: 2023/03/08 16:25:50 by rburgsta         ###   ########.fr        #
+#    Updated: 2023/03/08 18:35:19 by rburgsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = diamondTrap
+NAME = ex00
 
-FLAGS = -Wall -Wextra -Werror -std=c++98 #-Wshadow-all
+FLAGS = -Wall -Wextra -Werror -std=c++98
 LK_SAN = #-Wno-gnu-include-next -I/LeakSanitizer/include -L../../LeakSanitizer/ -llsan -lc++
 
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
+SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 OBJ = $(SRC:%.cpp=%.o)
 
 all : $(NAME)
