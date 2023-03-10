@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:39:54 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/10 15:31:29 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:16:03 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 AMateria::AMateria(void)
 {
 	std::cout << "AMateria default constructor called" << std::endl;
+}
+
+AMateria::AMateria(void) : type(type)
+{
+	std::cout << "AMateria type constructor called" << std::endl;
 }
 
 AMateria::AMateria(AMateria const& src)

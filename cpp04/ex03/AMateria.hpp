@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:31:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/09 19:18:33 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:17:04 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ protected:
 	std::string type;
 public:
 	AMateria();
+	AMateria(std::string const& type);
 	AMateria(AMateria const& src);
 	AMateria& operator=(AMateria const& rhs);
 	virtual ~AMateria();

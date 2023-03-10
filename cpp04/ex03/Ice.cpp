@@ -6,16 +6,15 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:10:16 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/09 18:59:02 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:16:36 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
-Ice::Ice(void)
+Ice::Ice(void) : AMateria("ice")
 {
 	std::cout << "Ice default constructor called" << std::endl;
-	type = "ice";
 }
 
 Ice::Ice(Ice const& src)
