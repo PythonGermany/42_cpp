@@ -26,6 +26,7 @@ public:
 	Fixed(const float nb);
 	Fixed(Fixed const& src);
 	Fixed& operator=(Fixed const& rhs);
+	~Fixed();
 	
 	bool operator>(Fixed const& rhs);
 	bool operator<(Fixed const& rhs);
@@ -43,8 +44,6 @@ public:
 	Fixed& operator--(void);
 	Fixed operator++(int);
 	Fixed operator--(int);
-
-	~Fixed();
 
 	void setRawBits(int const raw);
 	int getRawBits(void) const;
