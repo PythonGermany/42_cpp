@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:49:18 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/06 16:01:41 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:06:00 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,6 @@ FragTrap& FragTrap::operator=(FragTrap const& rhs)
 FragTrap::~FragTrap(void)
 {
 	std::cout << "FragTrap default destructor called" << std::endl;
-}
-
-void FragTrap::attack(const std::string& target)
-{
-	if (hit_points <= 0)
-		std::cout << "FragTrap " << name << " can't attack " << target 
-		<< ". No health left!";
-	else if (energy_points <= 0)
-		std::cout << "FragTrap " << name << " can't attack " << target 
-		<< ". No energy left!";
-	else
-	{
-		std::cout << "FragTrap " << name << " attacks " << target << ", causing ";
-		std::cout << attack_damage << " points of damage! " 
-		<< --energy_points << " EP left!";
-	}
-	std::cout << std::endl;
 }
 
 void FragTrap::highFivesGuys(void)
