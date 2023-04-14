@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:10:16 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/10 18:16:36 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:44:12 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Ice::Ice(void) : AMateria("ice")
 	std::cout << "Ice default constructor called" << std::endl;
 }
 
-Ice::Ice(Ice const& src)
+Ice::Ice(Ice const& src) : AMateria(src)
 {
 	std::cout << "Ice copy constructor called" << std::endl;
 	*this = src;
