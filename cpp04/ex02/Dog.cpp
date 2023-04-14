@@ -6,13 +6,13 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:42:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/08 19:47:15 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:46:40 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-Dog::Dog(void)
+Dog::Dog(void) : AAnimal()
 {
 	std::cout << "Dog default constructor called" << std::endl;
 	type = "Dog";
@@ -41,5 +41,10 @@ Dog::~Dog(void)
 
 void Dog::makeSound(void) const
 {
-	std::cout << "Wouffff" << std::endl;
+	std::cout << "Dog sound" << std::endl;
+}
+
+Brain *Dog::getBrain() const
+{
+	return (b);
 }
