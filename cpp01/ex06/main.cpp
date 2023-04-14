@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:49:44 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/17 17:09:17 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:31:06 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,34 @@ int main(int argc, char **argv)
 		std::cout << "[DEBUG]" << std::endl;
 		h.complain("DEBUG");
 		std::cout << std::endl;
+		std::cout << "[INFO]" << std::endl;
+		h.complain("INFO");
+		std::cout << std::endl;
+		std::cout << "[WARNING]" << std::endl;
+		h.complain("WARNING");
+		std::cout << std::endl;
+		std::cout << "[ERROR]" << std::endl;
+		h.complain("ERROR");
+		break;
 	case 1:
 		std::cout << "[INFO]" << std::endl;
 		h.complain("INFO");
 		std::cout << std::endl;
+		std::cout << "[WARNING]" << std::endl;
+		h.complain("WARNING");
+		std::cout << std::endl;
+		std::cout << "[ERROR]" << std::endl;
+		h.complain("ERROR");
+		break;
 	case 2:
 		std::cout << "[WARNING]" << std::endl;
 		h.complain("WARNING");
 		std::cout << std::endl;
+		std::cout << "[ERROR]" << std::endl;
+		h.complain("ERROR");
+		break;
 	case 3:
+		std::cout << std::endl;
 		std::cout << "[ERROR]" << std::endl;
 		h.complain("ERROR");
 		break;

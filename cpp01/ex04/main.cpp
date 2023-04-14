@@ -49,7 +49,7 @@ int main(int argc, char** argv)
 	if (in.fail())
 		return (std::cout << "Failed to open input file" << std::endl, 1);
 	outfile = argv[1];
-	out.open(outfile.append(".replace"), std::ofstream::out);
+	out.open(outfile.append(".replace").c_str(), std::ofstream::out);
 	if (out.fail())
 		return (std::cout << "Failed to create/open output file" << std::endl, 1);
 	while (true)
