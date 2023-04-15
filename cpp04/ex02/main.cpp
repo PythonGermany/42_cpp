@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:25:11 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/15 00:46:46 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:16:08 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int main()
 	c.makeSound();
 	d.getType();
 	d.makeSound();
-	//system("leaks ex01");
+	//system("leaks ex02");
 	return 0;
 }
