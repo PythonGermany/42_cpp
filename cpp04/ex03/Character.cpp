@@ -6,22 +6,24 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:40:34 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/20 12:22:01 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:41:37 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-Character::Character(void) : name("NONAME")
+Character::Character(void) : name("NONAME"), mat_on_floor(0)
 {
 	std::cout << "Character default constructor called" << std::endl;
+	floor = new AMateria*[mat_on_floor];
 	for (size_t i = 0; i < 4; i++)
 		materia[i] = NULL;
 }
 
-Character::Character(std::string name) : name(name)
+Character::Character(std::string name) : name(name), mat_on_floor(0)
 {
 	std::cout << "Character name constructor called" << std::endl;
+	floor = new AMateria*[mat_on_floor];
 	for (size_t i = 0; i < 4; i++)
 		materia[i] = NULL;
 }
@@ -53,6 +55,9 @@ Character::~Character(void)
 	for (size_t i = 0; i < 4; i++)
 		if (materia[i] != NULL)
 			delete materia[i];
+	for (int i = 0; i < mat_on_floor; i++)
+		delete floor[i];
+	delete [] floor;
 }
 
 std::string const& Character::getName() const
@@ -75,7 +80,15 @@ void Character::equip(AMateria *m)
 void Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < 4 && materia[idx] != NULL)
+	{
+		AMateria **tmp_floor = new AMateria*[mat_on_floor + 1];
+		for (int i = 0; i < mat_on_floor; i++)
+			tmp_floor[i] = floor[i];
+		tmp_floor[mat_on_floor++] = materia[idx];
 		materia[idx] = NULL;
+		delete[] floor;
+		floor = tmp_floor;
+	}
 }
 
 void Character::use(int idx, ICharacter &target)
