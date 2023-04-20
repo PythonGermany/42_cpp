@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:40:34 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/19 17:07:46 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:22:01 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-Character::Character(void)
+Character::Character(void) : name("NONAME")
 {
 	std::cout << "Character default constructor called" << std::endl;
 	for (size_t i = 0; i < 4; i++)
@@ -75,14 +75,9 @@ void Character::equip(AMateria *m)
 void Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < 4 && materia[idx] != NULL)
-	{
-		delete materia[idx];
 		materia[idx] = NULL;
-	}
 }
 
-
-#include <cstdio>
 void Character::use(int idx, ICharacter &target)
 {
 	if (idx >= 0 && idx < 4 && materia[idx] != NULL)
