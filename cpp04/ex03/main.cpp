@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:31:05 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/20 12:41:08 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/21 14:23:20 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int main()
 	me->use(0, *bob);
 	me->use(1, *bob);
 	me->unequip(0);
-	me->unequip(1);
 	delete bob;
 	delete me;
 	delete src;
