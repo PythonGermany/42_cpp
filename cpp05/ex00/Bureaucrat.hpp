@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 15:57:52 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/22 16:56:40 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:41:55 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <string>
 # include <iostream>
+
+# define HIGHEST_GRADE 1
+# define LOWEST_GRADE 150
 
 class Bureaucrat
 {
@@ -28,8 +31,11 @@ public:
 	Bureaucrat& operator=(Bureaucrat const& rhs);
 	~Bureaucrat();
 
-	std::string& getName() const;
+	std::string const& getName() const;
 	int getGrade() const;
+
+	void incrementGrade();
+	void decrementGrade();
 
 	class GradeTooHighException : public std::exception
 	{
