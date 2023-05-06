@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:28:26 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/06 20:10:20 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/05/06 20:15:14 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,25 @@ int main()
 
 	try
 	{
-		c = Bureaucrat("Test2", 12);
+		c = Bureaucrat("Test2", 145);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
 	std::cout << c << std::endl;
-	c.incrementGrade();
+	c.decrementGrade();
 	std::cout << c << std::endl;
+	for (size_t i = 0; i < 5; i++)
+	{
+		try
+		{
+			c.decrementGrade();
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		std::cout << c << std::endl;
+	}
 }
