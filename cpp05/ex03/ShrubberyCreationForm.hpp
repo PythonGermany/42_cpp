@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Template.hpp                                       :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 23:35:13 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/06 23:35:13 by rburgsta         ###   ########.fr       */
+/*   Created: 2023/05/06 21:28:36 by rburgsta          #+#    #+#             */
+/*   Updated: 2023/05/06 21:28:36 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEMPLATE_HPP
-# define TEMPLATE_HPP
+#ifndef SHUBBERYCREATIONFORM_HPP
+# define SHUBBERYCREATIONFORM_HPP
 
-# include <iostream>
+# include "AForm.hpp"
+# include <fstream> 
 
-class Template
+class ShrubberyCreationForm : public AForm
 {
 private:
-	
+	std::string target;
 public:
-	Template();
-	Template(Template const& rhs);
-	Template& operator=(Template const& rhs);
-	~Template();
+	ShrubberyCreationForm();
+	ShrubberyCreationForm(std::string const& target);
+	ShrubberyCreationForm(ShrubberyCreationForm const& rhs);
+	ShrubberyCreationForm& operator=(ShrubberyCreationForm const& rhs);
+	~ShrubberyCreationForm();
+
+	void executeFormTask() const;
 };
 
 #endif

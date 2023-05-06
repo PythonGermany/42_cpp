@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Template.hpp                                       :+:      :+:    :+:   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 23:35:13 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/06 23:35:13 by rburgsta         ###   ########.fr       */
+/*   Created: 2023/05/06 21:28:36 by rburgsta          #+#    #+#             */
+/*   Updated: 2023/05/06 21:28:36 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEMPLATE_HPP
-# define TEMPLATE_HPP
+#ifndef PRESIDENTIALPARDONFORM_HPP
+# define PRESIDENTIALPARDONFORM_HPP
 
-# include <iostream>
+# include "AForm.hpp"
 
-class Template
+class PresidentialPardonForm : public AForm
 {
 private:
-	
+	std::string target;
 public:
-	Template();
-	Template(Template const& rhs);
-	Template& operator=(Template const& rhs);
-	~Template();
+	PresidentialPardonForm();
+	PresidentialPardonForm(std::string const& target);
+	PresidentialPardonForm(PresidentialPardonForm const& rhs);
+	PresidentialPardonForm& operator=(PresidentialPardonForm const& rhs);
+	~PresidentialPardonForm();
+
+	void executeFormTask() const;
 };
 
 #endif
