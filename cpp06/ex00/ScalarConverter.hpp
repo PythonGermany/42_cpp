@@ -17,8 +17,6 @@
 
 class ScalarConverter
 {
-private:
-	
 public:
 	ScalarConverter();
 	ScalarConverter(ScalarConverter const& rhs);
