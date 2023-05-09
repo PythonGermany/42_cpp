@@ -18,7 +18,8 @@
 template <typename T>
 void easyfind(T container, int nb)
 {
-	
+	 if (std::find(container.begin(), container.end(), nb) == container.end())
+	 	throw std::exception();
 }
 
 #endif
