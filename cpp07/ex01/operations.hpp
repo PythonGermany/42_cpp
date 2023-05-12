@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 07:30:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/12 07:31:40 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/05/12 07:36:59 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ void pow(T& a)
 template <typename T>
 void toUpper(T& a)
 {
-	if (typeid(a) == typeid(char))
-	{
-		if (a >= 'a' && a <= 'z')
-			a -= 'a' - 'A';
-	}
+	if (a >= 'a' && a <= 'z')
+		a -= 'a' - 'A';
 }
 
 #endif
