@@ -20,7 +20,7 @@ class Array
 {
 private:
 	T *array;
-	int size;
+	int _size;
 public:
 	Array();
 	Array(unsigned int n);
@@ -29,6 +29,7 @@ public:
 	~Array();
 
 	T& operator[](int index);
+	int size() const;
 };
 
 # include "Array.tpp"

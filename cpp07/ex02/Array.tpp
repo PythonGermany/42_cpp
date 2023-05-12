@@ -13,17 +13,17 @@
 #ifndef ARRAY_TPP
 # define ARRAY_TPP
 
-#include "Array.hpp"
+# include "Array.hpp"
 
 template <typename T>
-Array<T>::Array() : size(0)
+Array<T>::Array() : _size(0)
 {
 	std::cout << "Array default constructor called" << std::endl;
 	array = new T[0];
 }
 
 template <typename T>
-Array<T>::Array(unsigned int n) : size(n)
+Array<T>::Array(unsigned int n) : _size(n)
 {
 	std::cout << "Array constructor called" << std::endl;
 	array = new T[n];
@@ -40,11 +40,13 @@ template <typename T>
 Array<T>& Array<T>::operator=(Array const& rhs)
 {
 	std::cout << "Array copy assignment operator called" << std::endl;
-	T *temp = new T[rhs.size];
-	for (int i = 0; i < rhs.size; i++)
+	T *temp = new T[rhs._size];
+	for (int i = 0; i < rhs._size; i++)
 		temp[i] = rhs.array[i];
+	//if (array != NULL) //HOW to differenciate between array allocated and uninitialized?
+	//	delete[] array;
 	array = temp;
-	this->size = rhs.size;
+	this->_size = rhs._size;
 	return (*this);
 }
 
@@ -58,9 +60,15 @@ Array<T>::~Array()
 template <typename T>
 T& Array<T>::operator[](int index)
 {
-	if (index < 0 || index >= size)
+	if (index < 0 || index >= _size)
 		throw std::exception();
 	return (array[index]);
+}
+
+template <typename T>
+int Array<T>::size() const
+{
+	return _size;
 }
 
 #endif
