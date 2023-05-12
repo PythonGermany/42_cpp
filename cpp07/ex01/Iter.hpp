@@ -14,7 +14,6 @@
 # define ITER_HPP
 
 # include <iostream>
-# include <typeinfo>
 
 template <typename T>
 void print(T& a)
