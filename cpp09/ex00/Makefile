@@ -6,7 +6,7 @@
 #    By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:38:03 by rburgsta          #+#    #+#              #
-#    Updated: 2023/05/30 17:31:08 by rburgsta         ###   ########.fr        #
+#    Updated: 2023/05/30 17:36:57 by rburgsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ input: $(DATABASE)
 
 $(DATABASE) : $(ARCHIVE)
 	tar -xf $(ARCHIVE)
-	sed -i 's/,/ | /' $(DATABASE)
 
 $(ARCHIVE) :
 	curl https://cdn.intra.42.fr/document/document/15186/cpp_09.tgz --output $(ARCHIVE)
