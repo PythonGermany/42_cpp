@@ -25,6 +25,12 @@ BitcoinExchange::BitcoinExchange(std::string inputLoc) : inputPath(inputLoc)
 	input.open(inputLoc.c_str());
 	if (input.is_open() == false)
 		handleError("Could not open input file", 1);
+	for (std::string line; std::getline(input, line); )
+	{
+		std::string key = line.substr(0, line.find(','));
+		line.erase(0, line.find(',') + 1);
+		data[key] = std::atof(line.c_str());
+	}
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const& rhs)
@@ -41,6 +47,7 @@ BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& rhs)
 		input.close();
 	input.open(rhs.inputPath.c_str());
 	inputPath = rhs.inputPath;
+	data = rhs.data;
 	return (*this);
 }
 
