@@ -35,7 +35,13 @@ public:
 	BitcoinExchange& operator=(BitcoinExchange const& rhs);
 	~BitcoinExchange();
 
-	static void handleError(std::string msg, int code);
+	void processInput();
+	float calculateValue(std::string& date, float amount);
+	static void handleError(std::string msg, int exitCode);
+	static void handleError(std::string msg);
+private:
+	int verifyDate(std::string& date);
+	int verifyValue(std::string& value);
 };
 
 #endif
