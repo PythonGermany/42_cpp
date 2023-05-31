@@ -68,13 +68,8 @@ void BitcoinExchange::processInput()
 	for (std::string line; std::getline(input, line); )
 	{
 		std::string dateStr = line.substr(0, line.find(" | "));
-		if (line.find(" | ") == std::string::npos || verifyDate(dateStr) != 0)
-		{
-			std::cout << "Error: bad input => " << line << std::endl;
-			continue;
-		}
 		std::string valueStr = line.substr(line.find(" | ") + 3, line.length());
-		if (verifyValue(valueStr) != 0)
+		if (line.find(" | ") == std::string::npos || verifyDate(dateStr) || verifyValue(valueStr))
 		{
 			std::cout << "Error: bad input => " << line << std::endl;
 			continue;
@@ -119,6 +114,10 @@ int BitcoinExchange::verifyDate(std::string& date)
 	for (size_t i = 0; i < date.length(); i++)
 		if (!std::isdigit(date[i]) && !((i == 4 || i == 7) && date[i] == '-'))
 			return (1);
+	int month = std::atoi(date.c_str() + 5);
+	int day = std::atoi(date.c_str() + 8);
+	if (month <= 0 || month > 12 || day <= 0 || day > 31)
+		return (1);
 	return (0);
 }
 
