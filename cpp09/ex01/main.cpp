@@ -14,9 +14,14 @@
 
 int main(int argc, char **argv)
 {
-	if (argc != 2)
-		RPN::handleError("Invalid argument count", 1);
-	RPN r(argv[1]);
+	if (argc < 2)
+		RPN::handleError("No expression provided", 1);
+	RPN r;
 
-	std::cout << r.processExpression() << std::endl;
+	for (int i = 1; i < argc; i++)
+	{
+		r.loadExpression(argv[i]);
+		float result = r.processExpression();
+		std::cout << result << std::endl;
+	}
 }
