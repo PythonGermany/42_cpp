@@ -12,35 +12,24 @@
 
 #include "Span.hpp"
 
-Span::Span() : n(0)
-{
-	std::cout << "Span default constructor called" << std::endl;
-}
+Span::Span() : n(0) {}
 
-Span::Span(unsigned int N) : n(N)
-{
-	std::cout << "Span constructor called" << std::endl;
-}
+Span::Span(unsigned int N) : n(N) {}
 
 Span::Span(Span const& rhs) : n(rhs.n)
 {
-	std::cout << "Span copy constructor called" << std::endl;
 	*this = rhs;
 }
 
 Span& Span::operator=(Span const& rhs)
 {
-	std::cout << "Span copy assignment operator called" << std::endl;
-	vec = std::vector<int>(rhs.vec.size());
+	vec.resize(rhs.vec.size());
 	std::copy(rhs.vec.begin(), rhs.vec.end(), vec.begin());
-	const_cast<size_t &>(n) = rhs.n;
+	const_cast<unsigned int&>(n) = rhs.n;
 	return (*this);
 }
 
-Span::~Span()
-{
-	std::cout << "Span destructor called" << std::endl;
-}
+Span::~Span() {}
 
 void Span::addNumber(int nb)
 {
@@ -65,11 +54,4 @@ int Span::longestSpan()
 	if (vec.size() < 2)
 		throw std::exception();
 	return (vec[vec.size() - 1] - vec[0]);
-}
-
-void Span::printSpan()
-{
-	for (size_t i = 0; i < vec.size(); i++)
-		std::cout << vec[i] << " ";
-	std::cout << std::endl;
 }

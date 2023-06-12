@@ -24,12 +24,13 @@ private:
 	std::vector<int> vec;
 public:
 	PmergeMe();
-	PmergeMe(std::string seq);
+	PmergeMe(std::vector<std::string> seq);
 	PmergeMe(PmergeMe const& rhs);
 	PmergeMe& operator=(PmergeMe const& rhs);
 	~PmergeMe();
 
-	void loadSequence(std::string &seq);
+	void loadSequence(std::vector<std::string> &seq);
+	void printContainerOne() const;
 	static void handleError(std::string msg, int exitCode);
 private:
 	int verifyValue(std::string &value);
