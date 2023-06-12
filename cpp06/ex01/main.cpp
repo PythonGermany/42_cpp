@@ -5,20 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 21:34:23 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/07 21:34:23 by rburgsta         ###   ########.fr       */
+/*   Created: 2023/06/12 14:12:21 by rburgsta          #+#    #+#             */
+/*   Updated: 2023/06/12 14:12:21 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
+#include <iostream>
+#include "Serialization.hpp"
 
-Base *generate(void);
-void identify(Base* p);
-void identify(Base& p);
+void comparePointers(Data *a, Data *b)
+{
+	if (a == b)
+		std::cout << "Pointers are equal: " << a << " = " << b;
+	else
+		std::cout << "Pointers are NOT equal" << a << " != " << b;
+	std::cout << std::endl;
+}
 
 int main()
 {
-	Base *b = generate();
-	
-	identify(b);
+	Serialization s;
+	Data d = {251};
+	Data d2 = {631};
+	uintptr_t dintptr = s.serialize(&d);
+	Data *dptr = s.deserialize(dintptr);
+
+	comparePointers(dptr, &d);
+	comparePointers(dptr, &d2);
+	return (0);
 }

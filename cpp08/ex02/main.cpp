@@ -5,20 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 21:34:23 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/07 21:34:23 by rburgsta         ###   ########.fr       */
+/*   Created: 2023/06/12 17:53:15 by rburgsta          #+#    #+#             */
+/*   Updated: 2023/06/12 17:53:15 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
-
-Base *generate(void);
-void identify(Base* p);
-void identify(Base& p);
+#include "MutantStack.hpp"
+#include <iostream>
 
 int main()
 {
-	Base *b = generate();
-	
-	identify(b);
+	MutantStack<int> mst;
+	std::cout << mst.size() << std::endl;
+	mst.push(25);
+	std::cout << mst.size() << std::endl;
+	std::cout << *mst.begin() << std::endl;
+	std::cout << *mst.end() << std::endl;
+	return (0);
 }

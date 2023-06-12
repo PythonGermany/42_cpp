@@ -6,15 +6,15 @@
 #    By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:38:03 by rburgsta          #+#    #+#              #
-#    Updated: 2023/06/12 14:16:36 by rburgsta         ###   ########.fr        #
+#    Updated: 2023/06/12 18:38:25 by rburgsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex01
+NAME = ex02
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp Serialization.cpp
+SRC = main.cpp
 OBJ = $(SRC:%.cpp=%.o)
 
 all : $(NAME)

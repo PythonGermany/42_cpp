@@ -5,20 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 21:34:23 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/07 21:34:23 by rburgsta         ###   ########.fr       */
+/*   Created: 2023/06/12 17:34:27 by rburgsta          #+#    #+#             */
+/*   Updated: 2023/06/12 17:34:27 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
+#include "ScalarConverter.hpp"
 
-Base *generate(void);
-void identify(Base* p);
-void identify(Base& p);
-
-int main()
+int main(int argc, char **argv)
 {
-	Base *b = generate();
-	
-	identify(b);
+	if (argc != 2)
+	{
+		std::cout << "Error: Wrong argument count!" << std::endl;
+		return (1);
+	}
 }
