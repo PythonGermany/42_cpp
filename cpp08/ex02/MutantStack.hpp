@@ -28,8 +28,10 @@ public:
 	{
 		private:
 			int index;
+			MutantStack &stack;
 		public:
-			iterator(int index);
+			iterator();
+			iterator(int index, MutantStack &stack);
 			iterator(iterator const& rhs);
 			iterator& operator=(iterator const& rhs);
 			~iterator();

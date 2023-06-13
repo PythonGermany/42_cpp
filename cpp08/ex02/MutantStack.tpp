@@ -36,10 +36,13 @@ template <typename T>
 MutantStack<T>::~MutantStack() {}
 
 template <typename T>
-MutantStack<T>::iterator::iterator(int index) :index(index) {}
+MutantStack<T>::iterator::iterator() {}
 
 template <typename T>
-MutantStack<T>::iterator::iterator(iterator const &rhs)
+MutantStack<T>::iterator::iterator(int index, MutantStack &stack) :index(index), stack(stack) {}
+
+template <typename T>
+MutantStack<T>::iterator::iterator(iterator const &rhs) : stack(rhs.stack)
 {
 	*this = rhs;
 }
@@ -50,6 +53,7 @@ typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator=(iterator 
 	if (this == &rhs)
 		return (*this);
 	index = rhs.index;
+	stack = rhs.stack;
 	return (*this);
 }
 
@@ -95,13 +99,13 @@ T& MutantStack<T>::iterator::operator*()
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::begin()
 {
-	return (MutantStack<T>::iterator(0));
+	return (MutantStack<T>::iterator(0, *this));
 }
 
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::end()
 {
-	return (MutantStack<T>::iterator(this->size()));
+	return (MutantStack<T>::iterator(this->size(), *this));
 }
 
 #endif
