@@ -10,27 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
-
-#include <stdlib.h>
-#include <time.h>
+#include "functions.hpp"
 
 Base *generate(void)
 {
-	srand(time(NULL));
+	static bool first = false;
+	if (first == false)
+	{
+		srand(time(NULL));
+		first = true;
+	}
 	int index = rand() % 3;
-	Base *ret = NULL;
 
 	if (index == 0)
-		ret = dynamic_cast<Base*>(new A());
+		return (new A());
 	else if (index == 1)
-		ret = dynamic_cast<Base*>(new B());
-	else
-		ret = dynamic_cast<Base*>(new C());
-	std::cout << index << std::endl; //Debug
-	return (ret);
+		return (new B());
+	else if (index == 2)
+		return (new C());
+	return (NULL);
 }
 
 void identify(Base* p)
@@ -45,5 +43,19 @@ void identify(Base* p)
 
 void identify(Base& p)
 {
-	(void)p;
+	try {
+		Base &temp = dynamic_cast<A&>(p);
+		std::cout << "A" << std::endl;
+		(void)temp;
+	} catch(const std::exception& e) {}
+	try {
+		Base &temp = dynamic_cast<B&>(p);
+		std::cout << "B" << std::endl;
+		(void)temp;
+	} catch(const std::exception& e) {}
+	try {
+		Base &temp = dynamic_cast<C&>(p);
+		std::cout << "C" << std::endl;
+		(void)temp;
+	} catch(const std::exception& e) {}
 }
