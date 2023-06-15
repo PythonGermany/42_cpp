@@ -25,7 +25,7 @@ public:
 	MutantStack<T>& operator=(MutantStack<T> const& rhs);
 	~MutantStack();
 
-	struct iterator
+	class iterator
 	{
 		// using iterator_category = std::bidirectional_iterator_tag;
     	// using difference_type   = std::ptrdiff_t;

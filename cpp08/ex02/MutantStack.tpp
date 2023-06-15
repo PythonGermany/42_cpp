@@ -93,13 +93,13 @@ typename MutantStack<T>::iterator MutantStack<T>::iterator::operator--(int)
 template <typename T>
 bool MutantStack<T>::iterator::operator==(iterator const& rhs)
 {
-	return (index == rhs.index);
+	return (stack == rhs.stack && index == rhs.index);
 }
 
 template <typename T>
 bool MutantStack<T>::iterator::operator!=(iterator const& rhs)
 {
-	return (index != rhs.index);
+	return (stack != rhs.stack || index != rhs.index);
 }
 
 template <typename T>
@@ -117,13 +117,13 @@ T* MutantStack<T>::iterator::operator->()
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::begin()
 {
-	return (MutantStack<T>::iterator(0, *this));
+	return (iterator(0, *this));
 }
 
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::end()
 {
-	return (MutantStack<T>::iterator(this->size(), *this));
+	return (iterator(this->size(), *this));
 }
 
 #endif
