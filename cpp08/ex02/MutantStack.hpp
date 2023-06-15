@@ -14,6 +14,7 @@
 # define MUTANTSTACK_HPP
 
 # include <stack>
+# include <iterator>
 
 template <typename T>
 class MutantStack : public std::stack<T>
@@ -24,23 +25,31 @@ public:
 	MutantStack<T>& operator=(MutantStack<T> const& rhs);
 	~MutantStack();
 
-	class iterator
+	struct iterator
 	{
-		private:
-			int index;
-			MutantStack &stack;
-		public:
-			iterator();
-			iterator(int index, MutantStack &stack);
-			iterator(iterator const& rhs);
-			iterator& operator=(iterator const& rhs);
-			~iterator();
+		// using iterator_category = std::bidirectional_iterator_tag;
+    	// using difference_type   = std::ptrdiff_t;
+    	// using value_type        = T;
+    	// using pointer           = T*;
+    	// using reference         = T&;
+	private:
+		int index;
+		MutantStack &stack;
+	public:
+		iterator();
+		iterator(int index, MutantStack &stack);
+		iterator(iterator const& rhs);
+		iterator& operator=(iterator const& rhs);
+		~iterator();
 
-			iterator& operator++();
-			iterator operator++(int);
-			iterator& operator--();
-			iterator operator--(int);
-			T& operator*();
+		iterator& operator++();
+		iterator operator++(int);
+		iterator& operator--();
+		iterator operator--(int);
+		bool operator==(iterator const& rhs);
+		bool operator!=(iterator const& rhs);
+		T& operator*();
+		T* operator->();
 	};
 	MutantStack<T>::iterator begin();
 	MutantStack<T>::iterator end();
