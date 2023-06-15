@@ -25,13 +25,13 @@ public:
 	MutantStack<T>& operator=(MutantStack<T> const& rhs);
 	~MutantStack();
 
-	class iterator
+	struct iterator
 	{
-		// using iterator_category = std::bidirectional_iterator_tag;
-    	// using difference_type   = std::ptrdiff_t;
-    	// using value_type        = T;
-    	// using pointer           = T*;
-    	// using reference         = T&;
+		typedef std::bidirectional_iterator_tag iterator_category;
+    	typedef std::ptrdiff_t difference_type;
+    	typedef T value_type;
+    	typedef T* pointer;
+    	typedef T& reference;
 	private:
 		int index;
 		MutantStack &stack;
