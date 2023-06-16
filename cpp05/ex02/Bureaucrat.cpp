@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:01:25 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/07 00:10:23 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:01:53 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void Bureaucrat::executeForm(AForm const& form)
 		std::cout << name << " couldn't execute " << form.getName() << " because \"";
 		std::cout << e.what() << "\"." << std::endl;
 	}
-	
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() 
