@@ -11,28 +11,28 @@
 /* ************************************************************************** */
 
 #ifndef ARRAY_HPP
-# define ARRAY_HPP
+#define ARRAY_HPP
 
-# include <iostream>
+#include <iostream>
 
 template <typename T>
-class Array
-{
-private:
-	T *array;
-	int arraySize;
-	bool isAllocated;
-public:
-	Array();
-	Array(unsigned int n);
-	Array(Array const& rhs);
-	Array& operator=(Array const& rhs);
-	~Array();
+class Array {
+ private:
+  T* array;
+  int arraySize;
+  bool isAllocated;
 
-	T& operator[](int index);
-	int size() const;
+ public:
+  Array();
+  Array(unsigned int n);
+  Array(Array const& rhs);
+  Array& operator=(Array const& rhs);
+  ~Array();
+
+  T& operator[](int index);
+  int size() const;
 };
 
-# include "Array.tpp"
+#include "Array.tpp"
 
 #endif

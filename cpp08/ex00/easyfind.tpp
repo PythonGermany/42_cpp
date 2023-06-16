@@ -11,17 +11,15 @@
 /* ************************************************************************** */
 
 #ifndef EASYFIND_TPP
-# define EASYFIND_TPP
+#define EASYFIND_TPP
 
-# include "easyfind.hpp"
+#include "easyfind.hpp"
 
 template <typename T>
-typename T::iterator easyfind(T container, int nb)
-{
-	typename T::iterator itr = std::find(container.begin(), container.end(), nb);
-	if (itr == container.end())
-		throw std::exception();
-	return (itr);
+typename T::iterator easyfind(T container, int nb) {
+  typename T::iterator itr = std::find(container.begin(), container.end(), nb);
+  if (itr == container.end()) throw std::exception();
+  return (itr);
 }
 
 #endif

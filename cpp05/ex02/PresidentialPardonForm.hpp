@@ -11,22 +11,22 @@
 /* ************************************************************************** */
 
 #ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#define PRESIDENTIALPARDONFORM_HPP
 
-# include "AForm.hpp"
+#include "AForm.hpp"
 
-class PresidentialPardonForm : public AForm
-{
-private:
-	std::string target;
-public:
-	PresidentialPardonForm();
-	PresidentialPardonForm(std::string const& target);
-	PresidentialPardonForm(PresidentialPardonForm const& rhs);
-	PresidentialPardonForm& operator=(PresidentialPardonForm const& rhs);
-	~PresidentialPardonForm();
+class PresidentialPardonForm : public AForm {
+ private:
+  std::string target;
 
-	void executeFormTask() const;
+ public:
+  PresidentialPardonForm();
+  PresidentialPardonForm(std::string const& target);
+  PresidentialPardonForm(PresidentialPardonForm const& rhs);
+  PresidentialPardonForm& operator=(PresidentialPardonForm const& rhs);
+  ~PresidentialPardonForm();
+
+  void executeFormTask() const;
 };
 
 #endif

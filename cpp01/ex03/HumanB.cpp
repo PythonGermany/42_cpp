@@ -12,22 +12,17 @@
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name) : name(name)
-{
-   std::cout << "HumanB '" << this->name << "' is being created" << std::endl;
+HumanB::HumanB(std::string name) : name(name) {
+  std::cout << "HumanB '" << this->name << "' is being created" << std::endl;
 }
 
-HumanB::~HumanB(void)
-{
-   std::cout << "HumanB '" << this->name << "' is being deleted" << std::endl;
+HumanB::~HumanB(void) {
+  std::cout << "HumanB '" << this->name << "' is being deleted" << std::endl;
 }
 
-void HumanB::attack(void)
-{
-	std::cout << this->name << " attacks with their " << weapon->getType() << std::endl;
+void HumanB::attack(void) {
+  std::cout << this->name << " attacks with their " << weapon->getType()
+            << std::endl;
 }
 
-void HumanB::setWeapon(Weapon& weapon)
-{
-	this->weapon = &weapon;
-}
+void HumanB::setWeapon(Weapon& weapon) { this->weapon = &weapon; }

@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:29:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/14 17:47:48 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/06/17 00:40:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOG_HPP
-# define DOG_HPP
+#define DOG_HPP
 
 #include "Animal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal
-{
-private:
-	Brain *b;
-public:
-	Dog();
-	Dog(Dog const& rhs);
-	Dog& operator=(Dog const& rhs);
-	~Dog();
+class Dog : public Animal {
+ private:
+  Brain* b;
 
-	Brain *getBrain() const;
-	void makeSound() const;
+ public:
+  Dog();
+  Dog(Dog const& rhs);
+  Dog& operator=(Dog const& rhs);
+  ~Dog();
+
+  Brain* getBrain() const;
+  void makeSound() const;
 };
 
 #endif

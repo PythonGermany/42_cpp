@@ -11,29 +11,30 @@
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
-# define PMERGEME_HPP
+#define PMERGEME_HPP
 
-# include <iostream>
-# include <cstdlib>
-# include <string>
-# include <vector>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
 
-class PmergeMe
-{
-private:
-	std::vector<int> vec;
-public:
-	PmergeMe();
-	PmergeMe(std::vector<std::string> seq);
-	PmergeMe(PmergeMe const& rhs);
-	PmergeMe& operator=(PmergeMe const& rhs);
-	~PmergeMe();
+class PmergeMe {
+ private:
+  std::vector<int> vec;
 
-	void loadSequence(std::vector<std::string> &seq);
-	void printContainerOne() const;
-	static void handleError(std::string msg, int exitCode);
-private:
-	int verifyValue(std::string &value);
+ public:
+  PmergeMe();
+  PmergeMe(std::vector<std::string> seq);
+  PmergeMe(PmergeMe const& rhs);
+  PmergeMe& operator=(PmergeMe const& rhs);
+  ~PmergeMe();
+
+  void loadSequence(std::vector<std::string>& seq);
+  void printContainerOne() const;
+  static void handleError(std::string msg, int exitCode);
+
+ private:
+  int verifyValue(std::string& value);
 };
 
 #endif

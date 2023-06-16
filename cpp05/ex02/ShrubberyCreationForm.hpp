@@ -11,23 +11,24 @@
 /* ************************************************************************** */
 
 #ifndef SHUBBERYCREATIONFORM_HPP
-# define SHUBBERYCREATIONFORM_HPP
+#define SHUBBERYCREATIONFORM_HPP
 
-# include "AForm.hpp"
-# include <fstream> 
+#include <fstream>
 
-class ShrubberyCreationForm : public AForm
-{
-private:
-	std::string target;
-public:
-	ShrubberyCreationForm();
-	ShrubberyCreationForm(std::string const& target);
-	ShrubberyCreationForm(ShrubberyCreationForm const& rhs);
-	ShrubberyCreationForm& operator=(ShrubberyCreationForm const& rhs);
-	~ShrubberyCreationForm();
+#include "AForm.hpp"
 
-	void executeFormTask() const;
+class ShrubberyCreationForm : public AForm {
+ private:
+  std::string target;
+
+ public:
+  ShrubberyCreationForm();
+  ShrubberyCreationForm(std::string const& target);
+  ShrubberyCreationForm(ShrubberyCreationForm const& rhs);
+  ShrubberyCreationForm& operator=(ShrubberyCreationForm const& rhs);
+  ~ShrubberyCreationForm();
+
+  void executeFormTask() const;
 };
 
 #endif

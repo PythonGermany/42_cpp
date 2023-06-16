@@ -11,23 +11,22 @@
 /* ************************************************************************** */
 
 #ifndef TEMPLATE_HPP
-# define TEMPLATE_HPP
+#define TEMPLATE_HPP
 
-# include <stdint.h>
-# include "Data.hpp"
+#include <stdint.h>
 
-class Serialization
-{
-private:
-	
-public:
-	Serialization();
-	Serialization(Serialization const& rhs);
-	Serialization& operator=(Serialization const& rhs);
-	~Serialization();
+#include "Data.hpp"
 
-	static uintptr_t serialize(Data* ptr);
-	static Data* deserialize(uintptr_t raw);
+class Serialization {
+ private:
+ public:
+  Serialization();
+  Serialization(Serialization const& rhs);
+  Serialization& operator=(Serialization const& rhs);
+  ~Serialization();
+
+  static uintptr_t serialize(Data* ptr);
+  static Data* deserialize(uintptr_t raw);
 };
 
 #endif

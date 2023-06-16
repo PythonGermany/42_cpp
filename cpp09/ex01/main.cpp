@@ -12,15 +12,12 @@
 
 #include "RPN.hpp"
 
-int main(int argc, char **argv)
-{
-	if (argc < 2)
-		RPN::handleError("No expression provided", 1);
-	RPN r;
+int main(int argc, char **argv) {
+  if (argc < 2) RPN::handleError("No expression provided", 1);
+  RPN r;
 
-	for (int i = 1; i < argc; i++)
-	{
-		float result = r.processExpression(argv[i]);
-		std::cout << result << std::endl;
-	}
+  for (int i = 1; i < argc; i++) {
+    float result = r.processExpression(argv[i]);
+    std::cout << result << std::endl;
+  }
 }
