@@ -19,4 +19,5 @@ int main(int argc, char **argv)
 		std::cout << "Error: Wrong argument count!" << std::endl;
 		return (1);
 	}
+	ScalarConverter::convert(argv[1]);
 }
