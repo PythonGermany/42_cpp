@@ -13,7 +13,12 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
+#include <climits>
+#include <cmath>
+#include <cstdlib>
 #include <iostream>
+
+typedef enum type_e { INVALID = -1, C, I, F, D } type_t;
 
 class ScalarConverter {
  public:
@@ -25,7 +30,8 @@ class ScalarConverter {
   static void convert(std::string literal);
 
  private:
-  static int verifyValue(std::string& value);
+  static void printType(type_t type);
+  static type_t verifyValue(std::string& value);
 };
 
 #endif
