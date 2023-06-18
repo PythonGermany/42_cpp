@@ -6,7 +6,7 @@
 #    By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:38:03 by rburgsta          #+#    #+#              #
-#    Updated: 2023/06/13 11:43:33 by rburgsta         ###   ########.fr        #
+#    Updated: 2023/06/18 15:34:27 by rburgsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ SRC = main.cpp ScalarConverter.cpp
 OBJ = $(SRC:%.cpp=%.o)
 
 all : $(NAME)
+
+test:
+	c++ $(FLAGS) -o $(NAME) test.cpp ScalarConverter.cpp
 
 $(NAME) : $(OBJ)
 	c++ $(FLAGS) -o $(NAME) $(OBJ)
