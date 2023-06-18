@@ -18,6 +18,7 @@
 #include <climits>
 #include <cmath>
 #include <cstdlib>
+#include <ios>
 #include <iostream>
 
 typedef enum type_e { INVALID = -1, C, I, F, D } type_t;

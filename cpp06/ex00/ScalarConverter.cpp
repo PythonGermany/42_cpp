@@ -23,6 +23,10 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
 
 ScalarConverter::~ScalarConverter() {}
 
+bool overflow(long int val, long int min, long int max) {
+  return (val < min || val > max);
+}
+
 void ScalarConverter::convert(std::string literal) {
   data_t dt = {.type = verifyValue(literal)};
   if (dt.type == INVALID) return;
@@ -42,7 +46,7 @@ void ScalarConverter::convert(std::string literal) {
     dt.i = static_cast<int>(dt.f);
     dt.d = static_cast<double>(dt.f);
   } else if (dt.type == D) {
-    dt.d = std::atof(literal.c_str());
+    dt.d = std::strtod(literal.c_str(), NULL);
     dt.c = static_cast<char>(dt.d);
     dt.i = static_cast<int>(dt.d);
     dt.f = static_cast<float>(dt.d);
@@ -53,8 +57,9 @@ void ScalarConverter::convert(std::string literal) {
                       comp > static_cast<long int>(CHAR_MAX));
   printInt(dt.i, pseudo || comp < static_cast<long int>(INT_MIN) ||
                      static_cast<long int>(comp > INT_MAX));
-  printFloat(dt.f, false);
-  printDouble(dt.d, false);
+  printFloat(dt.f, errno == ERANGE);
+  printDouble(dt.d, errno == ERANGE);
+  errno = 0;
 }
 
 void ScalarConverter::printType(type_t type) {
@@ -122,23 +127,18 @@ void ScalarConverter::printFloat(float f, bool impossible) {
   std::cout << "float: ";
   if (impossible)
     std::cout << "impossible";
-  else {
-    std::cout << f;
-    if (static_cast<int>(f) == f) std::cout << ".0";
-    std::cout << "f";
-  }
-  std::cout << std::endl;
+  else
+    std::cout << std::fixed << f << "f";
+  std::cout << std::scientific << std::endl;
 }
 
 void ScalarConverter::printDouble(double d, bool impossible) {
   std::cout << "double: ";
   if (impossible)
     std::cout << "impossible";
-  else {
-    std::cout << d;
-    if (static_cast<int>(d) == d) std::cout << ".0";
-  }
-  std::cout << std::endl;
+  else
+    std::cout << std::fixed << d;
+  std::cout << std::scientific << std::endl;
 }
 
 type_t ScalarConverter::checkPseudo(std::string& value) {
