@@ -78,12 +78,12 @@ void ScalarConverter::printType(type_t type) {
 }
 
 type_t ScalarConverter::verifyValue(std::string& value) {
-  bool precisionFound = false;
+  bool prec = false;
   if (value.empty()) return (INVALID);
-  if (value.length() == 3 && value[0] == '\'' && value[2] == '\'') return C;
+  size_t length = value.length();
+  if (length == 3 && value[0] == '\'' && value[2] == '\'') return C;
   type_t pseudo = checkPseudo(value);
   if (pseudo != INVALID) return (pseudo);
-  size_t length = value.length();
   bool hasSign = value[0] == '-' || value[0] == '+';
   bool maybeFloat = value[length - 1] == 'f';
   for (size_t i = 0; i < length; i++) {
@@ -92,14 +92,13 @@ type_t ScalarConverter::verifyValue(std::string& value) {
     else if (i == length - 1 && maybeFloat && i > 2 + hasSign &&
              value.find('.') != std::string::npos)
       continue;
-    else if (i != 0 && i != length - 1 - maybeFloat && !precisionFound &&
-             value[i] == '.')
-      precisionFound = true;
+    else if (i != 0 && i != length - 1 - maybeFloat && !prec && value[i] == '.')
+      prec = true;
     else if (!std::isdigit(value[i]))
       return (INVALID);
   }
-  if (value[value.length() - 1] == 'f') return (F);
-  if (precisionFound) return (D);
+  if (value[length - 1] == 'f') return (F);
+  if (prec) return (D);
   return (I);
 }
 
