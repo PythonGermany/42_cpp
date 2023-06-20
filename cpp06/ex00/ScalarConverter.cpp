@@ -23,42 +23,36 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
 
 ScalarConverter::~ScalarConverter() {}
 
-bool overflow(long int val, long int min, long int max) {
-  return (val < min || val > max);
+template <typename T>
+data_t cast(T val) {
+  data_t data = {static_cast<char>(val), static_cast<int>(val),
+                 static_cast<float>(val), static_cast<double>(val)};
+  return data;
 }
 
 void ScalarConverter::convert(std::string literal) {
-  data_t dt = {.type = verifyValue(literal)};
-  if (dt.type == INVALID) return;
-  if (dt.type == C) {
-    dt.c = static_cast<char>(literal[1]);
-    dt.i = static_cast<int>(dt.c);
-    dt.f = static_cast<float>(dt.c);
-    dt.d = static_cast<double>(dt.c);
-  } else if (dt.type == I) {
-    dt.i = std::atoi(literal.c_str());
-    dt.c = static_cast<char>(dt.i);
-    dt.f = static_cast<float>(dt.i);
-    dt.d = static_cast<double>(dt.i);
-  } else if (dt.type == F) {
-    dt.f = std::strtof(literal.c_str(), NULL);
-    dt.c = static_cast<char>(dt.f);
-    dt.i = static_cast<int>(dt.f);
-    dt.d = static_cast<double>(dt.f);
-  } else if (dt.type == D) {
-    dt.d = std::strtod(literal.c_str(), NULL);
-    dt.c = static_cast<char>(dt.d);
-    dt.i = static_cast<int>(dt.d);
-    dt.f = static_cast<float>(dt.d);
+  type_t type = verifyValue(literal);
+  if (type == INVALID) return;
+  bool fail = false;
+  data_t dt;
+  if (type == C)
+    dt = cast(literal[1]);
+  else if (type == I) {
+    dt = cast(std::atoi(literal.c_str()));
+    fail = intStringOverflow(literal);
+  } else if (type == F) {
+    dt = cast(std::strtof(literal.c_str(), NULL));
+    fail = errno == ERANGE;
+  } else if (type == D) {
+    dt = cast(std::strtod(literal.c_str(), NULL));
+    fail = errno == ERANGE;
   }
   bool pseudo = checkPseudo(literal) != INVALID;
-  long int comp = std::atol(literal.c_str());
-  printChar(dt.c, pseudo || comp < static_cast<long int>(CHAR_MIN) ||
-                      comp > static_cast<long int>(CHAR_MAX));
-  printInt(dt.i, pseudo || comp < static_cast<long int>(INT_MIN) ||
-                     static_cast<long int>(comp > INT_MAX));
-  printFloat(dt.f, errno == ERANGE);
-  printDouble(dt.d, errno == ERANGE);
+  long comp = std::atol(literal.c_str());
+  printChar(dt.c, pseudo || overflow<long, char>(comp, CHAR_MIN, CHAR_MAX));
+  printInt(dt.i, pseudo || overflow(comp, INT_MIN, INT_MAX));
+  printFloat(dt.f, fail);
+  printDouble(dt.d, fail);
   errno = 0;
 }
 
@@ -84,7 +78,7 @@ type_t ScalarConverter::verifyValue(std::string& value) {
   if (length == 3 && value[0] == '\'' && value[2] == '\'') return C;
   type_t pseudo = checkPseudo(value);
   if (pseudo != INVALID) return (pseudo);
-  bool hasSign = value[0] == '-' || value[0] == '+';
+  bool hasSign = value[0] == '-';
   bool maybeFloat = value[length - 1] == 'f';
   for (size_t i = 0; i < length; i++) {
     if (i == 0 && hasSign && length > 1)
@@ -127,8 +121,8 @@ void ScalarConverter::printFloat(float f, bool impossible) {
   if (impossible)
     std::cout << "impossible";
   else
-    std::cout << std::fixed << f << "f";
-  std::cout << std::scientific << std::endl;
+    std::cout << removeTrailingZeros(valueToString<float>(f)) << "f";
+  std::cout << std::endl;
 }
 
 void ScalarConverter::printDouble(double d, bool impossible) {
@@ -136,8 +130,8 @@ void ScalarConverter::printDouble(double d, bool impossible) {
   if (impossible)
     std::cout << "impossible";
   else
-    std::cout << std::fixed << d;
-  std::cout << std::scientific << std::endl;
+    std::cout << removeTrailingZeros(valueToString<double>(d));
+  std::cout << std::endl;
 }
 
 type_t ScalarConverter::checkPseudo(std::string& value) {
@@ -147,4 +141,43 @@ type_t ScalarConverter::checkPseudo(std::string& value) {
       !value.compare("nanf"))
     return (F);
   return (INVALID);
+}
+
+template <typename T, typename D>
+bool ScalarConverter::overflow(T val, D min, D max) {
+  long int valLong = static_cast<long int>(val);
+  return (valLong < static_cast<long int>(min) ||
+          valLong > static_cast<long int>(max));
+}
+
+bool ScalarConverter::intStringOverflow(std::string& str) {
+  if (str.empty()) return false;
+  if (str[0] == '-') {
+    if (str.size() > static_cast<size_t>(11)) return true;
+    if (str.size() < static_cast<size_t>(11)) return false;
+    if (str.compare("-2147483648") > 0) return true;
+    return false;
+  }
+  if (str.size() > static_cast<size_t>(10)) return true;
+  if (str.size() < static_cast<size_t>(10)) return false;
+  if (str.compare("2147483647") > 0) return true;
+  return false;
+}
+
+template <typename T>
+std::string ScalarConverter::valueToString(T val) {
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(std::numeric_limits<T>::digits10 + 1)
+     << val << std::scientific;
+  return ss.str();
+}
+
+std::string ScalarConverter::removeTrailingZeros(std::string str) {
+  if (str.empty()) return str;
+  while (str[str.length() - static_cast<size_t>(1)] == '0') {
+    if (str.length() < static_cast<size_t>(2) || str[str.length() - 2] == '.')
+      break;
+    str.erase(str.length() - static_cast<size_t>(1), static_cast<size_t>(1));
+  }
+  return str;
 }
