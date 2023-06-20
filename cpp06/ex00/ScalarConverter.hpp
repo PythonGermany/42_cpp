@@ -14,6 +14,7 @@
 #define SCALARCONVERTER_HPP
 
 #include <cerrno>
+#include <cfloat>
 #include <climits>
 #include <cstdlib>
 #include <iomanip>
