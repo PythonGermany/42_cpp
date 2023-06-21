@@ -82,7 +82,7 @@ int RPN::verifyValue(std::string& value) {
   bool precisionFound = false;
   if (value.empty()) return (1);
   for (size_t i = 0; i < value.length(); i++) {
-    if (i == 0 && (value[i] == '-' || value[i] == '+'))
+    if (i == 0 && (value[i] == '-' || value[i] == '+') && value.length() > 1)
       continue;
     else if (!precisionFound && value[i] == '.')
       precisionFound = true;

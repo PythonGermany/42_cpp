@@ -21,6 +21,7 @@ PmergeMe::PmergeMe(PmergeMe const& rhs) { *this = rhs; }
 PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
   if (this == &rhs) return (*this);
   vec = rhs.vec;
+  // DEV copy second container
   return (*this);
 }
 
@@ -41,13 +42,26 @@ void PmergeMe::loadSequence(std::vector<std::string>& seq) {
   }
 }
 
+void PmergeMe::sortContainerOne() {
+  // DEV sort first container
+}
+
 void PmergeMe::printContainerOne() const {
   for (size_t i = 0; i < vec.size(); i++) std::cout << vec[i] << " ";
   std::cout << std::endl;
 }
 
+void PmergeMe::sortContainerTwo() {
+  // DEV sort second container
+}
+
+void PmergeMe::printContainerTwo() const {
+  // DEV print second container
+}
+
 int PmergeMe::verifyValue(std::string& value) {
   if (value.empty()) return (1);
+  if (value.size() > 10) return (1);
   for (size_t i = 0; i < value.length(); i++)
     if (!std::isdigit(value[i])) return (1);
   return (0);
