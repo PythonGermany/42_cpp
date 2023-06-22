@@ -44,7 +44,8 @@ void ScalarConverter::convert(std::string literal) {
   long comp = std::atol(literal.c_str());
   printChar(dt.c, pseudo || overflow<char>(comp, CHAR_MIN, CHAR_MAX));
   printInt(dt.i, pseudo || overflow(comp, INT_MIN, INT_MAX) || fail);
-  printFloat(dt.f, fail);
+  printFloat(dt.f,
+             (!pseudo && (dt.f == INFINITY || dt.f == -INFINITY)) || fail);
   printDouble(dt.d, fail);
   errno = 0;
 }
