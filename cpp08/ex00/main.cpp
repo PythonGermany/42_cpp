@@ -25,7 +25,10 @@ int main() {
   // std::vector<int> test
   intvec.push_back(5);
   intvec.push_back(10);
-  std::cout << "Vector test:" << std::endl;
+  std::cout << "Vector test: ";
+  std::vector<int>::iterator itrvec = intvec.begin();
+  for (; itrvec != intvec.end(); itrvec++) std::cout << *itrvec << " ";
+  std::cout << std::endl;
   try {
     std::vector<int>::iterator itr = easyfind(intvec, 10);
     std::cout << "Number found: " << *itr << std::endl;
@@ -49,7 +52,10 @@ int main() {
   // std::list<int> test
   intlist.push_back(55);
   intlist.push_back(10);
-  std::cout << "List test:" << std::endl;
+  std::cout << "List test: ";
+  std::list<int>::iterator itrlst = intlist.begin();
+  for (; itrlst != intlist.end(); itrlst++) std::cout << *itrlst << " ";
+  std::cout << std::endl;
   try {
     std::list<int>::iterator itr = easyfind(intlist, 10);
     std::cout << "Number found: " << *itr << std::endl;
@@ -74,7 +80,10 @@ int main() {
   // std::deque<int> test
   intdeque.push_back(55);
   intdeque.push_back(10);
-  std::cout << "Deque test:" << std::endl;
+  std::cout << "Deque test: ";
+  std::deque<int>::iterator itrdqe = intdeque.begin();
+  for (; itrdqe != intdeque.end(); itrdqe++) std::cout << *itrdqe << " ";
+  std::cout << std::endl;
   try {
     std::deque<int>::iterator itr = easyfind(intdeque, 10);
     std::cout << "Number found: " << *itr << std::endl;
