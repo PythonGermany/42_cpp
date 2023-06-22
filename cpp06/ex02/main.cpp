@@ -26,5 +26,15 @@ int main() {
       cCount++;
     delete b;
   }
+  A *a = new A();
+  B *b = new B();
+  C *c = new C();
+
   std::cout << aCount << " " << bCount << " " << cCount << std::endl;
+  identify(a);
+  identify(b);
+  identify(c);
+  identify(*a);
+  identify(*b);
+  identify(*c);
 }
