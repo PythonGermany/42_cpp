@@ -24,28 +24,29 @@ RPN& RPN::operator=(RPN const& rhs) {
 RPN::~RPN() {}
 
 float RPN::processExpression(std::string expr) {
-  std::list<t_element> data = loadExpression(expr);
-  std::list<t_element> stack;
+  std::stack<t_element> data = loadExpression(expr);
+  std::stack<t_element> stack;
   while (data.size() > 0) {
-    if (data.front().type == OPERAND)
-      stack.push_front(data.front());
-    else if (data.front().type == OPERATOR) {
+    if (data.top().type == OPERAND)
+      stack.push(data.top());
+    else if (data.top().type == OPERATOR) {
       if (stack.size() < 2) handleError("Processing: Invalid expression", 1);
-      if (data.front().value == '+')
-        (*(++stack.begin())).value += stack.front().value;
-      else if (data.front().value == '-')
-        (*(++stack.begin())).value -= stack.front().value;
-      else if (data.front().value == '*')
-        (*(++stack.begin())).value *= stack.front().value;
-      else if (data.front().value == '/')
-        (*(++stack.begin())).value /= stack.front().value;
-      stack.pop_front();
+      t_element temp = stack.top();
+      stack.pop();
+      if (data.top().value == '+')
+        stack.top().value += temp.value;
+      else if (data.top().value == '-')
+        stack.top().value -= temp.value;
+      else if (data.top().value == '*')
+        stack.top().value *= temp.value;
+      else if (data.top().value == '/')
+        stack.top().value /= temp.value;
     }
-    data.pop_front();
+    data.pop();
   }
   if (stack.size() != 1)
     handleError("Processing: Invalid/Incomplete expression", 1);
-  return (stack.front().value);
+  return (stack.top().value);
 }
 
 void RPN::handleError(std::string msg, int exitCode) {
@@ -53,19 +54,26 @@ void RPN::handleError(std::string msg, int exitCode) {
   std::exit(exitCode);
 }
 
-std::list<t_element> RPN::loadExpression(std::string& expr) {
+std::stack<t_element> RPN::loadExpression(std::string& expr) {
   if (expr.empty()) handleError("Loading: Empty input expression", 1);
-  std::list<t_element> data;
+  std::stack<t_element> data;
   while (expr.length() > 0) {
-    std::string value = expr.substr(0, expr.find(' '));
-    if (value.size() == 1 && std::strchr("+-/*", expr[0]) != NULL)
-      data.push_back(createElement(OPERATOR, expr[0]));
+    size_t start = expr.find_last_of(' ');
+    std::string value;
+    if (start != std::string::npos)
+      value = expr.substr(start + 1);
+    else {
+      value = expr;
+      start = 0;
+    }
+    if (value.size() == 1 && std::strchr("+-/*", value[0]) != NULL)
+      data.push(createElement(OPERATOR, value[0]));
     else {
       if (verifyValue(value))
         handleError("Loading: Invalid input expression", 1);
-      data.push_back(createElement(OPERAND, std::atof(value.c_str())));
+      data.push(createElement(OPERAND, std::atof(value.c_str())));
     }
-    expr.erase(0, value.size() + 1);
+    expr.erase(start);
   }
   return (data);
 }
