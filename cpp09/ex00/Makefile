@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:38:03 by rburgsta          #+#    #+#              #
-#    Updated: 2023/06/12 11:08:26 by rburgsta         ###   ########.fr        #
+#    Updated: 2023/07/05 13:17:03 by rburgsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(DATABASE) : $(ARCHIVE)
 	tar -xf $(ARCHIVE)
 
 $(ARCHIVE) :
-	curl https://cdn.intra.42.fr/document/document/17076/cpp_09.tgz --output $(ARCHIVE)
+	curl https://cdn.intra.42.fr/document/document/17623/cpp_09.tgz --output $(ARCHIVE)
 
 clean :
 	rm -rf $(OBJ)
