@@ -15,9 +15,9 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <list>
 #include <string>
 #include <vector>
-#include <list>
 class PmergeMe {
  private:
   std::vector<int> vec;
@@ -32,8 +32,8 @@ class PmergeMe {
 
   void loadSequence(std::vector<std::string>& seq);
   void sortContainerOne();
-  void printContainerOne() const;
   void sortContainerTwo();
+  void printContainerOne() const;
   void printContainerTwo() const;
   static void handleError(std::string msg, int exitCode);
 
