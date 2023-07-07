@@ -16,7 +16,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <list>
+#include <stack>
 #include <string>
 
 #define OPERATOR 0
@@ -38,7 +38,7 @@ class RPN {
   static void handleError(std::string msg, int exitCode);
 
  private:
-  std::list<t_element> loadExpression(std::string& expr);
+  std::stack<t_element> loadExpression(std::string& expr);
   t_element createElement(int type, float value);
   int verifyValue(std::string& value);
 };
