@@ -22,7 +22,7 @@ ScalarConverter::ScalarConverter(ScalarConverter const& rhs)
 ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs)
 {
 	if (this == &rhs)
-		return (*this);	
+		return (*this);
 	return (*this);
 }
 
@@ -32,7 +32,10 @@ void ScalarConverter::convert(std::string literal)
 {
 	if (literal.empty())
 		return;
-	
+	if (!verifyValue(literal))
+		
+	else if (literal.length() == 1 && literal[0] > ' ' && literal[0] < '\177')
+
 }
 
 int ScalarConverter::verifyValue(std::string &value)
