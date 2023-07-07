@@ -39,9 +39,9 @@ Array<T>::Array(Array const& rhs) : isAllocated(false)
 template <typename T>
 Array<T>& Array<T>::operator=(Array const& rhs)
 {
+	std::cout << "Array copy assignment operator called" << std::endl;
 	if (this == &rhs)
 		return (*this);
-	std::cout << "Array copy assignment operator called" << std::endl;
 	T *temp = new T[rhs.arraySize];
 	for (int i = 0; i < rhs.arraySize; i++)
 		temp[i] = rhs.array[i];
