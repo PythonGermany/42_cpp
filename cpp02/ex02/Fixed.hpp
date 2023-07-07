@@ -33,7 +33,12 @@ public:
 	bool operator<=(Fixed const& rhs);
 	bool operator==(Fixed const& rhs);
 	bool operator!=(Fixed const& rhs);
-	
+
+	Fixed operator+(Fixed const& rhs);
+	Fixed operator-(Fixed const& rhs);
+	Fixed operator*(Fixed const& rhs);
+	Fixed operator/(Fixed const& rhs);
+
 	~Fixed();
 
 	void setRawBits(int const raw);

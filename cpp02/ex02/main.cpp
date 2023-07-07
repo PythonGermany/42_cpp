@@ -37,20 +37,22 @@ int main(void)
 {
 	Fixed a;
 	// Fixed const b(Fixed(5.05f) * Fixed(2));
+	Fixed const b(10.1f);
 
+	std::cout << "Subject tests:" << std::endl;
 	// std::cout << a << std::endl;
 	// std::cout << ++a << std::endl;
 	// std::cout << a << std::endl;
 	// std::cout << a++ << std::endl;
 	// std::cout << a << std::endl;
 	// std::cout << b << std::endl;
-	// std::cout << Fixed::max(a, b) << std::endl;
+	std::cout << Fixed::max(a, b) << std::endl;
+	std::cout << std::endl;
 
 	Fixed c(2.254f);
 	Fixed d(0.99f);
 
 	a = Fixed(0.99f);
-	std::cout << std::endl;
 	std::cout << "Comparison operator test:" << std::endl;
 	std::cout << a << " is equal to " << c << ": " << (a == c) << std::endl;
 	std::cout << a << " is not equal to " << c << ": " << (a != c) << std::endl;
@@ -62,11 +64,21 @@ int main(void)
 	std::cout << a << " is equal to / greater than " << d << ": " << (a >= d) << std::endl;
 	std::cout << std::endl;
 
+	std::cout << "+; -; *; / tests" << std::endl;
+	std::cout << a << " + " << c << " = " << (a + c) << std::endl;
+	std::cout << a << " - " << c << " = " << (a - c) << std::endl;
+	std::cout << c << " - " << a << " = " << (c - a) << std::endl;
+	std::cout << std::endl;
+
 	std::cout << "Min/Max tests:" << std::endl;
 	min_test(a, c);
 	min_test(a, d);
 	max_test(a, c);
 	max_test(a, d);
+	min_const_test(a, c);
+	min_const_test(a, d);
+	max_const_test(a, c);
+	max_const_test(a, d);
 	std::cout << std::endl;
 
 	return 0;
