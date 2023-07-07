@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Fixed.hpp"
 
 void min_test(Fixed& nb1, Fixed& nb2)
@@ -36,24 +35,35 @@ void max_const_test(Fixed const &nb1, Fixed const &nb2)
 int main(void)
 {
 	Fixed a;
-	// Fixed const b(Fixed(5.05f) * Fixed(2));
-	Fixed const b(10.1f);
+	Fixed const b(Fixed(5.05f) * Fixed(2));
 
-	std::cout << "Subject tests:" << std::endl;
-	// std::cout << a << std::endl;
-	// std::cout << ++a << std::endl;
-	// std::cout << a << std::endl;
-	// std::cout << a++ << std::endl;
-	// std::cout << a << std::endl;
-	// std::cout << b << std::endl;
+	std::cout << std::endl;
+	std::cout << "\x1B[31mSubject tests:\x1B[0m" << std::endl;
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
 	std::cout << Fixed::max(a, b) << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "\x1B[31mIncrement/Decrement operator tests:\x1B[0m" << std::endl;
+	std::cout << a << std::endl;
+	std::cout << --a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a-- << std::endl;
+	std::cout << a << std::endl;
 	std::cout << std::endl;
 
 	Fixed c(2.254f);
 	Fixed d(0.99f);
+	Fixed e(0.5f);
+	Fixed f(1);
 
 	a = Fixed(0.99f);
-	std::cout << "Comparison operator test:" << std::endl;
+	std::cout << std::endl;
+	std::cout << "\x1B[31mComparison operator tests:\x1B[0m" << std::endl;
 	std::cout << a << " is equal to " << c << ": " << (a == c) << std::endl;
 	std::cout << a << " is not equal to " << c << ": " << (a != c) << std::endl;
 	std::cout << a << " is smaller than " << c << ": " << (a < c) << std::endl;
@@ -64,13 +74,22 @@ int main(void)
 	std::cout << a << " is equal to / greater than " << d << ": " << (a >= d) << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "+; -; *; / tests" << std::endl;
+	std::cout << "\x1B[31m+; -; *; / tests\x1B[0m" << std::endl;
 	std::cout << a << " + " << c << " = " << (a + c) << std::endl;
 	std::cout << a << " - " << c << " = " << (a - c) << std::endl;
 	std::cout << c << " - " << a << " = " << (c - a) << std::endl;
+	std::cout << a << " * " << c << " = " << (a * c) << std::endl;
+	std::cout << a << " / " << c << " = " << (a / c) << std::endl;
+	std::cout << c << " / " << a << " = " << (c / a) << std::endl;
+	std::cout << e << "/" << e << " = " << (e / e) << std::endl;
+	std::cout << e << "*" << e << " = " << (e * e) << std::endl;
+	std::cout << e << " * 3 / " << e << " = " << (e * 3 / e) << std::endl;
+	std::cout << e << " * 3 * " << e << " = " << (e * 3 * e) << std::endl;
+	std::cout << f << " / 3 * " << 3 << " = " << (f / 3 * 3) << std::endl;
+	std::cout << e << " * 3 / 2 * " << e << " * 3 / 2 = " << ((e * 3 / 2) * (e * 3 / 2)) << std::endl;
 	std::cout << std::endl;
 
-	std::cout << "Min/Max tests:" << std::endl;
+	std::cout << "\x1B[31mMin/Max tests:\x1B[0m" << std::endl;
 	min_test(a, c);
 	min_test(a, d);
 	max_test(a, c);

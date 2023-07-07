@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-#include <cmath>
 
 const int Fixed::fractionalBits = 8;
 
@@ -88,6 +87,50 @@ Fixed Fixed::operator-(Fixed const& rhs)
 
 	ret.setRawBits(this->number - rhs.number);
 	return (ret);
+}
+
+Fixed Fixed::operator*(Fixed const& rhs)
+{
+	Fixed ret;
+
+	ret.setRawBits((long int)this->number * (long int)rhs.number / (1 << fractionalBits));
+	return (ret);
+}
+
+Fixed Fixed::operator/(Fixed const& rhs)
+{
+	Fixed ret;
+
+	ret.setRawBits((long int)this->number * (1 << fractionalBits) / rhs.number);
+	return (ret);
+}
+
+Fixed& Fixed::operator++(void)
+{
+	this->number++;
+	return (*this);
+}
+
+Fixed& Fixed::operator--(void)
+{
+	this->number--;
+	return (*this);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed temp = *this;
+
+	this->number++;
+	return (temp);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed temp = *this;
+
+	this->number--;
+	return (temp);
 }
 
 Fixed& Fixed::min(Fixed& nb1, Fixed& nb2)
