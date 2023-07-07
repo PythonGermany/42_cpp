@@ -13,12 +13,14 @@
 #include "easyfind.hpp"
 #include <vector>
 #include <list>
+#include <deque>
 #include <iostream>
 
 int main()
 {
 	std::vector<int> intvec;
 	std::list<int> intlist;
+	std::deque<int> intdeque;
 
 	intvec.push_back(5);
 	intvec.push_back(10);
@@ -75,6 +77,38 @@ int main()
 	try
 	{
 		easyfind(intlist, 10);
+		std::cerr << "Number found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " Number not found" << std::endl;
+	}
+	std::cout << std::endl;
+
+	intdeque.push_back(55);
+	intdeque.push_back(10);
+	try
+	{
+		easyfind(intdeque, 10);
+		std::cerr << "Number found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " Number not found" << std::endl;
+	}
+	try
+	{
+		easyfind(intdeque, 5);
+		std::cerr << "Number found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " Number not found" << std::endl;
+	}
+	intdeque.clear();
+	try
+	{
+		easyfind(intdeque, 10);
 		std::cerr << "Number found" << std::endl;
 	}
 	catch(const std::exception& e)
