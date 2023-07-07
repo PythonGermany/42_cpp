@@ -17,10 +17,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <list>
 class PmergeMe {
  private:
   std::vector<int> vec;
+  std::list<int> lst;
 
  public:
   PmergeMe();

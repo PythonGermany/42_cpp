@@ -18,4 +18,5 @@ int main(int argc, char **argv) {
   for (int i = 0; i < argc - 1; i++) arg[i] = argv[i + 1];
   PmergeMe p(arg);
   p.printContainerOne();
+  p.printContainerTwo();
 }
