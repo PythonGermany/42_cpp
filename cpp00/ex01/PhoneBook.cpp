@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 08:48:50 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/02/07 02:58:26 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/02/07 03:14:44 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,14 @@ void PhoneBook::search()
 	{
 		std::cout << "Enter valid index: ";
 		std::cin >> i;
-		if (std::cin.fail())
+		if (std::cin.fail() || i < 0 || i > 7 || !this->contacts[i].getInitialized())
 		{
 			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			std::cout << "ERROR: Not a valid index!" << std::endl;
 		}
-		else if (i >= 0 && i < 8 && this->contacts[i].getInitialized())
-			break;
+		else
+			saved = 0;
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	this->contacts[i].print();
 }
