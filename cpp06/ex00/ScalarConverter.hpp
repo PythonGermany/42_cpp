@@ -25,8 +25,7 @@ public:
 
 	static void convert(std::string literal);
 private:
-	static int verifyValue(std::string &value)
-
+	static int verifyValue(std::string &value);
 };
 
 #endif
