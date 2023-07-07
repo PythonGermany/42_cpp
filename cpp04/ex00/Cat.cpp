@@ -6,13 +6,13 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:42:29 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/08 18:28:19 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:45:53 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat(void)
+Cat::Cat(void) : Animal()
 {
 	std::cout << "Cat default constructor called" << std::endl;
 	type = "Cat";
@@ -38,5 +38,5 @@ Cat::~Cat(void)
 
 void Cat::makeSound(void) const
 {
-	std::cout << "Meaaaaoowwwwwww" << std::endl;
+	std::cout << "Cat sound" << std::endl;
 }

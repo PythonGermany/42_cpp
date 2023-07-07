@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 18:59:52 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/08 19:21:11 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:45:03 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ public:
 	Brain(Brain const& rhs);
 	Brain& operator=(Brain const& src);
 	~Brain();
+
+	void addIdea(const unsigned int index, const std::string& idea);
+	void readIdea(const unsigned index);
 };
 
 #endif

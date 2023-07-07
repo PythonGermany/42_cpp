@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:29:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/08 19:06:26 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:47:48 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
 	Dog& operator=(Dog const& rhs);
 	~Dog();
 
+	Brain *getBrain() const;
 	void makeSound() const;
 };
 

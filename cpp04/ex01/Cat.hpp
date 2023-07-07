@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:29:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/08 19:06:02 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:47:00 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
 	Cat& operator=(Cat const& rhs);
 	~Cat();
 
+	Brain *getBrain() const;
 	void makeSound() const;
 };
 

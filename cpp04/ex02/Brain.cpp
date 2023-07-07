@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:02:39 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/08 19:34:00 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:50:41 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,16 @@ Brain& Brain::operator=(Brain const& rhs)
 Brain::~Brain(void)
 {
 	std::cout << "Brain destructor called" << std::endl;
+}
+
+void Brain::addIdea(const unsigned int index, const std::string& idea)
+{
+	if (index < 100)
+		ideas[index] = idea;
+}
+
+void Brain::readIdea(const unsigned index)
+{
+	if (index < 100)
+		std::cout << "Idea: " << ideas[index] << std::endl;
 }
