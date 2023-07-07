@@ -6,16 +6,15 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:47:56 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/09 18:58:29 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/10 18:16:20 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
-Cure::Cure(void)
+Cure::Cure(void) : AMateria("cure")
 {
 	std::cout << "Cure default constructor called" << std::endl;
-	type = "cure";
 }
 
 Cure::Cure(Cure const& src)
