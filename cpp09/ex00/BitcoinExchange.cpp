@@ -134,7 +134,7 @@ int BitcoinExchange::verifyValue(std::string &value)
 		return (1);
 	for (size_t i = 0; i < value.length(); i++)
 	{
-		if (i == 0 && (value[i] == '-' || value[i] == '+'))
+		if (i == 0 && (value[i] == '-' || value[i] == '+') && value.length() > 1) // Dev check stuff
 			continue;
 		else if (!precisionFound && value[i] == '.')
 			precisionFound = true;
