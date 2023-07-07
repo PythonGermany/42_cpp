@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:14:39 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/14 15:12:57 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:13:27 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int main(void)
 	dt.attack("Bob");
 	dt.takeDamage(10);
 	dt.beRepaired(10);
+	dt.guardGate();
+	dt.highFivesGuys();
 	dt.whoAmI();
 	std::cout << std::endl;
 	return (0);
