@@ -12,7 +12,7 @@
 
 #include "iter.hpp"
 
-void pow(int &a)
+void powNoTemplate(int &a)
 {
 	a *= a;
 }
@@ -23,7 +23,7 @@ int main()
 	char chararray[] = "Function templates are very interesting.";
 	float floatarray[] = {1.5f, 0.5f, 10.0f, 3.3f};
 
-	iter<int, int &>(intarray, 12, pow);
+	iter<int>(intarray, 12, &powNoTemplate);
 	iter(intarray, 12, print<int>);
 	std::cout << std::endl;
 	iter(intarray, 12, pow<int>);
