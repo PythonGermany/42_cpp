@@ -12,11 +12,13 @@
 
 #include "easyfind.hpp"
 #include <vector>
+#include <list>
 #include <iostream>
 
 int main()
 {
 	std::vector<int> intvec;
+	std::list<int> intlist;
 
 	intvec.push_back(5);
 	intvec.push_back(10);
@@ -27,8 +29,7 @@ int main()
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
-		std::cerr << "Number not found" << std::endl;
+		std::cerr << e.what() << " Number not found" << std::endl;
 	}
 	try
 	{
@@ -37,7 +38,47 @@ int main()
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
-		std::cerr << "Number not found" << std::endl;
+		std::cerr << e.what() << " Number not found" << std::endl;
+	}
+	try
+	{
+		easyfind(intvec, 51);
+		std::cerr << "Number found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " Number not found" << std::endl;
+	}
+	std::cout << std::endl;
+
+	intlist.push_back(55);
+	intlist.push_back(10);
+	try
+	{
+		easyfind(intlist, 10);
+		std::cerr << "Number found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " Number not found" << std::endl;
+	}
+	try
+	{
+		easyfind(intlist, 5);
+		std::cerr << "Number found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " Number not found" << std::endl;
+	}
+	intlist.remove(10);
+	try
+	{
+		easyfind(intlist, 10);
+		std::cerr << "Number found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << " Number not found" << std::endl;
 	}
 }
