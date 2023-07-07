@@ -21,7 +21,7 @@ PmergeMe::PmergeMe(PmergeMe const& rhs) { *this = rhs; }
 PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
   if (this == &rhs) return (*this);
   vec = rhs.vec;
-  lst = rhs.lst;
+  que = rhs.que;
   return (*this);
 }
 
@@ -30,22 +30,49 @@ PmergeMe::~PmergeMe() {}
 void PmergeMe::loadSequence(std::vector<std::string>& seq) {
   if (seq.empty()) handleError("Loading: Empty sequence", 1);
   vec.clear();
-  lst.clear();
+  que.clear();
   for (size_t i = 0; i < seq.size(); i++) {
     if (seq[i].empty()) handleError("Loading: Empty argument", 1);
     if (verifyValue(seq[i])) handleError("Loading: Invalid sequence", 1);
     vec.push_back(std::atoi(seq[i].c_str()));
-    lst.push_back(std::atoi(seq[i].c_str()));
+    que.push_back(std::atoi(seq[i].c_str()));
   }
 }
 
-void PmergeMe::sortContainerOne() {
-  for (size_t i = 0; i < vec.size() - 1; i += 2)
-    if (vec[i] < vec[i + 1]) std::swap(vec[i], vec[i + 1]);
+long long PmergeMe::getTimeNanos() {
+  struct timespec ts;
+  clock_gettime(CLOCK_MONOTONIC, &ts);
+  return static_cast<long long>(ts.tv_sec) * 1000000000LL +
+         static_cast<long long>(ts.tv_nsec);
 }
 
-void PmergeMe::sortContainerTwo() {
-  // DEV sort second container
+std::string PmergeMe::valueToString(double val) {
+  std::stringstream ss;
+  ss << std::setprecision(std::numeric_limits<double>::digits10 + 1);
+  ss << std::fixed << val << std::scientific;
+  return ss.str();
+}
+
+std::string PmergeMe::removeTrailingZeros(std::string str) {
+  if (str.empty()) return str;
+  while (str[str.length() - 1] == '0') {
+    if (str.length() < 2 || str[str.length() - 2] == '.') break;
+    str.erase(str.length() - 1, 1);
+  }
+  return str;
+}
+
+std::string PmergeMe::sortContainerOne() {
+  long long startTime = getTimeNanos();
+  mergeSort(vec, 0, vec.size());
+  return removeTrailingZeros(
+      (valueToString((getTimeNanos() - startTime) / 1000.0)));
+}
+
+std::string PmergeMe::sortContainerTwo() {
+  long long startTime = getTimeNanos();
+  return removeTrailingZeros(
+      (valueToString((getTimeNanos() - startTime) / 1000.0)));
 }
 
 void PmergeMe::printContainerOne() const {
@@ -54,8 +81,8 @@ void PmergeMe::printContainerOne() const {
 }
 
 void PmergeMe::printContainerTwo() const {
-  std::list<int>::const_iterator itr = lst.begin();
-  while (itr != lst.end()) std::cout << *itr++ << " ";
+  std::deque<int>::const_iterator itr = que.begin();
+  while (itr != que.end()) std::cout << *itr++ << " ";
   std::cout << std::endl;
 }
 
