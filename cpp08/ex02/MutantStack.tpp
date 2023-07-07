@@ -36,7 +36,7 @@ template <typename T>
 MutantStack<T>::iterator::iterator() {}
 
 template <typename T>
-MutantStack<T>::iterator::iterator(int index, MutantStack& stack)
+MutantStack<T>::iterator::iterator(int index, MutantStack<T>& stack)
     : index(index), stack(stack) {}
 
 template <typename T>
@@ -48,6 +48,7 @@ template <typename T>
 typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator=(
     iterator const& rhs) {
   if (this == &rhs) return (*this);
+  std::iterator<std::bidirectional_iterator_tag, T>::operator=(rhs);
   index = rhs.index;
   stack = rhs.stack;
   return (*this);
@@ -83,16 +84,6 @@ typename MutantStack<T>::iterator MutantStack<T>::iterator::operator--(int) {
 }
 
 template <typename T>
-bool MutantStack<T>::iterator::operator==(iterator const& rhs) {
-  return (stack == rhs.stack && index == rhs.index);
-}
-
-template <typename T>
-bool MutantStack<T>::iterator::operator!=(iterator const& rhs) {
-  return (stack != rhs.stack || index != rhs.index);
-}
-
-template <typename T>
 T& MutantStack<T>::iterator::operator*() {
   return (stack.c.at(index));
 }
@@ -100,6 +91,16 @@ T& MutantStack<T>::iterator::operator*() {
 template <typename T>
 T* MutantStack<T>::iterator::operator->() {
   return (&stack.c.at(index));
+}
+
+template <typename T>
+bool MutantStack<T>::iterator::operator==(iterator const& rhs) const {
+  return (stack == rhs.stack && index == rhs.index);
+}
+
+template <typename T>
+bool MutantStack<T>::iterator::operator!=(iterator const& rhs) const {
+  return !(*this == rhs);
 }
 
 template <typename T>

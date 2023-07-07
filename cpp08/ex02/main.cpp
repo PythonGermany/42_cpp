@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <algorithm>
 #include <iostream>
 #include <list>
 
@@ -24,7 +25,23 @@ int main() {
   std::cout << "Clone Size: " << mstClone.size() << std::endl;
   MutantStack<int>::iterator itr = mst.begin();
   while (itr != mst.end()) std::cout << *itr++ << " ";
-  std::cout << std::endl << std::endl;
+  std::cout << std::endl;
+  MutantStack<int>::iterator itTemp = std::find(mst.begin(), mst.end(), 24);
+  if (itTemp != mst.end())
+    std::cout << "Number " << *itTemp << " found in mst" << std::endl;
+  else
+    std::cout << "Number 24 NOT found in mst" << std::endl;
+  itTemp = std::find(mst.begin(), mst.end(), 50);
+  if (itTemp != mst.end())
+    std::cout << "Number " << *itTemp << " found in mst" << std::endl;
+  else
+    std::cout << "Number 50 NOT found in mst" << std::endl;
+  itTemp = std::find(mst.begin(), mst.end(), 51);
+  if (itTemp != mst.end())
+    std::cout << "Number " << *itTemp << " found in mst" << std::endl;
+  else
+    std::cout << "Number 51 NOT found in mst" << std::endl;
+  std::cout << std::endl;
 
   std::cout << "Mutant stack: " << std::endl;
   MutantStack<int> mstack;
