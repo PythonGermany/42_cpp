@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:34:24 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/02/28 16:23:26 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/01 17:59:26 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ Point::Point(void) : x(0), y(0)
 
 Point::Point(const float x, const float y) : x(x), y(y)
 {
+	//this->x = Fixed(x);
 	std::cout << "Point assignment constructor called" << std::endl;
 }
 
@@ -39,4 +40,14 @@ Point& Point::operator=(Point const& rhs)
 Point::~Point(void)
 {
 	std::cout << "Point destructor called" << std::endl;
+}
+
+Fixed Point::getX(void)
+{
+	return (this->x);
+}
+
+Fixed Point::getY(void)
+{
+	return (this->y);
 }
