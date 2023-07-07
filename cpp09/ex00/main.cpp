@@ -17,4 +17,5 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		BitcoinExchange::handleError("Invalid argument count", 1);
 	BitcoinExchange ex(argv[1]);
+	ex.processInput();
 }
