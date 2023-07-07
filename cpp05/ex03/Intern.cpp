@@ -44,7 +44,7 @@ AForm *Intern::makeForm(std::string const& name, std::string const& target) cons
 		if (name == names[i])
 			break ;
 	if (i < 3)
-		std::cout << "Intern creates " << name;
+		std::cout << "Intern creates " << name << std::endl;
 	switch (i)
 	{
 	case 0:
