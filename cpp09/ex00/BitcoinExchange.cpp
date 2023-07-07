@@ -22,7 +22,7 @@ BitcoinExchange::BitcoinExchange(std::string inputLoc) : inputPath(inputLoc) {
   database.open(DATABASE_LOC);
   if (database.is_open() == false) handleError("Could not open database", 1);
   std::getline(database, line);
-  if (line != std::string("date,exchange_rate"))
+  if (line.compare("date,exchange_rate") != 0)
     handleError("Wrong or missing header in database", 1);
   input.open(inputLoc.c_str());
   if (input.is_open() == false) handleError("Could not open input file", 1);
@@ -31,9 +31,9 @@ BitcoinExchange::BitcoinExchange(std::string inputLoc) : inputPath(inputLoc) {
     handleError("Wrong or missing header in input", 1);
   while (std::getline(database, line)) {
     std::string key = line.substr(0, line.find(','));
-    if (verifyDate(key)) handleError("Invalid date", 1);
+    if (verifyDate(key)) handleError("Database invalid date", 1);
     line.erase(0, line.find(',') + 1);
-    if (verifyValue(line)) handleError("Invalid value", 1);
+    if (verifyValue(line)) handleError("Database invalid value", 1);
     if (data.count(key)) handleError("Duplicate database date", 1);
     data[key] = std::atof(line.c_str());
   }
@@ -57,7 +57,12 @@ BitcoinExchange::~BitcoinExchange() {}
 void BitcoinExchange::processInput() {
   for (std::string line; std::getline(input, line);) {
     std::string dateStr = line.substr(0, line.find(" | "));
-    std::string valueStr = line.substr(line.find(" | ") + 3, line.length());
+    size_t valueStart = line.find(" | ");
+    if (valueStart == std::string::npos) {
+      std::cout << "Error: bad input => " << line << std::endl;
+      continue;
+    }
+    std::string valueStr = line.substr(valueStart + 3, line.length());
     if (line.find(" | ") == std::string::npos || verifyDate(dateStr) ||
         verifyValue(valueStr)) {
       std::cout << "Error: bad input => " << line << std::endl;
