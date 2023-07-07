@@ -38,15 +38,15 @@ class ScalarConverter {
   ~ScalarConverter();
 
   static void convert(std::string literal);
+  static void printType(type_t type);
+  static type_t verifyValue(std::string& value);
 
  private:
-  static void printType(type_t type);
   static void printChar(char c, bool impossible);
   static void printInt(int i, bool impossible);
   static void printFloat(float f, bool impossible);
   static void printDouble(double d, bool impossible);
   static type_t checkPseudo(std::string& value);
-  static type_t verifyValue(std::string& value);
 };
 
 #endif
