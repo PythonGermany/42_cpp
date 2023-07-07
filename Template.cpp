@@ -26,7 +26,8 @@ Template::Template(Template const& rhs)
 Template& Template::operator=(Template const& rhs)
 {
 	std::cout << "Template copy assignment operator called" << std::endl;
-	
+	if (this == &rhs)
+		return (*this);
 	return (*this);
 }
 

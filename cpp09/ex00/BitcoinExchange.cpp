@@ -54,6 +54,8 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const &rhs)
 
 BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs)
 {
+	if (this == &rhs)
+		return (*this);
 	if (database.is_open() == true)
 		database.close();
 	database.open(DATABASE_LOC);

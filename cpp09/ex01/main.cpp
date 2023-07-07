@@ -14,5 +14,9 @@
 
 int main(int argc, char **argv)
 {
-	
+	if (argc != 2)
+		RPN::handleError("Invalid argument count", 1);
+	RPN r(argv[1]);
+
+	std::cout << r.processExpression() << std::endl;
 }
