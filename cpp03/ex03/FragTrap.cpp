@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 17:49:18 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/14 15:06:00 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:18:06 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 	std::cout << "FragTrap name constructor called" << std::endl;
 }
 
-FragTrap::FragTrap(FragTrap const& src)
+FragTrap::FragTrap(FragTrap const& src) : ClapTrap(src.name)
 {
 	std::cout << "FragTrap copy constructor called" << std::endl;
 	*this = src;
