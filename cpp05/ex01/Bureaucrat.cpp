@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:01:25 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/06 21:12:14 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/05/06 21:13:50 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,20 @@ void Bureaucrat::decrementGrade()
 	if (grade + 1 > LOWEST_GRADE)
 		throw GradeTooLowException();
 	grade++;
+}
+
+void Bureaucrat::signForm(Form& f) const
+{
+	try
+	{
+		f.beSigned(*this);
+		std::cout << name << " signed " << f.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << name << " couldn't sign " << f.getName() << " because \"";
+		std::cout << e.what() << "\"." << std::endl;
+	}
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() 
