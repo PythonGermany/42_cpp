@@ -28,6 +28,4 @@ int main(int argc, char** argv) {
   mergeSort(sorted.begin(), sorted.end());
   for (int i = 0; i < sorted.size(); i++) std::cout << sorted[i] << " ";
   std::cout << std::endl;
-  // Test
-  // Test 2
 }
