@@ -23,13 +23,6 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs) {
 
 ScalarConverter::~ScalarConverter() {}
 
-template <typename T>
-data_t cast(T val) {
-  data_t data = {static_cast<char>(val), static_cast<int>(val),
-                 static_cast<float>(val), static_cast<double>(val)};
-  return data;
-}
-
 void ScalarConverter::convert(std::string literal) {
   type_t type = verifyValue(literal);
   if (type == INVALID) return;
@@ -49,9 +42,9 @@ void ScalarConverter::convert(std::string literal) {
   }
   bool pseudo = checkPseudo(literal) != INVALID;
   long comp = std::atol(literal.c_str());
-  printChar(dt.c, pseudo || overflow<long, char>(comp, CHAR_MIN, CHAR_MAX));
-  printInt(dt.i, pseudo || overflow(comp, INT_MIN, INT_MAX));
-  printFloat(dt.f, (!pseudo && overflow(comp, -FLT_MAX, FLT_MAX)) || fail);
+  printChar(dt.c, pseudo || overflow<char>(comp, CHAR_MIN, CHAR_MAX));
+  printInt(dt.i, pseudo || overflow(comp, INT_MIN, INT_MAX) || fail);
+  printFloat(dt.f, fail);
   printDouble(dt.d, fail);
   errno = 0;
 }
@@ -143,11 +136,24 @@ type_t ScalarConverter::checkPseudo(std::string& value) {
   return (INVALID);
 }
 
-template <typename T, typename D>
-bool ScalarConverter::overflow(T val, D min, D max) {
-  long int valLong = static_cast<long int>(val);
-  return (valLong < static_cast<long int>(min) ||
-          valLong > static_cast<long int>(max));
+template <typename T>
+bool ScalarConverter::overflow(long val, T min, T max) {
+  return (val < static_cast<long>(min) || val > static_cast<long>(max));
+}
+
+template <typename T>
+data_t ScalarConverter::cast(T val) {
+  data_t data = {static_cast<char>(val), static_cast<int>(val),
+                 static_cast<float>(val), static_cast<double>(val)};
+  return data;
+}
+
+template <typename T>
+std::string ScalarConverter::valueToString(T val) {
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(std::numeric_limits<T>::digits10 + 1)
+     << val << std::scientific;
+  return ss.str();
 }
 
 bool ScalarConverter::intStringOverflow(std::string& str) {
@@ -162,14 +168,6 @@ bool ScalarConverter::intStringOverflow(std::string& str) {
   if (str.size() < static_cast<size_t>(10)) return false;
   if (str.compare("2147483647") > 0) return true;
   return false;
-}
-
-template <typename T>
-std::string ScalarConverter::valueToString(T val) {
-  std::stringstream ss;
-  ss << std::fixed << std::setprecision(std::numeric_limits<T>::digits10 + 1)
-     << val << std::scientific;
-  return ss.str();
 }
 
 std::string ScalarConverter::removeTrailingZeros(std::string str) {

@@ -30,7 +30,10 @@ class PmergeMe {
   ~PmergeMe();
 
   void loadSequence(std::vector<std::string>& seq);
+  void sortContainerOne();
   void printContainerOne() const;
+  void sortContainerTwo();
+  void printContainerTwo() const;
   static void handleError(std::string msg, int exitCode);
 
  private:

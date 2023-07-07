@@ -48,11 +48,13 @@ class ScalarConverter {
   static void printFloat(float f, bool impossible);
   static void printDouble(double d, bool impossible);
   static type_t checkPseudo(std::string& value);
-  template <typename T, typename D>
-  static bool overflow(T val, D min, D max);
-  static bool intStringOverflow(std::string& str);
+  template <typename T>
+  static bool overflow(long val, T min, T max);
+  template <typename T>
+  static data_t cast(T val);
   template <typename T>
   static std::string valueToString(T val);
+  static bool intStringOverflow(std::string& str);
   static std::string removeTrailingZeros(std::string str);
 };
 
