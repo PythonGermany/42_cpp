@@ -12,12 +12,18 @@
 
 #include "Iter.hpp"
 
+void pow(int &a)
+{
+	a *= a;
+}
+
 int main()
 {
 	int intarray[] = {0, 1, 15, 17, 84, 25, 27, 18, 74, 12, 61, 61};
 	char chararray[] = "Function templates are very interesting.";
 	float floatarray[] = {1.5f, 0.5f, 10.0f, 3.3f};
 
+	iter<int, int &>(intarray, 12, pow);
 	iter(intarray, 12, print<int>);
 	std::cout << std::endl;
 	iter(intarray, 12, pow<int>);
