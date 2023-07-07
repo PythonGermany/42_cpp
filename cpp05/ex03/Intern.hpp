@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Template.hpp                                       :+:      :+:    :+:   */
+/*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,20 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEMPLATE_HPP
-# define TEMPLATE_HPP
+#ifndef Intern_HPP
+# define Intern_HPP
 
+#include <string>
 # include <iostream>
+# include "AForm.hpp"
+# include "ShrubberyCreationForm.hpp"
+# include "RobotomyRequestForm.hpp"
+# include "PresidentialPardonForm.hpp"
 
-class Template
+class Intern
 {
 private:
 	
 public:
-	Template();
-	Template(Template const& rhs);
-	Template& operator=(Template const& rhs);
-	~Template();
+	Intern();
+	Intern(Intern const& rhs);
+	Intern& operator=(Intern const& rhs);
+	~Intern();
+
+	AForm *makeForm(std::string const& name, std::string const& target) const;
 };
 
 #endif
