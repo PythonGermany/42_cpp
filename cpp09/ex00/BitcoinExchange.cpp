@@ -47,12 +47,12 @@ BitcoinExchange::BitcoinExchange(std::string inputLoc) : inputPath(inputLoc)
 	}
 }
 
-BitcoinExchange::BitcoinExchange(BitcoinExchange const& rhs)
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &rhs)
 {
 	*this = rhs;
 }
 
-BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& rhs)
+BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs)
 {
 	if (database.is_open() == true)
 		database.close();
@@ -71,7 +71,7 @@ BitcoinExchange::~BitcoinExchange()
 
 void BitcoinExchange::processInput()
 {
-	for (std::string line; std::getline(input, line); )
+	for (std::string line; std::getline(input, line);)
 	{
 		std::string dateStr = line.substr(0, line.find(" | "));
 		std::string valueStr = line.substr(line.find(" | ") + 3, line.length());
@@ -86,12 +86,12 @@ void BitcoinExchange::processInput()
 		else if (value > 1000)
 			handleError("too large a number.");
 		else
-			std::cout << dateStr << " => " << value << " = " 
-				<< calculateValue(dateStr, value) << std::endl;
+			std::cout << dateStr << " => " << value << " = "
+					  << calculateValue(dateStr, value) << std::endl;
 	}
 }
 
-float BitcoinExchange::calculateValue(std::string& date, float amount)
+float BitcoinExchange::calculateValue(std::string &date, float amount)
 {
 	float value;
 
@@ -113,7 +113,7 @@ void BitcoinExchange::handleError(std::string msg)
 	std::cout << "Error: " << msg << std::endl;
 }
 
-int BitcoinExchange::verifyDate(std::string& date)
+int BitcoinExchange::verifyDate(std::string &date)
 {
 	if (date.length() != std::string("yyyy-mm-dd").length())
 		return (1);
@@ -127,7 +127,7 @@ int BitcoinExchange::verifyDate(std::string& date)
 	return (0);
 }
 
-int BitcoinExchange::verifyValue(std::string& value)
+int BitcoinExchange::verifyValue(std::string &value)
 {
 	bool precisionFound = false;
 	if (value.empty())

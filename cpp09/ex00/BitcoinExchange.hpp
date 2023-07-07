@@ -31,17 +31,17 @@ private:
 public:
 	BitcoinExchange();
 	BitcoinExchange(std::string inputLoc);
-	BitcoinExchange(BitcoinExchange const& rhs);
-	BitcoinExchange& operator=(BitcoinExchange const& rhs);
+	BitcoinExchange(BitcoinExchange const &rhs);
+	BitcoinExchange &operator=(BitcoinExchange const &rhs);
 	~BitcoinExchange();
 
 	void processInput();
-	float calculateValue(std::string& date, float amount);
+	float calculateValue(std::string &date, float amount);
 	static void handleError(std::string msg, int exitCode);
 	static void handleError(std::string msg);
 private:
-	int verifyDate(std::string& date);
-	int verifyValue(std::string& value);
+	int verifyDate(std::string &date);
+	int verifyValue(std::string &value);
 };
 
 #endif
