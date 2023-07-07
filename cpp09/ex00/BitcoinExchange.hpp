@@ -16,6 +16,8 @@
 # include <iostream>
 # include <fstream>
 # include <cstdlib>
+# include <map>
+# include <string>
 
 # define DATABASE_LOC "cpp_09/data.csv"
 
@@ -25,6 +27,7 @@ private:
 	std::string inputPath;
 	std::ifstream input;
 	std::ifstream database;
+	std::map<std::string, float> data;
 public:
 	BitcoinExchange();
 	BitcoinExchange(std::string inputLoc);
