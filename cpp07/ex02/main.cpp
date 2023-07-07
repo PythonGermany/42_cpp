@@ -6,12 +6,9 @@ int main(int, char **)
 {
 	Array<int> test;
 
-	try
-	{
+	try {
 		std::cout << test[0] << std::endl;
-	}
-	catch (const std::exception &e)
-	{
+	} catch (const std::exception &e) {
 		std::cerr << e.what() << '\n';
 	}
 	std::cout << std::endl;
@@ -32,40 +29,36 @@ int main(int, char **)
 	}
 	std::cout << std::endl;
 	test = numbers;
+	std::cout << std::endl;
 	Array<int> tmp(test);
+	std::cout << std::endl;
+	Array<int> copyTest = test;
+	std::cout << std::endl;
 	for (int i = 0; i < MAX_VAL; i++)
 	{
-		if (mirror[i] != numbers[i] || mirror[i] != test[i] || mirror[i] != tmp[i])
+		if (mirror[i] != numbers[i] || mirror[i] != test[i] || mirror[i] != tmp[i] || mirror[i] != copyTest[i])
 		{
 			std::cerr << "didn't save the same value!!" << std::endl;
 			return 1;
 		}
 	}
 	std::cout << std::endl;
-	try
-	{
+	try {
 		numbers[-2] = 0;
-	}
-	catch (const std::exception &e)
-	{
+	} catch (const std::exception &e) {
 		std::cerr << e.what() << '\n';
 	}
-	try
-	{
+	try {
 		numbers[MAX_VAL] = 0;
-	}
-	catch (const std::exception &e)
-	{
+	} catch (const std::exception &e) {
 		std::cerr << e.what() << '\n';
 	}
 
 	for (int i = 0; i < MAX_VAL; i++)
-	{
 		numbers[i] = -1;
-	}
 	for (int i = 0; i < MAX_VAL; i++)
 	{
-		if (numbers[i] == test[i] || numbers[i] == tmp[i])
+		if (numbers[i] == test[i] || numbers[i] == tmp[i] || numbers[i] == copyTest[i])
 		{
 			std::cerr << "Operation changed all values!!" << std::endl;
 			return 1;

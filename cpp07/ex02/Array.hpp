@@ -20,7 +20,8 @@ class Array
 {
 private:
 	T *array;
-	int _size;
+	int arraySize;
+	bool isAllocated;
 public:
 	Array();
 	Array(unsigned int n);
