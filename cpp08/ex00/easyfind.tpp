@@ -14,14 +14,13 @@
 # define EASYFIND_TPP
 
 # include "easyfind.hpp"
-# include <iostream>
+
 template <typename T>
 typename T::iterator easyfind(T container, int nb)
 {
 	typename T::iterator itr = std::find(container.begin(), container.end(), nb);
 	if (itr == container.end())
 		throw std::exception();
-	std::cout << *itr << std::endl;
 	return (itr);
 }
 
