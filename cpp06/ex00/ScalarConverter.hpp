@@ -16,6 +16,7 @@
 #include <cerrno>
 #include <cfloat>
 #include <climits>
+#include <cmath>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
