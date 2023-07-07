@@ -57,7 +57,7 @@ void RPN::loadExpression(std::string expr)
 	{
 		if (std::isdigit(expr[i]) && i != exprSize - 1)
 			data.push_front(createElement(OPERAND,
-				std::atoi(expr.substr(i, expr.find(' ')).c_str()) * 10));
+				std::atoi(expr.substr(i, expr.find(' ')).c_str())));
 		else if (std::strchr("+-/*", expr[i]) != NULL)
 			data.push_front(createElement(OPERATOR, expr[i]));
 		else
