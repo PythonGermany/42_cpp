@@ -100,4 +100,5 @@ int main(int argc, char** argv) {
   std::cout << std::endl;
   std::cout << removeTrailingZeros(valueToString(length)) << "ms" << std::endl;
   std::cout << compCpy << std::endl;
+  // Test
 }
