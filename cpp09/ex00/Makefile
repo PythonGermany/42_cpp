@@ -6,7 +6,7 @@
 #    By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:38:03 by rburgsta          #+#    #+#              #
-#    Updated: 2023/05/30 17:36:57 by rburgsta         ###   ########.fr        #
+#    Updated: 2023/06/12 11:08:26 by rburgsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(DATABASE) : $(ARCHIVE)
 	tar -xf $(ARCHIVE)
 
 $(ARCHIVE) :
-	curl https://cdn.intra.42.fr/document/document/15186/cpp_09.tgz --output $(ARCHIVE)
+	curl https://cdn.intra.42.fr/document/document/17076/cpp_09.tgz --output $(ARCHIVE)
 
 clean :
 	rm -rf $(OBJ)

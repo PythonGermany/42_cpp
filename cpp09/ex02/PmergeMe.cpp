@@ -14,7 +14,7 @@
 
 PmergeMe::PmergeMe() {}
 
-PmergeMe::PmergeMe(std::string seq)
+PmergeMe::PmergeMe(std::vector<std::string> seq)
 {
 	loadSequence(seq);
 }
@@ -34,21 +34,31 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& rhs)
 
 PmergeMe::~PmergeMe() {}
 
-void PmergeMe::loadSequence(std::string &seq)
+void PmergeMe::loadSequence(std::vector<std::string> &seq)
 {
 	if (seq.empty())
 		handleError("Loading: Empty sequence", 1);
 	vec.clear();
 	//DEV clear second container
-	while (seq.length() > 0)
+	for (size_t i = 0; i < seq.size(); i++)
 	{
-		std::string value = seq.substr(0, seq.find(' '));
-		if (verifyValue(value))
-			handleError("Loading: Invalid sequence", 1);
-		vec.push_back(std::atoi(value.c_str()));
-		//DEV add to second container
-		seq.erase(0, value.size() + 1);
+		while (seq[i].length() > 0)
+		{
+			std::string value = seq[i].substr(0, seq[i].find(' '));
+			if (verifyValue(value))
+				handleError("Loading: Invalid sequence", 1);
+			vec.push_back(std::atoi(value.c_str()));
+			// DEV add to second container
+			seq[i].erase(0, value.size() + 1);
+		}
 	}
+}
+
+void PmergeMe::printContainerOne() const
+{
+	for (size_t i = 0; i < vec.size(); i++)
+		std::cout << vec[i] << " ";
+	std::cout << std::endl;
 }
 
 int PmergeMe::verifyValue(std::string &value)

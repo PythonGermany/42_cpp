@@ -57,44 +57,6 @@ float RPN::processExpression(std::string expr)
 	return (stack.front().value);
 }
 
-std::string RPN::postfixToInfix(std::string expr)
-{
-	std::list<t_element> data = loadExpression(expr);
-	std::list<t_element> stack;
-	std::string infix;
-	int elementsPushed = 0;
-	while (data.size() > 0)
-	{
-		if (data.front().type == OPERAND)
-		{
-			stack.push_front(data.front());
-			if (++elementsPushed > 2)
-				infix.append("(");
-		}
-		else if (data.front().type == OPERATOR)
-		{
-			//infix.append(std::to_string((*(++stack.begin())).value));
-			if (stack.size() < 2)
-				handleError("Processing: Invalid expression", 1);
-			if (data.front().value == '+')
-				(*(++stack.begin())).value += stack.front().value;
-			else if (data.front().value  == '-')
-				(*(++stack.begin())).value -= stack.front().value;
-			else if (data.front().value == '*')
-				(*(++stack.begin())).value *= stack.front().value;
-			else if (data.front().value == '/')
-				(*(++stack.begin())).value /= stack.front().value;
-			//infix.append(std::to_string(stack.front().value));
-			stack.pop_front();
-			elementsPushed = 0;
-		}
-		data.pop_front();
-	}
-	if (stack.size() != 1)
-		handleError("Processing: Invalid/Incomplete expression", 1);
-	return (infix);
-}
-
 void RPN::handleError(std::string msg, int exitCode)
 {
 	std::cout << "Error: " << msg << "!" << std::endl;

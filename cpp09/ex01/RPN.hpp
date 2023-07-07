@@ -37,7 +37,6 @@ public:
 	~RPN();
 
 	float processExpression(std::string expr);
-	std::string postfixToInfix(std::string expr);
 	static void handleError(std::string msg, int exitCode);
 private:
 	std::list<t_element> loadExpression(std::string &expr);

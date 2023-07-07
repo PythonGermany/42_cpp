@@ -24,92 +24,95 @@ int main()
 
 	intvec.push_back(5);
 	intvec.push_back(10);
+	std::cout << "Vector:" << std::endl;
 	try
 	{
-		easyfind(intvec, 10);
-		std::cerr << "Number found" << std::endl;
+		std::vector<int>::iterator itr = easyfind(intvec, 10);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	try
 	{
-		easyfind(intvec, 5);
-		std::cerr << "Number found" << std::endl;
+		std::vector<int>::iterator itr = easyfind(intvec, 5);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	try
 	{
-		easyfind(intvec, 51);
-		std::cerr << "Number found" << std::endl;
+		std::vector<int>::iterator itr = easyfind(intvec, 51);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	std::cout << std::endl;
 
 	intlist.push_back(55);
 	intlist.push_back(10);
+	std::cout << "List:" << std::endl;
 	try
 	{
-		easyfind(intlist, 10);
-		std::cerr << "Number found" << std::endl;
+		std::list<int>::iterator itr = easyfind(intlist, 10);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	try
 	{
-		easyfind(intlist, 5);
-		std::cerr << "Number found" << std::endl;
+		std::list<int>::iterator itr = easyfind(intlist, 5);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	intlist.remove(10);
 	try
 	{
-		easyfind(intlist, 10);
-		std::cerr << "Number found" << std::endl;
+		std::list<int>::iterator itr = easyfind(intlist, 10);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	std::cout << std::endl;
 
 	intdeque.push_back(55);
 	intdeque.push_back(10);
+	std::cout << "Deque:" << std::endl;
 	try
 	{
-		easyfind(intdeque, 10);
-		std::cerr << "Number found" << std::endl;
+		std::deque<int>::iterator itr = easyfind(intdeque, 10);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	try
 	{
-		easyfind(intdeque, 5);
-		std::cerr << "Number found" << std::endl;
+		std::deque<int>::iterator itr = easyfind(intdeque, 5);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << " Number not found" << std::endl;
+		std::cout << e.what() << " Number not found" << std::endl;
 	}
 	intdeque.clear();
 	try
 	{
-		easyfind(intdeque, 10);
-		std::cerr << "Number found" << std::endl;
+		std::deque<int>::iterator itr = easyfind(intdeque, 10);
+		std::cout << "Number found: " << *itr << std::endl;
 	}
 	catch(const std::exception& e)
 	{

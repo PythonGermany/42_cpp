@@ -13,7 +13,6 @@
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
-# include <iostream>
 # include <climits>
 # include <vector>
 # include <algorithm>
@@ -31,10 +30,16 @@ public:
 	~Span();
 
 	void addNumber(int nb);
+	template <typename T>
+	void addRange(T begin, T end)
+	{
+		if (end - begin + vec.size() > n)
+			throw std::exception();
+		for (; begin != end; begin++)
+			addNumber(*begin);
+	}
 	int shortestSpan();
 	int longestSpan();
-
-	void printSpan();
 };
 
 #endif
