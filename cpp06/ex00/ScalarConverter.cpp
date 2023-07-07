@@ -43,7 +43,8 @@ void ScalarConverter::convert(std::string literal) {
   bool pseudo = checkPseudo(literal) != INVALID;
   long comp = std::atol(literal.c_str());
   printChar(dt.c, pseudo || overflow<char>(comp, CHAR_MIN, CHAR_MAX));
-  printInt(dt.i, pseudo || overflow(comp, INT_MIN, INT_MAX) || fail);
+  printInt(dt.i, pseudo || overflow(comp, INT_MIN, INT_MAX) ||
+                     (type == F && dt.f == 2147483648.0f) || fail);
   printFloat(dt.f,
              (!pseudo && (dt.f == INFINITY || dt.f == -INFINITY)) || fail);
   printDouble(dt.d, fail);
