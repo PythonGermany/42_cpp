@@ -34,3 +34,8 @@ ScalarConverter::~ScalarConverter()
 {
 	std::cout << "ScalarConverter destructor called" << std::endl;
 }
+
+void ScalarConverter::convert(std::string& literal)
+{
+	
+}
