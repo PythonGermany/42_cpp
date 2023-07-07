@@ -13,12 +13,22 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
+#include <float.h>
+
 #include <climits>
 #include <cmath>
 #include <cstdlib>
 #include <iostream>
 
 typedef enum type_e { INVALID = -1, C, I, F, D } type_t;
+
+typedef struct data_s {
+  type_t type;
+  char c;
+  int i;
+  float f;
+  double d;
+} data_t;
 
 class ScalarConverter {
  public:
@@ -31,6 +41,11 @@ class ScalarConverter {
 
  private:
   static void printType(type_t type);
+  static void printChar(char c, bool impossible);
+  static void printInt(int i, bool impossible);
+  static void printFloat(float f, bool impossible);
+  static void printDouble(double d, bool impossible);
+  static type_t checkPseudo(std::string& value);
   static type_t verifyValue(std::string& value);
 };
 
