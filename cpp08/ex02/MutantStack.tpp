@@ -91,9 +91,27 @@ typename MutantStack<T>::iterator MutantStack<T>::iterator::operator--(int)
 }
 
 template <typename T>
+bool MutantStack<T>::iterator::operator==(iterator const& rhs)
+{
+	return (index == rhs.index);
+}
+
+template <typename T>
+bool MutantStack<T>::iterator::operator!=(iterator const& rhs)
+{
+	return (index != rhs.index);
+}
+
+template <typename T>
 T& MutantStack<T>::iterator::operator*()
 {
-	return (index);
+	return (stack.c.at(index));
+}
+
+template <typename T>
+T* MutantStack<T>::iterator::operator->()
+{
+	return (&stack.c.at(index));
 }
 
 template <typename T>
