@@ -12,7 +12,9 @@
 
 #include "PmergeMe.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-	
+	if (argc != 2)
+		PmergeMe::handleError("Wrong argument count", 1);
+	PmergeMe p(argv[1]);
 }

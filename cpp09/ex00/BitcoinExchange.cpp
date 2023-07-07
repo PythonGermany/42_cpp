@@ -67,9 +67,7 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs)
 	return (*this);
 }
 
-BitcoinExchange::~BitcoinExchange()
-{
-}
+BitcoinExchange::~BitcoinExchange() {}
 
 void BitcoinExchange::processInput()
 {

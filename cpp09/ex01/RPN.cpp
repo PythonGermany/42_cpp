@@ -12,9 +12,7 @@
 
 #include "RPN.hpp"
 
-RPN::RPN()
-{
-}
+RPN::RPN() {}
 
 RPN::RPN(std::string expr)
 {
@@ -35,13 +33,11 @@ RPN& RPN::operator=(RPN const& rhs)
 	return (*this);
 }
 
-RPN::~RPN()
-{
-}
+RPN::~RPN() {}
 
 void RPN::loadExpression(std::string expr)
 {
-	if (expr.length() < 1)
+	if (expr.empty())
 		handleError("Loading: Empty input expression", 1);
 	data.clear();
 	stack.clear();
@@ -87,6 +83,12 @@ float RPN::processExpression()
 	return (stack.front().value);
 }
 
+void RPN::handleError(std::string msg, int exitCode)
+{
+	std::cout << "Error: " << msg << "!" << std::endl;
+	std::exit(exitCode);
+}
+
 t_element RPN::createElement(int type, float value)
 {
 	t_element el;
@@ -111,10 +113,4 @@ int RPN::verifyValue(std::string &value)
 			return (1);
 	}
 	return (0);
-}
-
-void RPN::handleError(std::string msg, int exitCode)
-{
-	std::cout << "Error: " << msg << "!" << std::endl;
-	std::exit(exitCode);
 }
