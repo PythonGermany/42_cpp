@@ -153,8 +153,8 @@ data_t ScalarConverter::cast(T val) {
 template <typename T>
 std::string ScalarConverter::valueToString(T val) {
   std::stringstream ss;
-  ss << std::fixed << std::setprecision(std::numeric_limits<T>::digits10 + 1)
-     << val << std::scientific;
+  // ss << std::setprecision(std::numeric_limits<T>::digits10 + 1);
+  ss << std::fixed << val << std::scientific;
   return ss.str();
 }
 
