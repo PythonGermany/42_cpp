@@ -37,17 +37,17 @@ void replace(std::string& s, std::string oldInsert, std::string newInsert)
 int main(int argc, char** argv)
 {
 	std::string read;
-	std::fstream in;
-	std::fstream out;
+	std::ifstream in;
+	std::ofstream out;
 	std::string outfile;
 
 	if (argc != 4)
 		return (std::cout << "Use: " << argv[0] << " <filename> <s1> <s2>" << std::endl, 1);
-	in.open(argv[1], std::fstream::in);
+	in.open(argv[1], std::ifstream::in);
 	if (in.fail())
 		return (std::cout << "Failed to open input file" << std::endl, 1);
 	outfile = argv[1];
-	out.open(outfile.append(".replace"), std::fstream::out);
+	out.open(outfile.append(".replace"), std::ofstream::out);
 	if (out.fail())
 		return (std::cout << "Failed to create/open output file" << std::endl, 1);
 	while (true)
