@@ -18,6 +18,6 @@ int	main(void)
 	Zombie* z = zombieHorde(n, "zombieHorde");
 
 	for (int i = 0; i < n; i++)
-		z->announce();
+		z[i].announce();
 	delete[] z;	
 }
