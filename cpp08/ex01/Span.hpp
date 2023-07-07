@@ -14,14 +14,16 @@
 # define SPAN_HPP
 
 # include <iostream>
-# include <list>
+# include <climits>
+# include <vector>
 # include <algorithm>
 
 class Span
 {
 private:
-	std::list<int> lst;
+	std::vector<int> vec;
 	const size_t n;
+	int min_span;
 public:
 	Span();
 	Span(unsigned int N);
@@ -32,6 +34,8 @@ public:
 	void addNumber(int nb);
 	int shortestSpan();
 	int longestSpan();
+
+	void printSpan();
 };
 
 #endif
