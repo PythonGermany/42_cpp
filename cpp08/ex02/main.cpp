@@ -75,6 +75,12 @@ int main()
 		std::cout << *itlst << " ";
 		++itlst;
 	}
+	std::cout << std::endl;
+	while (lst.size() > 0)
+	{
+		std::cout << lst.back() << " ";
+		lst.pop_back();
+	}
 	std::cout << std::endl << std::endl;
 
 	std::cout << "Stack: " << std::endl;
