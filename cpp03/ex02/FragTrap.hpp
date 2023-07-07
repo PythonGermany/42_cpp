@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 20:04:45 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/03 20:09:03 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:03:34 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ public:
 	FragTrap& operator=(FragTrap const& rhs);
 	~FragTrap();
 
-	void attack(const std::string& target);
 	void highFivesGuys(void);
 };
 

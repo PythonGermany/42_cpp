@@ -16,12 +16,12 @@
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap
+class DiamondTrap : public FragTrap, public ScavTrap
 {
 private:
 	std::string name;
-public:
 	DiamondTrap();
+public:
 	DiamondTrap(std::string name);
 	DiamondTrap(DiamondTrap const& src);
 	DiamondTrap& operator=(DiamondTrap const& rhs);

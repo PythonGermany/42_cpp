@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 16:45:50 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/06 15:59:49 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:49:03 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,8 @@ void ClapTrap::takeDamage(unsigned int amount)
 	if (hit_points > 0)
 	{
 		if (amount > (unsigned int)hit_points)
-			hit_points = 0;
-		else
-			hit_points -= amount;
+			amount = hit_points;
+		hit_points -= amount;
 		std::cout << "ClapTrap " << name << " takes " << amount;
 		std::cout << " points of damage! " << hit_points << " HP left!";
 	}
