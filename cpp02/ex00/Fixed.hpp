@@ -1,0 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/17 16:02:24 by rburgsta          #+#    #+#             */
+/*   Updated: 2023/02/17 16:02:24 by rburgsta         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FIXED_HPP
+# define FIXED_HPP
+
+class Fixed
+{
+private:
+	/* data */
+public:
+	Fixed();
+	Fixed(Fixed const& src);
+	Fixed& operator=(Fixed const& rhs);
+	~Fixed();
+};
+
+#endif
