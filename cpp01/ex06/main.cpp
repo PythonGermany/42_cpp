@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:49:44 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/02/17 15:32:14 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/17 17:09:17 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
-
-void filter(Harl *h, int i, std::string* lvls)
-{
-	for (; i < 4; i++)
-		h->complain(lvls[i]);
-}
 
 int main(int argc, char **argv)
 {
@@ -32,16 +26,20 @@ int main(int argc, char **argv)
 	switch (i)
 	{
 	case 0:
-		filter(&h, i, filterLVL);
-		break;
+		std::cout << "[DEBUG]" << std::endl;
+		h.complain("DEBUG");
+		std::cout << std::endl;
 	case 1:
-		filter(&h, i, filterLVL);
-		break;
+		std::cout << "[INFO]" << std::endl;
+		h.complain("INFO");
+		std::cout << std::endl;
 	case 2:
-		filter(&h, i, filterLVL);
-		break;
+		std::cout << "[WARNING]" << std::endl;
+		h.complain("WARNING");
+		std::cout << std::endl;
 	case 3:
-		filter(&h, i, filterLVL);
+		std::cout << "[ERROR]" << std::endl;
+		h.complain("ERROR");
 		break;
 	default:
 		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
