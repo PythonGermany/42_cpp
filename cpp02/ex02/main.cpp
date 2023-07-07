@@ -76,6 +76,7 @@ int main(void)
 
 	std::cout << "\x1B[31m+; -; *; / tests\x1B[0m" << std::endl;
 	std::cout << a << " + " << c << " = " << (a + c) << std::endl;
+	std::cout << a << " + " << c <<  " + " << e << " = " << (a + c + e) << std::endl;
 	std::cout << a << " - " << c << " = " << (a - c) << std::endl;
 	std::cout << c << " - " << a << " = " << (c - a) << std::endl;
 	std::cout << a << " * " << c << " = " << (a * c) << std::endl;
