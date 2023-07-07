@@ -10,15 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
-
-Base *generate(void);
-void identify(Base* p);
-void identify(Base& p);
+#include "functions.hpp"
 
 int main()
 {
-	Base *b = generate();
-	
-	identify(b);
+	int aCount = 0, bCount = 0, cCount = 0;
+	for (int i = 0; i < 1000; i++)
+	{
+		Base *b = generate();
+		identify(b);
+		identify(*b);
+		if (dynamic_cast<A*>(b) != NULL)
+			aCount++;
+		else if (dynamic_cast<B*>(b) != NULL)
+			bCount++;
+		else if (dynamic_cast<C*>(b) != NULL)
+			cCount++;
+		delete b;
+	}
+	std::cout << aCount << " " << bCount << " " << cCount << std::endl;
 }

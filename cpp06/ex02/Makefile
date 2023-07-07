@@ -6,15 +6,15 @@
 #    By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 15:38:03 by rburgsta          #+#    #+#              #
-#    Updated: 2023/06/12 14:55:31 by rburgsta         ###   ########.fr        #
+#    Updated: 2023/06/14 13:07:59 by rburgsta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = convert
+NAME = ex02
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = main.cpp functions.cpp
+SRC = main.cpp functions.cpp Base.cpp
 OBJ = $(SRC:%.cpp=%.o)
 
 all : $(NAME)

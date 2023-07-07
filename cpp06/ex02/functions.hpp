@@ -1,15 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Base.cpp                                           :+:      :+:    :+:   */
+/*   functions.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/07 21:22:09 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/07 21:22:09 by rburgsta         ###   ########.fr       */
+/*   Created: 2023/06/14 13:30:35 by rburgsta          #+#    #+#             */
+/*   Updated: 2023/06/14 13:30:35 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Base.hpp"
+#ifndef FUNCTIONS_HPP
+# define FUNCTIONS_HPP
 
-Base::~Base() {}
+# include "A.hpp"
+# include "B.hpp"
+# include "C.hpp"
+# include <stdlib.h>
+# include <time.h>
+
+Base *generate(void);
+void identify(Base* p);
+void identify(Base& p);
+
+#endif
