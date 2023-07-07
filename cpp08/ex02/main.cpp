@@ -20,6 +20,8 @@ int main() {
   std::cout << "Size: " << mst.size() << std::endl;
   for (int i = 0; i < 50; i++) mst.push(i + 1);
   std::cout << "Size: " << mst.size() << std::endl;
+  MutantStack<int> mstClone = mst;
+  std::cout << "Clone Size: " << mstClone.size() << std::endl;
   MutantStack<int>::iterator itr = mst.begin();
   while (itr != mst.end()) std::cout << *itr++ << " ";
   std::cout << std::endl << std::endl;
