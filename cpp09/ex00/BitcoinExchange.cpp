@@ -36,7 +36,13 @@ BitcoinExchange::BitcoinExchange(std::string inputLoc) : inputPath(inputLoc)
 	while (std::getline(database, line))
 	{
 		std::string key = line.substr(0, line.find(','));
+		if (verifyDate(key))
+			handleError("Invalid date", 1);
 		line.erase(0, line.find(',') + 1);
+		if (verifyValue(line))
+			handleError("Invalid value", 1);
+		if (data.count(key))
+			handleError("Duplicate database date", 1);
 		data[key] = std::atof(line.c_str());
 	}
 }
