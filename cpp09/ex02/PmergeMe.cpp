@@ -64,7 +64,7 @@ std::string PmergeMe::removeTrailingZeros(std::string str) {
 
 std::string PmergeMe::sortContainerOne() {
   long long startTime = getTimeNanos();
-  mergeSort(vec, 0, vec.size());
+  mergeSort(vec.begin(), vec.end());
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000.0)));
 }
