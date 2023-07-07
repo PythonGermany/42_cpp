@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:39:54 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/15 01:08:34 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/16 20:18:47 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ AMateria::AMateria(AMateria const& src)
 AMateria& AMateria::operator=(AMateria const& rhs)
 {
 	std::cout << "AMateria copy assignment operator called" << std::endl;
-	this->type = rhs.type;
+	(void)rhs;
 	return (*this);
 }
 

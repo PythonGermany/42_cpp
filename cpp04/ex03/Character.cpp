@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:40:34 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/09 18:12:07 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/16 20:16:03 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ Character::Character(Character const& src)
 Character& Character::operator=(Character const& rhs)
 {
 	std::cout << "Character copy assignment operator called" << std::endl;
+	name = rhs.name;
+	for (size_t i = 0; i < 4; i++)
+	{
+		if (materia[i] != NULL)
+			delete materia[i];
+		materia[i] = NULL;
+		if (rhs.materia[i] != NULL)
+			materia[i] = rhs.materia[i]->clone();
+	}
 	return (*this);
 }
 
@@ -66,7 +75,10 @@ void Character::equip(AMateria *m)
 void Character::unequip(int idx)
 {
 	if (idx >= 0 && idx < 4 && materia[idx] != NULL)
+	{
+		delete materia[idx];
 		materia[idx] == NULL;
+	}
 }
 
 void Character::use(int idx, ICharacter &target)
