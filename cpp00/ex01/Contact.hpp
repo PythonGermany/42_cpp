@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 08:12:48 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/02/07 00:56:16 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/02/07 02:33:30 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string>
 # include <iostream>
+# include <limits>
 
 class Contact
 {
