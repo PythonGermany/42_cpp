@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:39:54 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/16 20:18:47 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:53:22 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,9 @@ AMateria::~AMateria(void)
 std::string const& AMateria::getType() const
 {
 	return (type);
+}
+
+void AMateria::use(ICharacter& target)
+{
+	std::cout << "* AMateria is being used against " << target.getName() << std::endl;
 }

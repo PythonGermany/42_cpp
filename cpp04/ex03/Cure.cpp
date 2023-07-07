@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:47:56 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/15 00:44:05 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:06:01 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Cure::Cure(Cure const& src) : AMateria(src)
 Cure& Cure::operator=(Cure const& rhs)
 {
 	std::cout << "Cure copy assignment operator called" << std::endl;
+	(void)rhs;
 	return (*this);
 }
 
@@ -36,7 +37,7 @@ Cure::~Cure(void)
 
 AMateria* Cure::clone() const
 {
-	return (new Cure(*this));
+	return (new Cure());
 }
 
 void Cure::use(ICharacter& target)

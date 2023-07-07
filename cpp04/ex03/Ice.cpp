@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:10:16 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/15 00:44:12 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:02:08 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Ice::Ice(Ice const& src) : AMateria(src)
 Ice& Ice::operator=(Ice const& rhs)
 {
 	std::cout << "Ice copy assignment operator called" << std::endl;
+	(void)rhs;
 	return (*this);
 }
 
@@ -36,7 +37,7 @@ Ice::~Ice(void)
 
 AMateria* Ice::clone() const
 {
-	return (new Ice(*this));
+	return (new Ice());
 }
 
 void Ice::use(ICharacter& target)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MateriaSource.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 17:08:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/09 18:11:43 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:11:25 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ MateriaSource::MateriaSource(MateriaSource const& src)
 MateriaSource& MateriaSource::operator=(MateriaSource const& rhs)
 {
 	std::cout << "MateriaSource copy assignment operator called" << std::endl;
+	for (size_t i = 0; i < 4; i++)
+	{
+		if (materia[i] != NULL)
+			delete materia[i];
+		materia[i] = NULL;
+		if (rhs.materia[i] != NULL)
+			materia[i] = rhs.materia[i]->clone();
+	}
 	return (*this);
 }
 
@@ -44,7 +52,7 @@ void MateriaSource::learnMateria(AMateria* m)
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-	for (size_t i = 0; i < iMateria; i++)
+	for (int i = 0; i < iMateria && materia[i]->getType() != type; i++)
 		if (materia[i]->getType() == type)
 			return (materia[i]->clone());
 	return (NULL);
