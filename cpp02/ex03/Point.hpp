@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 15:34:50 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/01 17:24:54 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:16:03 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ public:
 	Point& operator=(Point const& rhs);
 	~Point();
 
-	Fixed getX(void);
-	Fixed getY(void);
+	Fixed getX(void) const;
+	Fixed getY(void) const;
 };
 
 #endif
