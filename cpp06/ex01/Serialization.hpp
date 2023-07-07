@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   Serialization.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,20 +13,21 @@
 #ifndef TEMPLATE_HPP
 # define TEMPLATE_HPP
 
-# include <iostream>
+# include <stdint.h>
+# include "Data.hpp"
 
-class ScalarConverter
+class Serialization
 {
-public:
-	ScalarConverter();
-	ScalarConverter(ScalarConverter const& rhs);
-	ScalarConverter& operator=(ScalarConverter const& rhs);
-	~ScalarConverter();
-
-	static void convert(std::string literal);
 private:
-	static int verifyValue(std::string &value)
+	
+public:
+	Serialization();
+	Serialization(Serialization const& rhs);
+	Serialization& operator=(Serialization const& rhs);
+	~Serialization();
 
+	static uintptr_t serialize(Data* ptr);
+	static Data* deserialize(uintptr_t raw);
 };
 
 #endif

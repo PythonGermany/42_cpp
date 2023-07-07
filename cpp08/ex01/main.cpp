@@ -17,7 +17,7 @@
 
 int main()
 {
-	srand (time(NULL));
+	srand(time(NULL));
 
 	Span sp = Span(5);
 	sp.addNumber(6);

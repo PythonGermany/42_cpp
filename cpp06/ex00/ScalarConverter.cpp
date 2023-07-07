@@ -12,30 +12,44 @@
 
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter()
-{
-	std::cout << "ScalarConverter default constructor called" << std::endl;
-}
+ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::ScalarConverter(ScalarConverter const& rhs)
 {
-	std::cout << "ScalarConverter copy constructor called" << std::endl;
 	*this = rhs;
 }
 
 ScalarConverter& ScalarConverter::operator=(ScalarConverter const& rhs)
 {
-	std::cout << "ScalarConverter copy assignment operator called" << std::endl;
-	
+	if (this == &rhs)
+		return (*this);	
 	return (*this);
 }
 
-ScalarConverter::~ScalarConverter()
+ScalarConverter::~ScalarConverter() {}
+
+void ScalarConverter::convert(std::string literal)
 {
-	std::cout << "ScalarConverter destructor called" << std::endl;
+	if (literal.empty())
+		return;
+	
 }
 
-void ScalarConverter::convert(std::string& literal)
+int ScalarConverter::verifyValue(std::string &value)
 {
-	
+	bool precisionFound = false;
+	if (value.empty())
+		return (1);
+	if (!value.compare("-inf") || !value.compare("+inf") || !value.compare("nan"))
+		return (0);
+	for (size_t i = 0; i < value.length(); i++)
+	{
+		if (i == 0 && (value[i] == '-' || value[i] == '+'))
+			continue;
+		else if (!precisionFound && value[i] == '.')
+			precisionFound = true;
+		else if (!std::isdigit(value[i]))
+			return (1);
+	}
+	return (0);
 }
