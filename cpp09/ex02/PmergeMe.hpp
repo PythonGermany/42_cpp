@@ -40,13 +40,12 @@ class PmergeMe {
   std::string valueToString(double val);
   std::string removeTrailingZeros(std::string str);
   template <typename T>
-  void mergeSort(T& data, size_t start, size_t end) {
+  void mergeSort(T start, T end) {
     if (end - start < 2) return;
-    size_t mid = (start + end) / 2;
-    mergeSort(data, start, mid);
-    mergeSort(data, mid, end);
-    std::inplace_merge(data.begin() + start, data.begin() + mid,
-                       data.begin() + end);
+    T mid = start + (end - start) / 2;
+    mergeSort(start, mid);
+    mergeSort(mid, end);
+    std::inplace_merge(start, mid, end);
   }
   std::string sortContainerOne();
   std::string sortContainerTwo();
