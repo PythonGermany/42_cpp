@@ -6,13 +6,14 @@
 template <typename T>
 void mergeSort(T start, T end) {
   if (end - start < 2) return;
-  T mid = (end - start) / 2;
+  T mid = start + (end - start) / 2;
   mergeSort(start, mid);
   mergeSort(mid, end);
   std::inplace_merge(start, mid, end);
 }
 
 int main(int argc, char** argv) {
+  if (argc < 2) return 1;
   std::vector<int> arg(argc - 1);
   for (int i = 0; i < argc - 1; i++) arg[i] = std::atoi(argv[i + 1]);
   std::vector<std::pair<int, int> > pairs;
@@ -27,4 +28,5 @@ int main(int argc, char** argv) {
   mergeSort(sorted.begin(), sorted.end());
   for (int i = 0; i < sorted.size(); i++) std::cout << sorted[i] << " ";
   std::cout << std::endl;
+  // Test
 }
