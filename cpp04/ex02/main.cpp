@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:25:11 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/15 16:16:08 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/06/17 00:41:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-int main()
-{
-	//AAnimal a;
-	Cat c;
-	Dog d;
-	c.getType();
-	c.makeSound();
-	d.getType();
-	d.makeSound();
-	//system("leaks ex02");
-	return 0;
+int main() {
+  // AAnimal a;
+  Cat c;
+  Dog d;
+  c.getType();
+  c.makeSound();
+  d.getType();
+  d.makeSound();
+  // system("leaks ex02");
+  return 0;
 }

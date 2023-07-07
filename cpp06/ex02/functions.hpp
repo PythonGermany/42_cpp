@@ -11,15 +11,16 @@
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_HPP
-# define FUNCTIONS_HPP
+#define FUNCTIONS_HPP
 
-# include "A.hpp"
-# include "B.hpp"
-# include "C.hpp"
-# include <stdlib.h>
-# include <time.h>
+#include <stdlib.h>
+#include <time.h>
 
-Base *generate(void);
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+
+Base* generate(void);
 void identify(Base* p);
 void identify(Base& p);
 

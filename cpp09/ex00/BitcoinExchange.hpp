@@ -11,37 +11,38 @@
 /* ************************************************************************** */
 
 #ifndef BITCOINEXCHANGE_HPP
-# define BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
 
-# include <iostream>
-# include <fstream>
-# include <cstdlib>
-# include <map>
-# include <string>
+#include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <string>
 
-# define DATABASE_LOC "cpp_09/data.csv"
+#define DATABASE_LOC "cpp_09/data.csv"
 
-class BitcoinExchange
-{
-private:
-	std::string inputPath;
-	std::ifstream input;
-	std::ifstream database;
-	std::map<std::string, float> data;
-public:
-	BitcoinExchange();
-	BitcoinExchange(std::string inputLoc);
-	BitcoinExchange(BitcoinExchange const &rhs);
-	BitcoinExchange &operator=(BitcoinExchange const &rhs);
-	~BitcoinExchange();
+class BitcoinExchange {
+ private:
+  std::string inputPath;
+  std::ifstream input;
+  std::ifstream database;
+  std::map<std::string, float> data;
 
-	void processInput();
-	float calculateValue(std::string &date, float amount);
-	static void handleError(std::string msg, int exitCode);
-	static void handleError(std::string msg);
-private:
-	int verifyDate(std::string &date);
-	int verifyValue(std::string &value);
+ public:
+  BitcoinExchange();
+  BitcoinExchange(std::string inputLoc);
+  BitcoinExchange(BitcoinExchange const &rhs);
+  BitcoinExchange &operator=(BitcoinExchange const &rhs);
+  ~BitcoinExchange();
+
+  void processInput();
+  float calculateValue(std::string &date, float amount);
+  static void handleError(std::string msg, int exitCode);
+  static void handleError(std::string msg);
+
+ private:
+  int verifyDate(std::string &date);
+  int verifyValue(std::string &value);
 };
 
 #endif

@@ -11,26 +11,25 @@
 /* ************************************************************************** */
 
 #ifndef Intern_HPP
-# define Intern_HPP
+#define Intern_HPP
 
+#include <iostream>
 #include <string>
-# include <iostream>
-# include "AForm.hpp"
-# include "ShrubberyCreationForm.hpp"
-# include "RobotomyRequestForm.hpp"
-# include "PresidentialPardonForm.hpp"
 
-class Intern
-{
-private:
-	
-public:
-	Intern();
-	Intern(Intern const& rhs);
-	Intern& operator=(Intern const& rhs);
-	~Intern();
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-	AForm *makeForm(std::string const& name, std::string const& target) const;
+class Intern {
+ private:
+ public:
+  Intern();
+  Intern(Intern const& rhs);
+  Intern& operator=(Intern const& rhs);
+  ~Intern();
+
+  AForm* makeForm(std::string const& name, std::string const& target) const;
 };
 
 #endif

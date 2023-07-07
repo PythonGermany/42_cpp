@@ -11,28 +11,28 @@
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
-# define FIXED_HPP
+#define FIXED_HPP
 
 #include <iostream>
 
-class Fixed
-{
-private:
-	int number;
-	static const int fractionalBits ;
-public:
-	Fixed();
-	Fixed(const int nb);
-	Fixed(const float nb);
-	Fixed(Fixed const& src);
-	Fixed& operator=(Fixed const& rhs);
-	~Fixed();
+class Fixed {
+ private:
+  int number;
+  static const int fractionalBits;
 
-	void setRawBits(int const raw);
-	int getRawBits(void) const;
+ public:
+  Fixed();
+  Fixed(const int nb);
+  Fixed(const float nb);
+  Fixed(Fixed const& src);
+  Fixed& operator=(Fixed const& rhs);
+  ~Fixed();
 
-	float toFloat(void) const;
-	int toInt(void) const;
+  void setRawBits(int const raw);
+  int getRawBits(void) const;
+
+  float toFloat(void) const;
+  int toInt(void) const;
 };
 
 std::ostream& operator<<(std::ostream& os, Fixed const& rhs);

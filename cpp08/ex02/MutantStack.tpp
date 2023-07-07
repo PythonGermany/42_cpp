@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef MUTANTSTACK_TPP
-# define MUTANTSTACK_TPP
+#define MUTANTSTACK_TPP
 
 #include "MutantStack.hpp"
 
@@ -19,17 +19,14 @@ template <typename T>
 MutantStack<T>::MutantStack() {}
 
 template <typename T>
-MutantStack<T>::MutantStack(MutantStack const& rhs)
-{
-	*this = rhs;
+MutantStack<T>::MutantStack(MutantStack const& rhs) {
+  *this = rhs;
 }
 
 template <typename T>
-MutantStack<T>& MutantStack<T>::operator=(MutantStack<T> const& rhs)
-{
-	if (this == &rhs)
-		return (*this);
-	return (*this);
+MutantStack<T>& MutantStack<T>::operator=(MutantStack<T> const& rhs) {
+  if (this == &rhs) return (*this);
+  return (*this);
 }
 
 template <typename T>
@@ -39,91 +36,80 @@ template <typename T>
 MutantStack<T>::iterator::iterator() {}
 
 template <typename T>
-MutantStack<T>::iterator::iterator(int index, MutantStack &stack) :index(index), stack(stack) {}
+MutantStack<T>::iterator::iterator(int index, MutantStack& stack)
+    : index(index), stack(stack) {}
 
 template <typename T>
-MutantStack<T>::iterator::iterator(iterator const &rhs) : stack(rhs.stack)
-{
-	*this = rhs;
+MutantStack<T>::iterator::iterator(iterator const& rhs) : stack(rhs.stack) {
+  *this = rhs;
 }
 
 template <typename T>
-typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator=(iterator const &rhs)
-{
-	if (this == &rhs)
-		return (*this);
-	index = rhs.index;
-	stack = rhs.stack;
-	return (*this);
+typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator=(
+    iterator const& rhs) {
+  if (this == &rhs) return (*this);
+  index = rhs.index;
+  stack = rhs.stack;
+  return (*this);
 }
 
 template <typename T>
 MutantStack<T>::iterator::~iterator() {}
 
 template <typename T>
-typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator++()
-{
-	++index;
-	return (*this);
+typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator++() {
+  ++index;
+  return (*this);
 }
 
 template <typename T>
-typename MutantStack<T>::iterator MutantStack<T>::iterator::operator++(int)
-{
-	MutantStack<T>::iterator temp = *this;
-	index++;
-	return (temp);
+typename MutantStack<T>::iterator MutantStack<T>::iterator::operator++(int) {
+  MutantStack<T>::iterator temp = *this;
+  index++;
+  return (temp);
 }
 
 template <typename T>
-typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator--()
-{
-	--index;
-	return (*this);
+typename MutantStack<T>::iterator& MutantStack<T>::iterator::operator--() {
+  --index;
+  return (*this);
 }
 
 template <typename T>
-typename MutantStack<T>::iterator MutantStack<T>::iterator::operator--(int)
-{
-	MutantStack<T>::iterator temp = *this;
-	index--;
-	return (temp);
+typename MutantStack<T>::iterator MutantStack<T>::iterator::operator--(int) {
+  MutantStack<T>::iterator temp = *this;
+  index--;
+  return (temp);
 }
 
 template <typename T>
-bool MutantStack<T>::iterator::operator==(iterator const& rhs)
-{
-	return (stack == rhs.stack && index == rhs.index);
+bool MutantStack<T>::iterator::operator==(iterator const& rhs) {
+  return (stack == rhs.stack && index == rhs.index);
 }
 
 template <typename T>
-bool MutantStack<T>::iterator::operator!=(iterator const& rhs)
-{
-	return (stack != rhs.stack || index != rhs.index);
+bool MutantStack<T>::iterator::operator!=(iterator const& rhs) {
+  return (stack != rhs.stack || index != rhs.index);
 }
 
 template <typename T>
-T& MutantStack<T>::iterator::operator*()
-{
-	return (stack.c.at(index));
+T& MutantStack<T>::iterator::operator*() {
+  return (stack.c.at(index));
 }
 
 template <typename T>
-T* MutantStack<T>::iterator::operator->()
-{
-	return (&stack.c.at(index));
+T* MutantStack<T>::iterator::operator->() {
+  return (&stack.c.at(index));
 }
 
 template <typename T>
-typename MutantStack<T>::iterator MutantStack<T>::begin()
-{
-	return (iterator(0, *this));
+typename MutantStack<T>::iterator MutantStack<T>::begin() {
+  return (iterator(0, *this));
 }
 
 template <typename T>
-typename MutantStack<T>::iterator MutantStack<T>::end()
-{
-	return (iterator(this->size(), *this));
+typename MutantStack<T>::iterator MutantStack<T>::end() {
+  return (iterator(this->size(), *this));
 }
 
 #endif

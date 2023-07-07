@@ -12,37 +12,37 @@
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5)
-{
-	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
-	this->target = "noname";
+PresidentialPardonForm::PresidentialPardonForm()
+    : AForm("PresidentialPardonForm", 25, 5) {
+  std::cout << "PresidentialPardonForm default constructor called" << std::endl;
+  this->target = "noname";
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string const& target) : AForm("PresidentialPardonForm", 25, 5)
-{
-	std::cout << "PresidentialPardonForm constructor called" << std::endl;
-	this->target = target;
+PresidentialPardonForm::PresidentialPardonForm(std::string const& target)
+    : AForm("PresidentialPardonForm", 25, 5) {
+  std::cout << "PresidentialPardonForm constructor called" << std::endl;
+  this->target = target;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& rhs) : AForm("PresidentialPardonForm", 25, 5)
-{
-	std::cout << "PresidentialPardonForm copy constructor called" << std::endl;
-	*this = rhs;
+PresidentialPardonForm::PresidentialPardonForm(
+    PresidentialPardonForm const& rhs)
+    : AForm("PresidentialPardonForm", 25, 5) {
+  std::cout << "PresidentialPardonForm copy constructor called" << std::endl;
+  *this = rhs;
 }
 
-PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm const& rhs)
-{
-	std::cout << "PresidentialPardonForm copy assignment operator called" << std::endl;
-	this->target = rhs.target;
-	return (*this);
+PresidentialPardonForm& PresidentialPardonForm::operator=(
+    PresidentialPardonForm const& rhs) {
+  std::cout << "PresidentialPardonForm copy assignment operator called"
+            << std::endl;
+  this->target = rhs.target;
+  return (*this);
 }
 
-void PresidentialPardonForm::executeFormTask() const
-{
-	std::cout << target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
+void PresidentialPardonForm::executeFormTask() const {
+  std::cout << target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
 }
 
-PresidentialPardonForm::~PresidentialPardonForm()
-{
-	std::cout << "PresidentialPardonForm destructor called" << std::endl;
+PresidentialPardonForm::~PresidentialPardonForm() {
+  std::cout << "PresidentialPardonForm destructor called" << std::endl;
 }

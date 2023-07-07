@@ -12,12 +12,11 @@
 
 #include "Zombie.hpp"
 
-int	main(void)
-{
-	Zombie z("Zomb");
-	z.announce();
-	Zombie *ptr = newZombie("newZombie");
-	ptr->announce();
-	randomChump("randomChump");
-	delete ptr;
+int main(void) {
+  Zombie z("Zomb");
+  z.announce();
+  Zombie *ptr = newZombie("newZombie");
+  ptr->announce();
+  randomChump("randomChump");
+  delete ptr;
 }

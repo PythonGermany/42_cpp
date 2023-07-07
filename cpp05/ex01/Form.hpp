@@ -11,48 +11,47 @@
 /* ************************************************************************** */
 
 #ifndef FORM_HPP
-# define FORM_HPP
+#define FORM_HPP
 
-# include <string>
-# include <iostream>
-# include "Bureaucrat.hpp"
+#include <iostream>
+#include <string>
 
-# define HIGHEST_GRADE 1
-# define LOWEST_GRADE 150
+#include "Bureaucrat.hpp"
+
+#define HIGHEST_GRADE 1
+#define LOWEST_GRADE 150
 
 class Bureaucrat;
 
-class Form
-{
-private:
-	std::string const name;
-	bool isSigned;
-	int const signReq;
-	int const exeReq;
-public:
-	Form();
-	Form(std::string name, int sR, int const eR);
-	Form(Form const& rhs);
-	Form& operator=(Form const& rhs);
-	~Form();
+class Form {
+ private:
+  std::string const name;
+  bool isSigned;
+  int const signReq;
+  int const exeReq;
 
-	std::string const& getName() const;
-	bool const& getSigned() const;
-	int const& getSignReq() const;
-	int const& getExeReq() const;
+ public:
+  Form();
+  Form(std::string name, int sR, int const eR);
+  Form(Form const& rhs);
+  Form& operator=(Form const& rhs);
+  ~Form();
 
-	void beSigned(Bureaucrat const& b);
+  std::string const& getName() const;
+  bool const& getSigned() const;
+  int const& getSignReq() const;
+  int const& getExeReq() const;
 
-	class GradeTooHighException : public std::exception
-	{
-	public:
-		const char* what() const throw();
-	};
-	class GradeTooLowException : public std::exception
-	{
-	public:
-		const char* what() const throw();
-	};
+  void beSigned(Bureaucrat const& b);
+
+  class GradeTooHighException : public std::exception {
+   public:
+    const char* what() const throw();
+  };
+  class GradeTooLowException : public std::exception {
+   public:
+    const char* what() const throw();
+  };
 };
 
 std::ostream& operator<<(std::ostream& os, Form const& rhs);

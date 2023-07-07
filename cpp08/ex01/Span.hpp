@@ -11,35 +11,32 @@
 /* ************************************************************************** */
 
 #ifndef SPAN_HPP
-# define SPAN_HPP
+#define SPAN_HPP
 
-# include <climits>
-# include <vector>
-# include <algorithm>
+#include <algorithm>
+#include <climits>
+#include <vector>
 
-class Span
-{
-private:
-	std::vector<int> vec;
-	const unsigned int n;
-public:
-	Span();
-	Span(unsigned int N);
-	Span(Span const& rhs);
-	Span& operator=(Span const& rhs);
-	~Span();
+class Span {
+ private:
+  std::vector<int> vec;
+  const unsigned int n;
 
-	void addNumber(int nb);
-	template <typename T>
-	void addRange(T begin, T end)
-	{
-		if (end - begin + vec.size() > n)
-			throw std::exception();
-		for (; begin != end; begin++)
-			addNumber(*begin);
-	}
-	int shortestSpan();
-	int longestSpan();
+ public:
+  Span();
+  Span(unsigned int N);
+  Span(Span const& rhs);
+  Span& operator=(Span const& rhs);
+  ~Span();
+
+  void addNumber(int nb);
+  template <typename T>
+  void addRange(T begin, T end) {
+    if (end - begin + vec.size() > n) throw std::exception();
+    for (; begin != end; begin++) addNumber(*begin);
+  }
+  int shortestSpan();
+  int longestSpan();
 };
 
 #endif
