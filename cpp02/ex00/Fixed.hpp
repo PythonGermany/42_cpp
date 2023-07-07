@@ -13,15 +13,21 @@
 #ifndef FIXED_HPP
 # define FIXED_HPP
 
+#include <iostream>
+
 class Fixed
 {
 private:
-	/* data */
+	int number;
+	static const int fractionalBits ;
 public:
 	Fixed();
 	Fixed(Fixed const& src);
 	Fixed& operator=(Fixed const& rhs);
 	~Fixed();
+
+	void setRawBits(int const raw);
+	int getRawBits(void) const;
 };
 
 #endif
