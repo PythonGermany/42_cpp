@@ -18,7 +18,6 @@
 #include "Data.hpp"
 
 class Serialization {
- private:
  public:
   Serialization();
   Serialization(Serialization const& rhs);

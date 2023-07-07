@@ -18,7 +18,7 @@ void comparePointers(Data *a, Data *b) {
   if (a == b)
     std::cout << "Pointers are equal: " << a << " = " << b;
   else
-    std::cout << "Pointers are NOT equal" << a << " != " << b;
+    std::cout << "Pointers are NOT equal: " << a << " != " << b;
   std::cout << std::endl;
 }
 
@@ -29,7 +29,9 @@ int main() {
   uintptr_t dintptr = s.serialize(&d);
   Data *dptr = s.deserialize(dintptr);
 
+  std::cout << "uintprt_t: " << dintptr << "; Data ptr: " << dptr << std::endl;
   comparePointers(dptr, &d);
   comparePointers(dptr, &d2);
+  std::cout << "d value: " << d.value << std::endl;
   return (0);
 }
