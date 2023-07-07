@@ -12,12 +12,12 @@
 
 #include "Span.hpp"
 
-Span::Span() : n(0) , min_span(INT_MAX)
+Span::Span() : n(0)
 {
 	std::cout << "Span default constructor called" << std::endl;
 }
 
-Span::Span(unsigned int N) : n(N) , min_span(INT_MAX)
+Span::Span(unsigned int N) : n(N)
 {
 	std::cout << "Span constructor called" << std::endl;
 }
@@ -34,7 +34,6 @@ Span& Span::operator=(Span const& rhs)
 	vec = std::vector<int>(rhs.vec.size());
 	std::copy(rhs.vec.begin(), rhs.vec.end(), vec.begin());
 	const_cast<size_t &>(n) = rhs.n;
-	min_span = rhs.min_span;
 	return (*this);
 }
 

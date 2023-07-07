@@ -22,8 +22,7 @@ class Span
 {
 private:
 	std::vector<int> vec;
-	const size_t n;
-	int min_span;
+	const unsigned int n;
 public:
 	Span();
 	Span(unsigned int N);
