@@ -43,6 +43,8 @@ int main(int argc, char** argv)
 
 	if (argc != 4)
 		return (std::cout << "Use: " << argv[0] << " <filename> <s1> <s2>" << std::endl, 1);
+	if (std::string(argv[2]).length() < 1)
+		return (std::cout << "An empty string is not allowed for <s1>" << std::endl, 1);
 	in.open(argv[1], std::ifstream::in);
 	if (in.fail())
 		return (std::cout << "Failed to open input file" << std::endl, 1);
