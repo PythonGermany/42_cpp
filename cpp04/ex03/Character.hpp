@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:39:08 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/09 19:06:40 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/20 12:32:32 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ class Character : public ICharacter
 private:
 	std::string name;
 	AMateria *materia[4];
+	AMateria **floor;
+	int	mat_on_floor;
 public:
 	Character();
 	Character(std::string name);
