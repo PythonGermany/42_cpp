@@ -40,16 +40,17 @@ void PmergeMe::loadSequence(std::vector<std::string>& seq) {
 }
 
 void PmergeMe::sortContainerOne() {
-  // DEV sort first container
+  for (size_t i = 0; i < vec.size() - 1; i += 2)
+    if (vec[i] < vec[i + 1]) std::swap(vec[i], vec[i + 1]);
+}
+
+void PmergeMe::sortContainerTwo() {
+  // DEV sort second container
 }
 
 void PmergeMe::printContainerOne() const {
   for (size_t i = 0; i < vec.size(); i++) std::cout << vec[i] << " ";
   std::cout << std::endl;
-}
-
-void PmergeMe::sortContainerTwo() {
-  // DEV sort second container
 }
 
 void PmergeMe::printContainerTwo() const {

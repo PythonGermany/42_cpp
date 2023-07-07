@@ -19,4 +19,8 @@ int main(int argc, char **argv) {
   PmergeMe p(arg);
   p.printContainerOne();
   p.printContainerTwo();
+  p.sortContainerOne();
+  p.sortContainerTwo();
+  p.printContainerOne();
+  p.printContainerTwo();
 }
