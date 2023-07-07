@@ -6,11 +6,13 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 11:33:40 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/02/14 11:46:22 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:36:16 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
+
+typedef void(Harl::*function)();
 
 void Harl::debug(void)
 {
@@ -39,5 +41,10 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-	
+	std::string lvlspec[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	function ptr[] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+
+	for (size_t i = 0; i < 4; i++)
+		if (lvlspec[i] == level)
+			(*ptr[i])();
 }
