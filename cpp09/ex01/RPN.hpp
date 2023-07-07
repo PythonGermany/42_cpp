@@ -30,20 +30,17 @@ typedef struct s_element
 
 class RPN
 {
-private:
-	std::list<t_element> data;
-	std::list<t_element> stack;
 public:
 	RPN();
-	RPN(std::string expr);
 	RPN(RPN const& rhs);
 	RPN& operator=(RPN const& rhs);
 	~RPN();
 
-	void loadExpression(std::string expr);
-	float processExpression();
+	float processExpression(std::string expr);
+	std::string postfixToInfix(std::string expr);
 	static void handleError(std::string msg, int exitCode);
 private:
+	std::list<t_element> loadExpression(std::string &expr);
 	t_element createElement(int type, float value);
 	int verifyValue(std::string &value);
 };

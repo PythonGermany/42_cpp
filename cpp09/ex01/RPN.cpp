@@ -14,11 +14,6 @@
 
 RPN::RPN() {}
 
-RPN::RPN(std::string expr)
-{
-	loadExpression(expr);
-}
-
 RPN::RPN(RPN const& rhs)
 {
 	*this = rhs;
@@ -28,36 +23,15 @@ RPN& RPN::operator=(RPN const& rhs)
 {
 	if (this == &rhs)
 		return (*this);
-	data = rhs.data;
-	stack = rhs.stack;
 	return (*this);
 }
 
 RPN::~RPN() {}
 
-void RPN::loadExpression(std::string expr)
+float RPN::processExpression(std::string expr)
 {
-	if (expr.empty())
-		handleError("Loading: Empty input expression", 1);
-	data.clear();
-	stack.clear();
-	while (expr.length() > 0)
-	{
-		std::string value = expr.substr(0, expr.find(' '));
-		if (value.size() == 1 && std::strchr("+-/*", expr[0]) != NULL)
-			data.push_back(createElement(OPERATOR, expr[0]));
-		else
-		{
-			if (verifyValue(value))
-				handleError("Loading: Invalid input expression", 1);
-			data.push_back(createElement(OPERAND, std::atof(value.c_str())));
-		}
-		expr.erase(0, value.size() + 1);
-	}
-}
-
-float RPN::processExpression()
-{
+	std::list<t_element> data = loadExpression(expr);
+	std::list<t_element> stack;
 	while (data.size() > 0)
 	{
 		if (data.front().type == OPERAND)
@@ -83,10 +57,69 @@ float RPN::processExpression()
 	return (stack.front().value);
 }
 
+std::string RPN::postfixToInfix(std::string expr)
+{
+	std::list<t_element> data = loadExpression(expr);
+	std::list<t_element> stack;
+	std::string infix;
+	int elementsPushed = 0;
+	while (data.size() > 0)
+	{
+		if (data.front().type == OPERAND)
+		{
+			stack.push_front(data.front());
+			if (++elementsPushed > 2)
+				infix.append("(");
+		}
+		else if (data.front().type == OPERATOR)
+		{
+			//infix.append(std::to_string((*(++stack.begin())).value));
+			if (stack.size() < 2)
+				handleError("Processing: Invalid expression", 1);
+			if (data.front().value == '+')
+				(*(++stack.begin())).value += stack.front().value;
+			else if (data.front().value  == '-')
+				(*(++stack.begin())).value -= stack.front().value;
+			else if (data.front().value == '*')
+				(*(++stack.begin())).value *= stack.front().value;
+			else if (data.front().value == '/')
+				(*(++stack.begin())).value /= stack.front().value;
+			//infix.append(std::to_string(stack.front().value));
+			stack.pop_front();
+			elementsPushed = 0;
+		}
+		data.pop_front();
+	}
+	if (stack.size() != 1)
+		handleError("Processing: Invalid/Incomplete expression", 1);
+	return (infix);
+}
+
 void RPN::handleError(std::string msg, int exitCode)
 {
 	std::cout << "Error: " << msg << "!" << std::endl;
 	std::exit(exitCode);
+}
+
+std::list<t_element> RPN::loadExpression(std::string &expr)
+{
+	if (expr.empty())
+		handleError("Loading: Empty input expression", 1);
+	std::list<t_element> data;
+	while (expr.length() > 0)
+	{
+		std::string value = expr.substr(0, expr.find(' '));
+		if (value.size() == 1 && std::strchr("+-/*", expr[0]) != NULL)
+			data.push_back(createElement(OPERATOR, expr[0]));
+		else
+		{
+			if (verifyValue(value))
+				handleError("Loading: Invalid input expression", 1);
+			data.push_back(createElement(OPERAND, std::atof(value.c_str())));
+		}
+		expr.erase(0, value.size() + 1);
+	}
+	return (data);
 }
 
 t_element RPN::createElement(int type, float value)
