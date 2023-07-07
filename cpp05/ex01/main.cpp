@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:28:26 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/06 21:17:50 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:53:29 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,14 @@ int main()
 	b.signForm(f);
 	std::cout << f << std::endl;
 	std::cout << std::endl;
-	try
-	{
+	try {
 		f = Form("TestForm2", 0, 9);
-	}
-	catch(const std::exception& e)
-	{
+	} catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 	}
-	try
-	{
+	try {
 		f = Form("TestForm2", 16, 160);
-	}
-	catch(const std::exception& e)
-	{
+	} catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 	}
 	std::cout << std::endl;

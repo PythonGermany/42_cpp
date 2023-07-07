@@ -39,8 +39,13 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm const& r
 
 void RobotomyRequestForm::executeFormTask() const
 {
+	static bool first = true;
 	std::cout << "* drilling noises *, ";
-	srand(time(NULL));
+	if (first == true)
+	{
+		srand(time(NULL));
+		first = false;
+	}
 	if (rand() % 2 == 0)
 		std::cout << target << " has been robotomized" << std::endl;
 	else

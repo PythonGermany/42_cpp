@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:28:26 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/06 20:15:14 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:47:02 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,26 @@ int main()
 	Bureaucrat *b;
 	Bureaucrat c;
 
-	try
-	{
+	try {
 		b = new Bureaucrat("Test1", 0);
-	}
-	catch(const std::exception& e)
-	{
+	} catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 	}
-	try
-	{
+	try {
 		b = new Bureaucrat("Test1", 156);
-	}
-	catch(const std::exception& e)
-	{
+	} catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 	}
-	try
-	{
+	try {
 		b = new Bureaucrat("Test1", 12);
-	}
-	catch(const std::exception& e)
-	{
+	} catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 	}
 	for (size_t i = 0; i < 12; i++)
 	{
-		try
-		{
+		try {
 			b->incrementGrade();
-		}
-		catch(const std::exception& e)
-		{
+		} catch(const std::exception& e) {
 			std::cerr << e.what() << std::endl;
 		}
 		std::cout << *b << std::endl;
@@ -56,12 +44,9 @@ int main()
 	delete b;
 	std::cout << std::endl;
 
-	try
-	{
+	try {
 		c = Bureaucrat("Test2", 145);
-	}
-	catch(const std::exception& e)
-	{
+	} catch(const std::exception& e) {
 		std::cerr << e.what() << '\n';
 	}
 	std::cout << c << std::endl;
@@ -69,12 +54,9 @@ int main()
 	std::cout << c << std::endl;
 	for (size_t i = 0; i < 5; i++)
 	{
-		try
-		{
+		try {
 			c.decrementGrade();
-		}
-		catch(const std::exception& e)
-		{
+		} catch(const std::exception& e) {
 			std::cerr << e.what() << std::endl;
 		}
 		std::cout << c << std::endl;
