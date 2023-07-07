@@ -14,7 +14,7 @@
 
 Span::Span() : n(0) {}
 
-Span::Span(unsigned int N) : n(N) {}
+Span::Span(unsigned int N) : n(N) { vec.resize(0); }
 
 Span::Span(Span const& rhs) : n(rhs.n) { *this = rhs; }
 
