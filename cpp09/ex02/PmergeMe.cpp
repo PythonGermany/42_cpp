@@ -62,9 +62,52 @@ std::string PmergeMe::removeTrailingZeros(std::string str) {
   return str;
 }
 
+template <typename T>
+void mergeSort(typename T::iterator start, typename T::iterator end) {
+  if (end - start < 2) return;
+  typename T::iterator mid = start + (end - start) / 2;
+  mergeSort<T>(start, mid);
+  mergeSort<T>(mid, end);
+  T tmp(end - start);
+  typename T::iterator left = start, right = mid;
+  for (size_t i = 0; i < tmp.size(); i++) {
+    if (left == mid)
+      tmp[i] = *right;
+    else if (right == end)
+      tmp[i] = *left++;
+    else if (*left < *right)
+      tmp[i] = *left++;
+    else
+      tmp[i] = *right++;
+  }
+  for (size_t i = 0; i < tmp.size(); i++) *start++ = tmp[i];
+}
+
+template <typename T>
+T binarySearch(int& target, T start, T end) {
+  if (end - start < 1) return end;
+  T mid = start + (end - start) / 2;
+  if (*mid == target) return mid;
+  if (*mid < target) return binarySearch(target, mid + 1, end);
+  return binarySearch(target, start, mid);
+}
+
+template <typename T>
+void mergeInsertSort(T& data) {
+  T sorted;
+  for (size_t i = 0; i < data.size() - 1; i += 2) {
+    if (data[i] < data[i + 1]) std::swap(data[i], data[i + 1]);
+    sorted.push_back(data[i]);
+  }
+  mergeSort<T>(sorted.begin(), sorted.end());
+  for (size_t i = 1; i < data.size(); i += 2)
+    sorted.insert(binarySearch(data[i], sorted.begin(), sorted.end()), data[i]);
+  data = sorted;
+}
+
 std::string PmergeMe::sortContainerOne() {
   long long startTime = getTimeNanos();
-  mergeSort(vec.begin(), vec.end());
+  mergeInsertSort(vec);
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000.0)));
 }

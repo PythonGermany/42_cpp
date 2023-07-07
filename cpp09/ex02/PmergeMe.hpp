@@ -39,14 +39,6 @@ class PmergeMe {
   long long getTimeNanos();
   std::string valueToString(double val);
   std::string removeTrailingZeros(std::string str);
-  template <typename T>
-  void mergeSort(T start, T end) {
-    if (end - start < 2) return;
-    T mid = start + (end - start) / 2;
-    mergeSort(start, mid);
-    mergeSort(mid, end);
-    std::inplace_merge(start, mid, end);
-  }
   std::string sortContainerOne();
   std::string sortContainerTwo();
   void printContainerOne() const;
