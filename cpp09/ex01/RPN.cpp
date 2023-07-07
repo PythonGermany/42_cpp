@@ -39,6 +39,15 @@ RPN::~RPN()
 {
 }
 
+t_element createElement(int type, int value)
+{
+	t_element el;
+
+	el.type = type;
+	el.value = value;
+	return (el);
+}
+
 void RPN::loadExpression(std::string expr)
 {
 	if (expr.length() < 1)
@@ -47,9 +56,10 @@ void RPN::loadExpression(std::string expr)
 	for (int i = exprSize - 1; i >= 0; i -= 2)
 	{
 		if (std::isdigit(expr[i]) && i != exprSize - 1)
-			data.push_front(expr[i] - '0');
+			data.push_front(createElement(OPERAND,
+				std::atoi(expr.substr(i, expr.find(' ')).c_str()) * 10));
 		else if (std::strchr("+-/*", expr[i]) != NULL)
-			data.push_front(expr[i]);
+			data.push_front(createElement(OPERATOR, expr[i]));
 		else
 			handleError("Loading: Invalid input expression", 1);
 		if (i > 0 && expr[i - 1] != ' ')
@@ -61,27 +71,27 @@ int RPN::processExpression()
 {
 	while (data.size() > 0)
 	{
-		if (data.front() >= 0 && data.front() <= 9)
+		if (data.front().type == OPERAND)
 			stack.push_front(data.front());
-		else if (std::strchr("+-/*", data.front()) != NULL)
+		else if (data.front().type == OPERATOR)
 		{
 			if (stack.size() < 2)
 				handleError("Processing: Invalid expression", 1);
-			if (data.front() == '+')
-				*(++stack.begin()) += stack.front();
-			else if (data.front() == '-')
-				*(++stack.begin()) -= stack.front();
-			else if (data.front() == '*')
-				*(++stack.begin()) *= stack.front();
-			else if (data.front() == '/')
-				*(++stack.begin()) /= stack.front();
+			if (data.front().value == '+')
+				(*(++stack.begin())).value += stack.front().value;
+			else if (data.front().value  == '-')
+				(*(++stack.begin())).value -= stack.front().value;
+			else if (data.front().value == '*')
+				(*(++stack.begin())).value *= stack.front().value;
+			else if (data.front().value == '/')
+				(*(++stack.begin())).value /= stack.front().value;
 			stack.pop_front();
 		}
 		data.pop_front();
 	}
 	if (stack.size() != 1)
 		handleError("Processing: Invalid/Incomplete expression", 1);
-	return (stack.front());
+	return (stack.front().value);
 }
 
 void RPN::handleError(std::string msg, int exitCode)

@@ -19,11 +19,21 @@
 # include <cstdlib>
 # include <iostream>
 
+# define OPERATOR 0
+# define OPERAND 1
+
+typedef struct s_element
+{
+	int type;
+	int value;
+} t_element;
+
+
 class RPN
 {
 private:
-	std::list<int> data;
-	std::list<int> stack;
+	std::list<t_element> data;
+	std::list<t_element> stack;
 public:
 	RPN();
 	RPN(std::string expr);
