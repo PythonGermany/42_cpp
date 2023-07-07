@@ -13,7 +13,7 @@
 #include <iostream>
 #include <fstream>
 
-void replace(std::string& s, std::string oldInsert, std::string newInsert)
+void ft_replace(std::string& s, std::string oldInsert, std::string newInsert)
 {
 	std::string buf;
 	std::size_t i = 0;
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 	while (true)
 	{
 		std::getline(in, read);
-		replace(read, argv[2], argv[3]);
+		ft_replace(read, argv[2], argv[3]);
 		out << read;
 		if (in.eof())
 			break;
