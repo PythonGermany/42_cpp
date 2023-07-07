@@ -13,15 +13,20 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <cstdlib>
+#include <sys/time.h>
+
+#include <algorithm>
+#include <deque>
+#include <iomanip>
 #include <iostream>
-#include <list>
-#include <string>
+#include <limits>
+#include <sstream>
 #include <vector>
+
 class PmergeMe {
  private:
   std::vector<int> vec;
-  std::list<int> lst;
+  std::deque<int> que;
 
  public:
   PmergeMe();
@@ -31,8 +36,20 @@ class PmergeMe {
   ~PmergeMe();
 
   void loadSequence(std::vector<std::string>& seq);
-  void sortContainerOne();
-  void sortContainerTwo();
+  long long getTimeNanos();
+  std::string valueToString(double val);
+  std::string removeTrailingZeros(std::string str);
+  template <typename T>
+  void mergeSort(T& data, size_t start, size_t end) {
+    if (end - start < 2) return;
+    size_t mid = (start + end) / 2;
+    mergeSort(data, start, mid);
+    mergeSort(data, mid, end);
+    std::inplace_merge(data.begin() + start, data.begin() + mid,
+                       data.begin() + end);
+  }
+  std::string sortContainerOne();
+  std::string sortContainerTwo();
   void printContainerOne() const;
   void printContainerTwo() const;
   static void handleError(std::string msg, int exitCode);
