@@ -28,12 +28,14 @@ int main() {
   std::cout << std::endl;
   iter(intarray, 12, clear<int>);
   iter(intarray, 12, print<int>);
-  std::cout << std::endl;
+  std::cout << std::endl << std::endl;
+
   iter(chararray, 41, print<char>);
   std::cout << std::endl;
   iter(chararray, 41, toUpper<char>);
   iter(chararray, 41, print<char>);
-  std::cout << std::endl;
+  std::cout << std::endl << std::endl;
+
   iter(floatarray, 4, print<float>);
   std::cout << std::endl;
   iter(floatarray, 4, pow<float>);
