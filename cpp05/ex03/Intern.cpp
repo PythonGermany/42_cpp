@@ -37,16 +37,24 @@ Intern::~Intern()
 
 AForm *Intern::makeForm(std::string const& name, std::string const& target) const
 {
-	AForm *form = NULL;
-	if (name == "ShrubberyCreationForm")
-		form = new ShrubberyCreationForm(target);
-	else if (name == "RobotomyRequestForm")
-		form = new RobotomyRequestForm(target);
-	else if (name == "PresidentialPardonForm")
-		form = new PresidentialPardonForm(target);
-	if (form == NULL)
-		std::cout << "Intern: Form with the name " << name << " does not exist" << std::endl;
-	else
-		std::cout << "Intern creates " << name << std::endl;
-	return (form);
+	int i = 0;
+	const std::string names[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+
+	for (; i < 3; i++)
+		if (name == names[i])
+			break ;
+	if (i < 3)
+		std::cout << "Intern creates " << name;
+	switch (i)
+	{
+	case 0:
+		return (new ShrubberyCreationForm(target));	
+	case 1:
+		return (new RobotomyRequestForm(target));
+	case 2:
+		return (new PresidentialPardonForm(target));
+	default:
+		std::cout << "Intern: Form type " << name << " does not exist";
+	}
+	return (NULL);
 }

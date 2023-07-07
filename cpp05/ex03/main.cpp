@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:28:26 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/05/07 01:11:35 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/05/07 01:21:03 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int main()
 	b.executeForm(p);
 	std::cout << std::endl;
 
-	AForm *f = i.makeForm("RobotomyRequestForm", "Bender");
+	AForm *f = i.makeForm("robotomy request", "Bender");
 	b.signForm(*f);
 	b.executeForm(*f);
 	delete f;
