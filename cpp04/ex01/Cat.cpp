@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:42:29 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/14 18:46:08 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:41:10 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Cat::Cat(void) : Animal()
 	b = new Brain();
 }
 
-Cat::Cat(Cat const& src)
+Cat::Cat(Cat const& src) : Animal(src)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
 	*this = src;

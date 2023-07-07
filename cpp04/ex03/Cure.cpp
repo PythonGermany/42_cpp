@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:47:56 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/10 18:16:20 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:44:05 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Cure::Cure(void) : AMateria("cure")
 	std::cout << "Cure default constructor called" << std::endl;
 }
 
-Cure::Cure(Cure const& src)
+Cure::Cure(Cure const& src) : AMateria(src)
 {
 	std::cout << "Cure copy constructor called" << std::endl;
 	*this = src;

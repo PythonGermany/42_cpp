@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:31:05 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/03/09 17:13:49 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:43:01 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int main()
 	delete me;
 	delete src;
 
-	system("leaks ex03");
+	//system("leaks ex03");
 	return 0;
 }

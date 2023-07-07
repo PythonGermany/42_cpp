@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:42:58 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/14 18:45:26 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:40:23 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Dog::Dog(void) : Animal()
 	type = "Dog";
 }
 
-Dog::Dog(Dog const& src)
+Dog::Dog(Dog const& src) : Animal(src)
 {
 	std::cout << "Dog copy constructor called" << std::endl;
 	*this = src;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rburgsta <rburgsta@student.42.de>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 17:42:29 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/04/14 18:47:20 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/04/15 00:41:23 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ WrongCat::WrongCat(void) : WrongAnimal()
 	type = "WrongCat";
 }
 
-WrongCat::WrongCat(WrongCat const& src)
+WrongCat::WrongCat(WrongCat const& src) : WrongAnimal(src)
 {
 	std::cout << "WrongCat copy constructor called" << std::endl;
 	*this = src;
