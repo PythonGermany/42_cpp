@@ -25,9 +25,8 @@
 typedef struct s_element
 {
 	int type;
-	int value;
+	float value;
 } t_element;
-
 
 class RPN
 {
@@ -42,8 +41,11 @@ public:
 	~RPN();
 
 	void loadExpression(std::string expr);
-	int processExpression();
+	float processExpression();
 	static void handleError(std::string msg, int exitCode);
+private:
+	t_element createElement(int type, float value);
+	int verifyValue(std::string &value);
 };
 
 #endif

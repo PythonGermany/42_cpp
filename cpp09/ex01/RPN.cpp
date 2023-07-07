@@ -39,35 +39,28 @@ RPN::~RPN()
 {
 }
 
-t_element createElement(int type, int value)
-{
-	t_element el;
-
-	el.type = type;
-	el.value = value;
-	return (el);
-}
-
 void RPN::loadExpression(std::string expr)
 {
 	if (expr.length() < 1)
 		handleError("Loading: Empty input expression", 1);
-	int exprSize = expr.length();
-	for (int i = exprSize - 1; i >= 0; i -= 2)
+	data.clear();
+	stack.clear();
+	while (expr.length() > 0)
 	{
-		if (std::isdigit(expr[i]) && i != exprSize - 1)
-			data.push_front(createElement(OPERAND,
-				std::atoi(expr.substr(i, expr.find(' ')).c_str())));
-		else if (std::strchr("+-/*", expr[i]) != NULL)
-			data.push_front(createElement(OPERATOR, expr[i]));
+		std::string value = expr.substr(0, expr.find(' '));
+		if (value.size() == 1 && std::strchr("+-/*", expr[0]) != NULL)
+			data.push_back(createElement(OPERATOR, expr[0]));
 		else
-			handleError("Loading: Invalid input expression", 1);
-		if (i > 0 && expr[i - 1] != ' ')
-			handleError("Loading: Invalid input expression", 1);
+		{
+			if (verifyValue(value))
+				handleError("Loading: Invalid input expression", 1);
+			data.push_back(createElement(OPERAND, std::atof(value.c_str())));
+		}
+		expr.erase(0, value.size() + 1);
 	}
 }
 
-int RPN::processExpression()
+float RPN::processExpression()
 {
 	while (data.size() > 0)
 	{
@@ -92,6 +85,32 @@ int RPN::processExpression()
 	if (stack.size() != 1)
 		handleError("Processing: Invalid/Incomplete expression", 1);
 	return (stack.front().value);
+}
+
+t_element RPN::createElement(int type, float value)
+{
+	t_element el;
+
+	el.type = type;
+	el.value = value;
+	return (el);
+}
+
+int RPN::verifyValue(std::string &value)
+{
+	bool precisionFound = false;
+	if (value.empty())
+		return (1);
+	for (size_t i = 0; i < value.length(); i++)
+	{
+		if (i == 0 && (value[i] == '-' || value[i] == '+'))
+			continue;
+		else if (!precisionFound && value[i] == '.')
+			precisionFound = true;
+		else if (!std::isdigit(value[i]))
+			return (1);
+	}
+	return (0);
 }
 
 void RPN::handleError(std::string msg, int exitCode)
