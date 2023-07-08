@@ -27,6 +27,8 @@ int main(int argc, char **argv) {
   p.printContainerOne();
   std::cout << "Container dqueue after:  ";
   p.printContainerTwo();
-  std::cout << "Container vector time:   " << timeOne << "ms" << std::endl;
-  std::cout << "Container dqueue time:   " << timeTwo << "ms" << std::endl;
+  std::cout << "Container vector time for " << arg.size()
+            << " elements: " << timeOne << "ms" << std::endl;
+  std::cout << "Container dqueue time for " << arg.size()
+            << " elements: " << timeTwo << "ms" << std::endl;
 }
