@@ -61,11 +61,11 @@ T binarySearch(int& target, T start, T end) {
 }
 
 void mergeInsertSort(std::vector<int>& data) {
-  const int size = data.size();
+  const size_t size = data.size();
   if (size < 2) return;
   std::vector<std::pair<int, int> > pairs;
   pairs.reserve(size / 2);
-  for (int i = 0; i < size - 1; i += 2) {
+  for (size_t i = 0; i < size - 1; i += 2) {
     if (data[i] < data[i + 1]) std::swap(data[i], data[i + 1]);
     comp++;
     pairs.push_back(std::make_pair(data[i], data[i + 1]));
@@ -74,14 +74,33 @@ void mergeInsertSort(std::vector<int>& data) {
 
   std::vector<int> sorted;
   sorted.reserve(size);
-  if (pairs.size() > 0) sorted.push_back(pairs[0].second);
+  sorted.push_back(pairs[0].second);
   for (size_t i = 0; i < pairs.size(); i++) sorted.push_back(pairs[i].first);
-  for (size_t i = 1; i < pairs.size(); i++)
-    sorted.insert(binarySearch(pairs[i].second, sorted.begin(), sorted.end()),
-                  pairs[i].second);
+  int insertions = 0;
+
+  size_t jacPrev = 1;
+  size_t jac = 1;
+  if (pairs.size() > 1)
+    sorted.insert(binarySearch(pairs[1].second, sorted.begin(),
+                               sorted.begin() + ++insertions + 1),
+                  pairs[1].second);
+  while (jacPrev < (size + 1) / 2) {
+    for (size_t i = std::min(jac, pairs.size() - 1); i > jacPrev; i--)
+      sorted.insert(binarySearch(pairs[i].second, sorted.begin(),
+                                 sorted.begin() + ++insertions + i),
+                    pairs[i].second);
+    int temp = jac;
+    jac += 2 * jacPrev;
+    jacPrev = temp;
+  }
+
+  // for (size_t i = 1; i < pairs.size(); i++)
+  //   sorted.insert(binarySearch(pairs[i].second, sorted.begin(),
+  //                              sorted.begin() + ++insertions + i),
+  //                 pairs[i].second);
   if (size % 2 == 1)
-    sorted.insert(binarySearch(data[size - 1], sorted.begin(), sorted.end()),
-                  data[size - 1]);
+    sorted.insert(binarySearch(data.back(), sorted.begin(), sorted.end()),
+                  data.back());
   std::swap(data, sorted);
 }
 
