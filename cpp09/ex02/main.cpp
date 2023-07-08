@@ -17,16 +17,16 @@ int main(int argc, char **argv) {
   std::vector<std::string> arg(argc - 1);
   for (int i = 0; i < argc - 1; i++) arg[i] = argv[i + 1];
   PmergeMe p(arg);
-  std::cout << "Container one before: ";
+  std::cout << "Container vector before: ";
   p.printContainerOne();
-  std::cout << "Container two before: ";
+  std::cout << "Container dqueue before: ";
   p.printContainerTwo();
   std::string timeOne = p.sortContainerOne();
   std::string timeTwo = p.sortContainerTwo();
-  std::cout << "Container one after: ";
+  std::cout << "Container vector after:  ";
   p.printContainerOne();
-  // std::cout << "Container two after: ";
-  // p.printContainerTwo();
-  std::cout << "Container one time: " << timeOne << "us" << std::endl;
-  // std::cout << "Container two time: " << timeTwo << "ms" << std::endl;
+  std::cout << "Container dqueue after:  ";
+  p.printContainerTwo();
+  std::cout << "Container vector time:   " << timeOne << "ms" << std::endl;
+  std::cout << "Container dqueue time:   " << timeTwo << "ms" << std::endl;
 }

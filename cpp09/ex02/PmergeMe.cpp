@@ -27,6 +27,102 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
 
 PmergeMe::~PmergeMe() {}
 
+void PmergeMe::mergeInsertSortOne(std::vector<int>& data) {
+  const size_t size = data.size();
+  if (size < 2) return;
+
+  // Create ordered pairs
+  std::vector<std::pair<int, int> > pairs;
+  pairs.reserve(size / 2);
+  for (size_t i = 0; i < size - 1; i += 2) {
+    if (data[i] < data[i + 1]) std::swap(data[i], data[i + 1]);
+    pairs.push_back(std::make_pair(data[i], data[i + 1]));
+  }
+  const size_t pairsSize = pairs.size();
+  // Recursively sort pairs by looking at bigger element
+  mergeSort(pairs, 0, pairsSize, comparePairs);
+
+  std::vector<int> res;
+  res.reserve(size);
+  // Insert smaller element of smallest biggest element into sorted container
+  res.push_back(pairs[0].second);
+  // Fill container with bigger sorted elements
+  for (size_t i = 0; i < pairsSize; i++) res.push_back(pairs[i].first);
+
+  int insert = 0;
+  std::vector<int>::iterator insertLoc;
+  size_t jacPrev = 1, jac = 1;
+  // Insert second smaller element into sorted container using binary search
+  if (pairsSize > 1) {
+    int curr = pairs[1].second;
+    insertLoc = binarySearch(curr, res.begin(), res.begin() + ++insert + 1);
+    res.insert(insertLoc, curr);
+  }
+  // Insert remaining smaller elements into sorted container using binary search
+  // in an order derived from Jacobsthal number sequence
+  while (jacPrev < pairsSize) {
+    for (size_t i = std::min(jac, pairsSize - 1); i > jacPrev; i--) {
+      int curr = pairs[i].second;
+      insertLoc = binarySearch(curr, res.begin(), res.begin() + ++insert + i);
+      res.insert(insertLoc, curr);
+    }
+    int temp = jac;
+    jac += 2 * jacPrev;
+    jacPrev = temp;
+  }
+  // Insert last unmatched element into sorted container if element count is odd
+  if (size % 2 == 1)
+    res.insert(binarySearch(data.back(), res.begin(), res.end()), data.back());
+  std::swap(data, res);
+}
+
+void PmergeMe::mergeInsertSortTwo(std::deque<int>& data) {
+  const size_t size = data.size();
+  if (size < 2) return;
+
+  // Create ordered pairs
+  std::deque<std::pair<int, int> > pairs;
+  for (size_t i = 0; i < size - 1; i += 2) {
+    if (data[i] < data[i + 1]) std::swap(data[i], data[i + 1]);
+    pairs.push_back(std::make_pair(data[i], data[i + 1]));
+  }
+  const size_t pairsSize = pairs.size();
+  // Recursively sort pairs by looking at bigger element
+  mergeSort(pairs, 0, pairsSize, comparePairs);
+
+  std::deque<int> res;
+  // Insert smaller element of smallest biggest element into sorted container
+  res.push_back(pairs[0].second);
+  // Fill container with bigger sorted elements
+  for (size_t i = 0; i < pairsSize; i++) res.push_back(pairs[i].first);
+
+  int insert = 0;
+  std::deque<int>::iterator insertLoc;
+  size_t jacPrev = 1, jac = 1;
+  // Insert second smaller element into sorted container using binary search
+  if (pairsSize > 1) {
+    int curr = pairs[1].second;
+    insertLoc = binarySearch(curr, res.begin(), res.begin() + ++insert + 1);
+    res.insert(insertLoc, curr);
+  }
+  // Insert remaining smaller elements into sorted container using binary search
+  // in an order derived from Jacobsthal number sequence
+  while (jacPrev < pairsSize) {
+    for (size_t i = std::min(jac, pairsSize - 1); i > jacPrev; i--) {
+      int curr = pairs[i].second;
+      insertLoc = binarySearch(curr, res.begin(), res.begin() + ++insert + i);
+      res.insert(insertLoc, curr);
+    }
+    int temp = jac;
+    jac += 2 * jacPrev;
+    jacPrev = temp;
+  }
+  // Insert last unmatched element into sorted container if element count is odd
+  if (size % 2 == 1)
+    res.insert(binarySearch(data.back(), res.begin(), res.end()), data.back());
+  std::swap(data, res);
+}
+
 void PmergeMe::loadSequence(std::vector<std::string>& seq) {
   if (seq.empty()) handleError("Loading: Empty sequence", 1);
   vec.clear();
@@ -39,64 +135,18 @@ void PmergeMe::loadSequence(std::vector<std::string>& seq) {
   }
 }
 
-long long PmergeMe::getTimeNanos() {
-  struct timespec ts;
-  clock_gettime(CLOCK_MONOTONIC, &ts);
-  return static_cast<long long>(ts.tv_sec) * 1000000000LL +
-         static_cast<long long>(ts.tv_nsec);
-}
-
-std::string PmergeMe::valueToString(double val) {
-  std::stringstream ss;
-  ss << std::setprecision(std::numeric_limits<double>::digits10 + 1);
-  ss << std::fixed << val << std::scientific;
-  return ss.str();
-}
-
-std::string PmergeMe::removeTrailingZeros(std::string str) {
-  if (str.empty()) return str;
-  while (str[str.length() - 1] == '0') {
-    if (str.length() < 2 || str[str.length() - 2] == '.') break;
-    str.erase(str.length() - 1, 1);
-  }
-  return str;
-}
-
-template <typename T>
-T binarySearch(int& target, T start, T end) {
-  if (end - start < 1) return end;
-  T mid = start + (end - start) / 2;
-  if (*mid == target) return mid;
-  if (*mid < target) return binarySearch(target, mid + 1, end);
-  return binarySearch(target, start, mid);
-}
-
-template <typename T>
-void mergeInsertSort(T& data) {
-  const int size = data.size();
-  if (size < 2) return;
-  T sorted;
-  for (int i = 1; i < size; i += 2) {
-    if (data[i - 1] < data[i]) std::swap(data[i - 1], data[i]);
-    sorted.push_back(data[i]);
-  }
-  mergeInsertSort(sorted);
-  for (int i = 0; i < size; i += 2)
-    sorted.insert(binarySearch(data[i], sorted.begin(), sorted.end()), data[i]);
-  data = sorted;
-}
-
 std::string PmergeMe::sortContainerOne() {
   long long startTime = getTimeNanos();
-  mergeInsertSort(vec);
+  mergeInsertSortOne(vec);
   return removeTrailingZeros(
-      (valueToString((getTimeNanos() - startTime) / 1000.0)));
+      (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }
 
 std::string PmergeMe::sortContainerTwo() {
   long long startTime = getTimeNanos();
+  mergeInsertSortTwo(que);
   return removeTrailingZeros(
-      (valueToString((getTimeNanos() - startTime) / 1000.0)));
+      (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }
 
 void PmergeMe::printContainerOne() const {
@@ -110,7 +160,39 @@ void PmergeMe::printContainerTwo() const {
   std::cout << std::endl;
 }
 
-int PmergeMe::verifyValue(std::string& value) {
+void PmergeMe::handleError(std::string msg, int exitCode) {
+  std::cout << "Error: " << msg << "!" << std::endl;
+  std::exit(exitCode);
+}
+
+bool PmergeMe::comparePairs(std::pair<int, int>& a, std::pair<int, int>& b) {
+  return a.first < b.first;
+}
+
+long long PmergeMe::getTimeNanos() const {
+  struct timespec ts;
+  clock_gettime(CLOCK_MONOTONIC, &ts);
+  return static_cast<long long>(ts.tv_sec) * 1000000000LL +
+         static_cast<long long>(ts.tv_nsec);
+}
+
+std::string PmergeMe::valueToString(double val) const {
+  std::stringstream ss;
+  ss << std::setprecision(std::numeric_limits<double>::digits10 + 1);
+  ss << std::fixed << val << std::scientific;
+  return ss.str();
+}
+
+std::string PmergeMe::removeTrailingZeros(std::string str) const {
+  if (str.empty()) return str;
+  while (str[str.length() - 1] == '0') {
+    if (str.length() < 2 || str[str.length() - 2] == '.') break;
+    str.erase(str.length() - 1, 1);
+  }
+  return str;
+}
+
+int PmergeMe::verifyValue(std::string& value) const {
   if (value.empty()) return (1);
   if (value.size() > 10) return (1);
   for (size_t i = 0; i < value.length(); i++) {
@@ -119,9 +201,4 @@ int PmergeMe::verifyValue(std::string& value) {
     if (!std::isdigit(value[i])) return (1);
   }
   return (0);
-}
-
-void PmergeMe::handleError(std::string msg, int exitCode) {
-  std::cout << "Error: " << msg << "!" << std::endl;
-  std::exit(exitCode);
 }
