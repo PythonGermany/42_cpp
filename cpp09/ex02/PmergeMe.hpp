@@ -24,6 +24,10 @@
 #include <vector>
 
 class PmergeMe {
+#ifdef COUNT
+ public:
+  int compCount;
+#endif
  private:
   std::vector<int> vec;
   std::deque<int> que;

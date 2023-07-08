@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:40:52 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/07/08 16:21:02 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:47:25 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ void PmergeMe::mergeSort(T& data, size_t start, size_t end, C comp) {
       tmp[i] = data[r++];
     else if (r == end)
       tmp[i] = data[l++];
-    else
+    else {
+#ifdef COUNT
+      compCount++;
+#endif
       tmp[i] = comp(data[l], data[r]) ? data[l++] : data[r++];
+    }
   }
   std::copy(tmp.begin(), tmp.end(), data.begin() + start);
 }
@@ -40,6 +44,9 @@ template <typename T>
 T PmergeMe::binarySearch(int& target, T start, T end) {
   if (end - start < 1) return end;
   T mid = start + (end - start) / 2;
+#ifdef COUNT
+  compCount++;
+#endif
   if (*mid < target) return binarySearch(target, mid + 1, end);
   return binarySearch(target, start, mid);
 }
