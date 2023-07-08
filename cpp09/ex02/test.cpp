@@ -30,6 +30,27 @@ void mergeSort(typename T::iterator start, typename T::iterator end) {
   for (size_t i = 0; i < tmp.size(); i++) *start++ = tmp[i];
 }
 
+typedef std::vector<std::pair<int, int> >::iterator iter;
+void mergeSortOne(iter start, iter end) {
+  if (end - start < 2) return;
+  iter mid = start + (end - start) / 2;
+  mergeSortOne(start, mid);
+  mergeSortOne(mid, end);
+  std::vector<std::pair<int, int> > tmp(end - start);
+  iter left = start, right = mid;
+  for (size_t i = 0; i < tmp.size(); i++) {
+    if (left == mid)
+      tmp[i] = *right++;
+    else if (right == end)
+      tmp[i] = *left++;
+    else {
+      comp++;
+      tmp[i] = (*left).first < (*right).first ? *left++ : *right++;
+    }
+  }
+  for (size_t i = 0; i < tmp.size(); i++) *start++ = tmp[i];
+}
+
 template <typename T>
 T binarySearch(int& target, T start, T end) {
   if (end - start < 1) return end;
@@ -39,20 +60,29 @@ T binarySearch(int& target, T start, T end) {
   return binarySearch(target, start, mid);
 }
 
-template <typename T>
-void mergeInsertSort(T& data) {
+void mergeInsertSort(std::vector<int>& data) {
   const int size = data.size();
   if (size < 2) return;
-  T sorted;
-  for (int i = 1; i < size; i += 2) {
-    if (data[i - 1] < data[i]) std::swap(data[i - 1], data[i]);
+  std::vector<std::pair<int, int> > pairs;
+  pairs.reserve(size / 2);
+  for (int i = 0; i < size - 1; i += 2) {
+    if (data[i] < data[i + 1]) std::swap(data[i], data[i + 1]);
     comp++;
-    sorted.push_back(data[i]);
+    pairs.push_back(std::make_pair(data[i], data[i + 1]));
   }
-  mergeInsertSort(sorted);
-  for (int i = 0; i < size; i += 2)
-    sorted.insert(binarySearch(data[i], sorted.begin(), sorted.end()), data[i]);
-  data = sorted;
+  mergeSortOne(pairs.begin(), pairs.end());
+
+  std::vector<int> sorted;
+  sorted.reserve(size);
+  if (pairs.size() > 0) sorted.push_back(pairs[0].second);
+  for (size_t i = 0; i < pairs.size(); i++) sorted.push_back(pairs[i].first);
+  for (size_t i = 1; i < pairs.size(); i++)
+    sorted.insert(binarySearch(pairs[i].second, sorted.begin(), sorted.end()),
+                  pairs[i].second);
+  if (size % 2 == 1)
+    sorted.insert(binarySearch(data[size - 1], sorted.begin(), sorted.end()),
+                  data[size - 1]);
+  std::swap(data, sorted);
 }
 
 long long getTimeNanos() {
@@ -83,22 +113,24 @@ int main(int argc, char** argv) {
   std::vector<int> arg(argc - 1);
   for (int i = 0; i < argc - 1; i++) arg[i] = std::atoi(argv[i + 1]);
   std::vector<int> cpy = arg;
-  for (int i = 0; i < arg.size(); i++) std::cout << arg[i] << " ";
+  for (size_t i = 0; i < arg.size(); i++) std::cout << arg[i] << " ";
   std::cout << std::endl;
+
   long long startTime = getTimeNanos();
   mergeInsertSort(arg);
   double length = (double)(getTimeNanos() - startTime) / 1000000.0;
-  for (int i = 0; i < arg.size(); i++) std::cout << arg[i] << " ";
+  for (size_t i = 0; i < arg.size(); i++) std::cout << arg[i] << " ";
   std::cout << std::endl;
+
+  long long startTime1 = getTimeNanos();
+  mergeSort<std::vector<int> >(cpy.begin(), cpy.end());
+  double length1 = (double)(getTimeNanos() - startTime1) / 1000000.0;
+  for (size_t i = 0; i < cpy.size(); i++) std::cout << cpy[i] << " ";
+  std::cout << std::endl;
+
   std::cout << removeTrailingZeros(valueToString(length)) << "ms" << std::endl;
   std::cout << comp << std::endl;
 
-  startTime = getTimeNanos();
-  mergeSort<std::vector<int> >(cpy.begin(), cpy.end());
-  length = (double)(getTimeNanos() - startTime) / 1000000.0;
-  for (int i = 0; i < cpy.size(); i++) std::cout << cpy[i] << " ";
-  std::cout << std::endl;
-  std::cout << removeTrailingZeros(valueToString(length)) << "ms" << std::endl;
+  std::cout << removeTrailingZeros(valueToString(length1)) << "ms" << std::endl;
   std::cout << compCpy << std::endl;
-  // Test
 }
