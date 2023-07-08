@@ -93,11 +93,6 @@ void mergeInsertSort(std::vector<int>& data) {
     jac += 2 * jacPrev;
     jacPrev = temp;
   }
-
-  // for (size_t i = 1; i < pairs.size(); i++)
-  //   sorted.insert(binarySearch(pairs[i].second, sorted.begin(),
-  //                              sorted.begin() + ++insertions + i),
-  //                 pairs[i].second);
   if (size % 2 == 1)
     sorted.insert(binarySearch(data.back(), sorted.begin(), sorted.end()),
                   data.back());
