@@ -50,16 +50,22 @@ void PmergeMe::mergeInsertSortOne(std::vector<int>& data) {
     compCount++;
 #endif
   }
-  const size_t pairsSize = pairs.size();
+
   // Recursively sort pairs by looking at bigger element
+  size_t pairsSize = pairs.size();
   mergeSort(pairs, 0, pairsSize, comparePairs);
 
+  // Fill container with bigger sorted elements
   std::vector<int> res;
   res.reserve(size);
-  // Insert smaller element of smallest biggest element into sorted container
-  if (pairsSize > 0) res.push_back(pairs[0].second);
-  // Fill container with bigger sorted elements
   for (size_t i = 0; i < pairsSize; i++) res.push_back(pairs[i].first);
+
+  // Add unpaired element if existent
+  if (size % 2) pairs.push_back(std::make_pair(-1, data.back()));
+  pairsSize += size % 2;
+
+  // Insert smaller element of smallest pair into sorted container
+  res.insert(res.begin(), pairs[0].second);
 
   int insert = 0;
   std::vector<int>::iterator insertLoc;
@@ -67,7 +73,7 @@ void PmergeMe::mergeInsertSortOne(std::vector<int>& data) {
   // Insert remaining smaller elements into sorted container using binary search
   // in an order derived from Jacobsthal number sequence
   while (jacPrev < pairsSize) {
-    for (size_t i = std::min(jac - 1, pairsSize - 1); i > jacPrev - 1; i--) {
+    for (size_t i = std::min(jac - 1, pairsSize - 1); i >= jacPrev; i--) {
       int curr = pairs[i].second;
       insertLoc = binarySearch(curr, res.begin(), res.begin() + ++insert + i);
       res.insert(insertLoc, curr);
@@ -76,9 +82,6 @@ void PmergeMe::mergeInsertSortOne(std::vector<int>& data) {
     jac += 2 * jacPrev;
     jacPrev = temp;
   }
-  // Insert last unmatched element into sorted container if element count is odd
-  if (size % 2 == 1)
-    res.insert(binarySearch(data.back(), res.begin(), res.end()), data.back());
   std::swap(data, res);
 }
 
@@ -95,15 +98,21 @@ void PmergeMe::mergeInsertSortTwo(std::deque<int>& data) {
     compCount++;
 #endif
   }
-  const size_t pairsSize = pairs.size();
+
   // Recursively sort pairs by looking at bigger element
+  size_t pairsSize = pairs.size();
   mergeSort(pairs, 0, pairsSize, comparePairs);
 
-  std::deque<int> res;
-  // Insert smaller element of smallest biggest element into sorted container
-  if (pairsSize > 0) res.push_back(pairs[0].second);
   // Fill container with bigger sorted elements
+  std::deque<int> res;
   for (size_t i = 0; i < pairsSize; i++) res.push_back(pairs[i].first);
+
+  // Add unpaired element if existent
+  if (size % 2) pairs.push_back(std::make_pair(-1, data.back()));
+  pairsSize += size % 2;
+
+  // Insert smaller element of smallest pair into sorted container
+  res.insert(res.begin(), pairs[0].second);
 
   int insert = 0;
   std::deque<int>::iterator insertLoc;
@@ -120,9 +129,6 @@ void PmergeMe::mergeInsertSortTwo(std::deque<int>& data) {
     jac += 2 * jacPrev;
     jacPrev = temp;
   }
-  // Insert last unmatched element into sorted container if element count is odd
-  if (size % 2 == 1)
-    res.insert(binarySearch(data.back(), res.begin(), res.end()), data.back());
   std::swap(data, res);
 }
 
