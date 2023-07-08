@@ -23,6 +23,8 @@
 #include <sstream>
 #include <vector>
 
+#define COUNT
+
 class PmergeMe {
 #ifdef COUNT
  public:

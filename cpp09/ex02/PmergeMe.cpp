@@ -63,7 +63,7 @@ void PmergeMe::mergeInsertSortOne(std::vector<int>& data) {
 
   int insert = 0;
   std::vector<int>::iterator insertLoc;
-  size_t jacPrev = 1, jac = 1;
+  size_t jacPrev = 1, jac = 3;
   // Insert remaining smaller elements into sorted container using binary search
   // in an order derived from Jacobsthal number sequence
   while (jacPrev < pairsSize) {
@@ -107,7 +107,7 @@ void PmergeMe::mergeInsertSortTwo(std::deque<int>& data) {
 
   int insert = 0;
   std::deque<int>::iterator insertLoc;
-  size_t jacPrev = 1, jac = 1;
+  size_t jacPrev = 1, jac = 3;
   // Insert remaining smaller elements into sorted container using binary search
   // in an order derived from Jacobsthal number sequence
   while (jacPrev < pairsSize) {
