@@ -19,14 +19,14 @@ int main(int argc, char **argv) {
   PmergeMe p(arg);
   std::cout << "Container before: ";
   p.printContainerOne();
-  // std::cout << "Container dqueue before: ";
-  // p.printContainerTwo();
+  std::cout << "Container before: ";
+  p.printContainerTwo();
   std::string timeOne = p.sortContainerOne();
   std::string timeTwo = p.sortContainerTwo();
   std::cout << "Container after:  ";
   p.printContainerOne();
-  // std::cout << "Container dqueue after:  ";
-  // p.printContainerTwo();
+  std::cout << "Container after:  ";
+  p.printContainerTwo();
   std::cout << "Container vector time for " << arg.size()
             << " elements: " << timeOne << "ms" << std::endl;
   std::cout << "Container dqueue time for " << arg.size()

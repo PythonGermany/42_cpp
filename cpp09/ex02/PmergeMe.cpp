@@ -36,102 +36,6 @@ PmergeMe& PmergeMe::operator=(PmergeMe const& rhs) {
 
 PmergeMe::~PmergeMe() {}
 
-void PmergeMe::mergeInsertSortOne(std::vector<int>& data) {
-  const size_t size = data.size();
-  if (size < 2) return;
-
-  // Create ordered pairs
-  std::vector<std::pair<int, int> > pairs;
-  pairs.reserve(size / 2);
-  for (size_t i = 0; i < size - 1; i += 2) {
-    if (data[i] < data[i + 1]) std::swap(data[i], data[i + 1]);
-    pairs.push_back(std::make_pair(data[i], data[i + 1]));
-#ifdef COUNT
-    compCount++;
-#endif
-  }
-
-  // Recursively sort pairs by looking at bigger element
-  size_t pairsSize = pairs.size();
-  mergeSort(pairs, 0, pairsSize, comparePairs);
-
-  // Fill container with bigger sorted elements
-  std::vector<int> res;
-  res.reserve(size);
-  for (size_t i = 0; i < pairsSize; i++) res.push_back(pairs[i].first);
-
-  // Add unpaired element if existent
-  if (size % 2) pairs.push_back(std::make_pair(-1, data.back()));
-  pairsSize += size % 2;
-
-  // Insert smaller element of smallest pair into sorted container
-  res.insert(res.begin(), pairs[0].second);
-
-  int insert = 0;
-  std::vector<int>::iterator insertLoc;
-  size_t jacPrev = 1, jac = 3;
-  // Insert remaining smaller elements into sorted container using binary search
-  // in an order derived from Jacobsthal number sequence
-  while (jacPrev < pairsSize) {
-    for (size_t i = std::min(jac - 1, pairsSize - 1); i >= jacPrev; i--) {
-      int curr = pairs[i].second;
-      insertLoc = binarySearch(curr, res.begin(), res.begin() + ++insert + i);
-      res.insert(insertLoc, curr);
-    }
-    int temp = jac;
-    jac += 2 * jacPrev;
-    jacPrev = temp;
-  }
-  std::swap(data, res);
-}
-
-void PmergeMe::mergeInsertSortTwo(std::deque<int>& data) {
-  const size_t size = data.size();
-  if (size < 2) return;
-
-  // Create ordered pairs
-  std::deque<std::pair<int, int> > pairs;
-  for (size_t i = 0; i < size - 1; i += 2) {
-    if (data[i] < data[i + 1]) std::swap(data[i], data[i + 1]);
-    pairs.push_back(std::make_pair(data[i], data[i + 1]));
-#ifdef COUNT
-    compCount++;
-#endif
-  }
-
-  // Recursively sort pairs by looking at bigger element
-  size_t pairsSize = pairs.size();
-  mergeSort(pairs, 0, pairsSize, comparePairs);
-
-  // Fill container with bigger sorted elements
-  std::deque<int> res;
-  for (size_t i = 0; i < pairsSize; i++) res.push_back(pairs[i].first);
-
-  // Add unpaired element if existent
-  if (size % 2) pairs.push_back(std::make_pair(-1, data.back()));
-  pairsSize += size % 2;
-
-  // Insert smaller element of smallest pair into sorted container
-  res.insert(res.begin(), pairs[0].second);
-
-  int insert = 0;
-  std::deque<int>::iterator insertLoc;
-  size_t jacPrev = 1, jac = 3;
-  // Insert remaining smaller elements into sorted container using binary
-  // search in an order derived from Jacobsthal number sequence
-  while (jacPrev < pairsSize) {
-    for (size_t i = std::min(jac - 1, pairsSize - 1); i > jacPrev - 1; i--) {
-      int curr = pairs[i].second;
-      insertLoc = binarySearch(curr, res.begin(), res.begin() + ++insert + i);
-      res.insert(insertLoc, curr);
-    }
-    int temp = jac;
-    jac += 2 * jacPrev;
-    jacPrev = temp;
-  }
-  std::swap(data, res);
-}
-
 void PmergeMe::loadSequence(std::vector<std::string>& seq) {
   if (seq.empty()) handleError("Loading: Empty sequence", 1);
   vec.clear();
@@ -146,14 +50,14 @@ void PmergeMe::loadSequence(std::vector<std::string>& seq) {
 
 std::string PmergeMe::sortContainerOne() {
   long long startTime = getTimeNanos();
-  mergeInsertSortTest(vec, (std::vector<int>*)NULL);
+  mergeInsertSort(vec, (std::vector<int>*)NULL);
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }
 
 std::string PmergeMe::sortContainerTwo() {
   long long startTime = getTimeNanos();
-  mergeInsertSortTwo(que);
+  mergeInsertSort(que, (std::deque<int>*)NULL);
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }

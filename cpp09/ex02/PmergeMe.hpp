@@ -42,16 +42,12 @@ class PmergeMe {
   ~PmergeMe();
 
   template <typename T, typename C>
-  void mergeSort(T& data, size_t start, size_t end, C comp);
-  template <typename T, typename C>
-  void mergeSortTest(T& data, size_t start, size_t end, C comp, T& sml);
+  void mergeSort(T& data, size_t start, size_t end, C comp, T& sml);
   template <typename T>
   T binarySearch(int& target, T start, T end);
   template <typename T>
-  void mergeInsertSortTest(T& data, T* sml);
+  void mergeInsertSort(T& data, T* sml);
 
-  void mergeInsertSortOne(std::vector<int>& data);
-  void mergeInsertSortTwo(std::deque<int>& data);
   void loadSequence(std::vector<std::string>& seq);
   std::string sortContainerOne();
   std::string sortContainerTwo();

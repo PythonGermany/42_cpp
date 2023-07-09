@@ -16,38 +16,12 @@
 #include "PmergeMe.hpp"
 
 template <typename T, typename C>
-void PmergeMe::mergeSort(T& data, size_t start, size_t end, C comp) {
+void PmergeMe::mergeSort(T& data, size_t start, size_t end, C comp, T& sml) {
   if (end - start < 2) return;
   size_t mid = start + (end - start) / 2;
   // Recursively sort two halfes
-  mergeSort<T>(data, start, mid, comp);
-  mergeSort<T>(data, mid, end, comp);
-  // Merge two sorted halfes into one sorted part
-  T tmp(end - start);
-  size_t l = start, r = mid;
-  for (size_t i = 0; i < tmp.size(); i++) {
-    if (l == mid)
-      tmp[i] = data[r++];
-    else if (r == end)
-      tmp[i] = data[l++];
-    else {
-#ifdef COUNT
-      compCount++;
-#endif
-      tmp[i] = comp(data[l], data[r]) ? data[l++] : data[r++];
-    }
-  }
-  std::copy(tmp.begin(), tmp.end(), data.begin() + start);
-}
-
-template <typename T, typename C>
-void PmergeMe::mergeSortTest(T& data, size_t start, size_t end, C comp,
-                             T& sml) {
-  if (end - start < 2) return;
-  size_t mid = start + (end - start) / 2;
-  // Recursively sort two halfes
-  mergeSortTest<T>(data, start, mid, comp, sml);
-  mergeSortTest<T>(data, mid, end, comp, sml);
+  mergeSort<T>(data, start, mid, comp, sml);
+  mergeSort<T>(data, mid, end, comp, sml);
   // Merge two sorted halfes into one sorted part
   T tmp(end - start);
   T smlTmp(end - start);
@@ -83,13 +57,12 @@ T PmergeMe::binarySearch(int& target, T start, T end) {
 }
 
 template <typename T>
-void PmergeMe::mergeInsertSortTest(T& data, T* sml) {
+void PmergeMe::mergeInsertSort(T& data, T* sml) {
   (void)sml;
+  const size_t size = data.size();
   if (size < 2) return;
 
-  const size_t size = data.size();
-  T big(size / 2);
-  T small(size / 2 + size % 2);
+  T big(size / 2), small(size / 2 + size % 2);
   size_t smlSize = small.size();
   for (size_t i = 0; i < size - 1; i += 2) {
     if (data[i] > data[i + 1]) std::swap(data[i], data[i + 1]);
@@ -100,17 +73,15 @@ void PmergeMe::mergeInsertSortTest(T& data, T* sml) {
 #endif
   }
   if (size % 2) small.back() = data.back();
-  mergeSortTest(big, 0, big.size(), compareInts, small);
+  mergeSort(big, 0, big.size(), compareInts, small);
 
-  int insert = 0;
-  typename T::iterator insertLoc;
-  size_t jacPrev = 1, jac = 3;
+  typename T::iterator loc;
+  size_t jacPrev = 1, jac = 3, insCnt = 0;
   big.insert(big.begin(), small[0]);
   while (jacPrev < smlSize) {
     for (size_t i = std::min(jac - 1, smlSize - 1); i >= jacPrev; i--) {
-      int curr = small[i];
-      insertLoc = binarySearch(curr, big.begin(), big.begin() + ++insert + i);
-      big.insert(insertLoc, curr);
+      loc = binarySearch(small[i], big.begin(), big.begin() + ++insCnt + i);
+      big.insert(loc, small[i]);
     }
     int temp = jac;
     jac += 2 * jacPrev;
