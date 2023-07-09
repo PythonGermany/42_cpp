@@ -50,7 +50,8 @@ void PmergeMe::loadSequence(std::vector<std::string>& seq) {
 
 std::string PmergeMe::sortContainerOne() {
   long long startTime = getTimeNanos();
-  mergeInsertSortWrong(vec);
+  // mergeInsertSortWrong(vec);
+  mergeInsertSort(vec.begin(), vec.end(), 1);
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }

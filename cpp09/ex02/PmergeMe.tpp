@@ -89,4 +89,24 @@ void PmergeMe::mergeInsertSortWrong(T& data) {
   std::swap(data, big);
 }
 
+template <typename T>
+void PmergeMe::mergeInsertSort(T begin, T end, size_t range) {
+  const size_t size = end - begin;
+  if (size < 2 * range) return;
+
+  for (size_t i = 0; i < size - range; i += 2 * range) {
+    if (begin[i] > begin[i + range])
+      for (size_t j = i; j < i + range; j++)
+        std::swap(begin[j], begin[j + range]);
+#ifdef COUNT
+    compCount++;
+#endif
+  }
+  mergeInsertSort(begin, begin + size / 2, range + 1);
+
+  std::cout << "Data for " << range << ": ";
+  for (size_t i = 0; i < size; i++) std::cout << begin[i] << " ";
+  std::cout << std::endl << std::endl;
+}
+
 #endif

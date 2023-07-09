@@ -47,6 +47,8 @@ class PmergeMe {
   T binarySearch(int& target, T start, T end);
   template <typename T>
   void mergeInsertSortWrong(T& data);
+  template <typename T>
+  void mergeInsertSort(T begin, T end, size_t range);
 
   void loadSequence(std::vector<std::string>& seq);
   std::string sortContainerOne();
