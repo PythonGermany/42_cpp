@@ -51,14 +51,15 @@ void PmergeMe::loadSequence(std::vector<std::string>& seq) {
 std::string PmergeMe::sortContainerOne() {
   long long startTime = getTimeNanos();
   // mergeInsertSortWrong(vec);
-  mergeInsertSort(vec.begin(), vec.end(), 1);
+  mergeInsertSort<std::vector<int> >(vec.begin(), vec.end(), 1);
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }
 
 std::string PmergeMe::sortContainerTwo() {
   long long startTime = getTimeNanos();
-  mergeInsertSortWrong(que);
+  // mergeInsertSortWrong(que);
+  // mergeInsertSort<std::deque<int> >(que.begin(), que.end(), 1);
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }
