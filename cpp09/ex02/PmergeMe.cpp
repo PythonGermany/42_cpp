@@ -117,8 +117,8 @@ void PmergeMe::mergeInsertSortTwo(std::deque<int>& data) {
   int insert = 0;
   std::deque<int>::iterator insertLoc;
   size_t jacPrev = 1, jac = 3;
-  // Insert remaining smaller elements into sorted container using binary search
-  // in an order derived from Jacobsthal number sequence
+  // Insert remaining smaller elements into sorted container using binary
+  // search in an order derived from Jacobsthal number sequence
   while (jacPrev < pairsSize) {
     for (size_t i = std::min(jac - 1, pairsSize - 1); i > jacPrev - 1; i--) {
       int curr = pairs[i].second;
@@ -146,7 +146,7 @@ void PmergeMe::loadSequence(std::vector<std::string>& seq) {
 
 std::string PmergeMe::sortContainerOne() {
   long long startTime = getTimeNanos();
-  mergeInsertSortOne(vec);
+  mergeInsertSortTest(vec, (std::vector<int>*)NULL);
   return removeTrailingZeros(
       (valueToString((getTimeNanos() - startTime) / 1000000.0)));
 }
@@ -177,6 +177,8 @@ void PmergeMe::handleError(std::string msg, int exitCode) {
 bool PmergeMe::comparePairs(std::pair<int, int>& a, std::pair<int, int>& b) {
   return a.first < b.first;
 }
+
+bool PmergeMe::compareInts(int& a, int& b) { return a < b; }
 
 long long PmergeMe::getTimeNanos() const {
   struct timespec ts;

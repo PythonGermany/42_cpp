@@ -43,8 +43,12 @@ class PmergeMe {
 
   template <typename T, typename C>
   void mergeSort(T& data, size_t start, size_t end, C comp);
+  template <typename T, typename C>
+  void mergeSortTest(T& data, size_t start, size_t end, C comp, T& sml);
   template <typename T>
   T binarySearch(int& target, T start, T end);
+  template <typename T>
+  void mergeInsertSortTest(T& data, T* sml);
 
   void mergeInsertSortOne(std::vector<int>& data);
   void mergeInsertSortTwo(std::deque<int>& data);
@@ -57,6 +61,7 @@ class PmergeMe {
 
  private:
   static bool comparePairs(std::pair<int, int>& a, std::pair<int, int>& b);
+  static bool compareInts(int& a, int& b);
   long long getTimeNanos() const;
   std::string valueToString(double val) const;
   std::string removeTrailingZeros(std::string str) const;
