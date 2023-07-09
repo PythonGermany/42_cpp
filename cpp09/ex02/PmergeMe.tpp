@@ -57,8 +57,7 @@ T PmergeMe::binarySearch(int& target, T start, T end) {
 }
 
 template <typename T>
-void PmergeMe::mergeInsertSort(T& data, T* sml) {
-  (void)sml;
+void PmergeMe::mergeInsertSortWrong(T& data) {
   const size_t size = data.size();
   if (size < 2) return;
 
