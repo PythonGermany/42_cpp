@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:40:52 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/07/08 17:47:25 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:23:20 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void PmergeMe::mergeSort(T& data, size_t start, size_t end, C comp, T& sml) {
 
 template <typename T>
 T PmergeMe::binarySearch(int& target, T start, T end, size_t block) {
-  if ((end - start) / block < 1) return end;
-  T mid = start + (end - start) / 2;
+  size_t size = (end - start) / block;
+  if (size < 1) return end;
+  T mid = start + (size / 2) * block;
 #ifdef COUNT
   compCount++;
 #endif
@@ -87,10 +88,9 @@ void PmergeMe::mergeInsertSortWrong(T& data) {
   std::swap(data, big);
 }
 
-// Doesn't work
 template <typename C, typename T>
 void insert_block(C& data, T dst, T src, size_t block) {
-  for (size_t i = 0; i < block; i++) data.insert(dst++, src[i]);
+  for (size_t j = 0; j < block; j++) dst = data.insert(dst, src[block - j - 1]);
 }
 
 template <typename C, typename T>
@@ -113,19 +113,21 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t block) {
   C tmp, small;
   // Init big elements
   for (size_t i = 0; i < size - 1; i += 2)
-    // insert_block(tmp, tmp.end(), begin + i * block, block);
-    for (size_t j = 0; j < block; j++)
-      tmp.insert(tmp.end(), begin[i * block + j]);
+    insert_block(tmp, tmp.end(), begin + i * block, block);
   // Init small elements
   for (size_t i = 1; i < size; i += 2)
-    for (size_t j = 0; j < block; j++)
-      small.insert(small.end(), begin[i * block + j]);
+    insert_block(small, small.end(), begin + i * block, block);
   // Init last element if size is odd
-  if (size % 2)
-    for (size_t j = 0; j < block; j++)
-      small.insert(small.end(), begin[(size - 1) * block + j]);
+  if (size % 2) insert_block(small, small.end(), end - block, block);
 
-  // Debug
+#ifdef DEBUG
+  std::cout << "\033[31m"
+            << "Data for " << block << ": \033[39m";
+  for (size_t i = 0; i < size; i++) {
+    for (size_t j = 0; j < block; j++) std::cout << begin[i * block + j] << " ";
+    std::cout << "| ";
+  }
+  std::cout << std::endl;
   std::cout << "Small for " << block << ": ";
   for (size_t i = 0; i < small.size() / block; i++) {
     for (size_t j = 0; j < block; j++) std::cout << small[i * block + j] << " ";
@@ -138,41 +140,55 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t block) {
     std::cout << "| ";
   }
   std::cout << std::endl;
+#endif
 
   typename C::iterator loc;
   size_t smlSize = (size + 1) / 2;
   size_t jacPrev = 1, jac = 3, insCnt = 1;
   for (size_t j = 0; j < block; j++) tmp.insert(tmp.begin() + j, small[j]);
   while (jacPrev < smlSize) {
-    // std::cout << "jac: " << jac << " | jacPrev: " << jacPrev << std::endl;
     for (size_t i = std::min(jac - 1, smlSize - 1); i >= jacPrev; i--) {
-      loc = binarySearch(small[i * block], tmp.begin(),
+      typename C::iterator curr = small.begin() + i * block;
+      loc = binarySearch(*curr, tmp.begin(),
                          tmp.begin() + (insCnt++ + i) * block, block);
-      // std::cout << "index: " << i << std::endl;
-      for (size_t j = 0; j < block; j++)
-        tmp.insert(loc + j, small[i * block + j]);
+#ifdef DEBUG
+      std::cout << "\033[34m Insert: \033[39m"
+                << "index: " << i << " value: " << *curr << std::endl;
+      std::cout << "\033[32m     Prev:  \033[39m";
+      for (size_t i = 0; i < tmp.size() / block; i++) {
+        for (size_t j = 0; j < block; j++)
+          std::cout << tmp[i * block + j] << " ";
+        std::cout << "| ";
+      }
+      std::cout << std::endl;
+#endif
+      insert_block(tmp, loc, curr, block);
+#ifdef DEBUG
+      std::cout << "\033[32m     After: \033[39m";
+      for (size_t i = 0; i < tmp.size() / block; i++) {
+        for (size_t j = 0; j < block; j++)
+          std::cout << tmp[i * block + j] << " ";
+        std::cout << "| ";
+      }
+      std::cout << std::endl;
+#endif
     }
     int temp = jac;
     jac += 2 * jacPrev;
     jacPrev = temp;
   }
 
-  // Debug
-  std::cout << "Data for " << block << ": ";
-  for (size_t i = 0; i < size; i++) {
-    for (size_t j = 0; j < block; j++) std::cout << begin[i * block + j] << " ";
-    std::cout << "| ";
-  }
-  std::cout << std::endl;
-  std::cout << "Tmp for " << block << ":  ";
+#ifdef DEBUG
+  std::cout << "\033[33m Out for " << block << ":  \033[39m";
   for (size_t i = 0; i < tmp.size() / block; i++) {
     for (size_t j = 0; j < block; j++) std::cout << tmp[i * block + j] << " ";
     std::cout << "| ";
   }
   std::cout << std::endl << std::endl;
+#endif
 
   // Copy sorted data to original array
-  // std::copy(tmp.begin(), tmp.end(), begin);
+  std::copy(tmp.begin(), tmp.end(), begin);
 }
 
 #endif

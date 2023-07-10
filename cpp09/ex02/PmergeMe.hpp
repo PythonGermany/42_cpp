@@ -23,6 +23,7 @@
 #include <sstream>
 #include <vector>
 
+#define DEBUG
 #define COUNT
 
 class PmergeMe {

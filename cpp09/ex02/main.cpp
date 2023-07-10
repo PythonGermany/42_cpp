@@ -19,18 +19,18 @@ int main(int argc, char **argv) {
   PmergeMe p(arg);
   std::cout << "Container before: ";
   p.printContainerOne();
-  std::cout << "Container before: ";
-  p.printContainerTwo();
+  // std::cout << "Container before: ";
+  // p.printContainerTwo();
   std::string timeOne = p.sortContainerOne();
   std::string timeTwo = p.sortContainerTwo();
   std::cout << "Container after:  ";
   p.printContainerOne();
-  std::cout << "Container after:  ";
-  p.printContainerTwo();
+  // std::cout << "Container after:  ";
+  // p.printContainerTwo();
   std::cout << "Container vector time for " << arg.size()
             << " elements: " << timeOne << "ms" << std::endl;
-  std::cout << "Container dqueue time for " << arg.size()
-            << " elements: " << timeTwo << "ms" << std::endl;
+  // std::cout << "Container dqueue time for " << arg.size()
+  //           << " elements: " << timeTwo << "ms" << std::endl;
 #ifdef COUNT
   std::cout << p.compCount * 0.5 << std::endl;
 #endif
