@@ -97,17 +97,11 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
   mergeInsertSort<C>(begin, stop, chunk * 2);
 
   C tmp;
-  // Init big elements
+  // Insert big elements
   for (size_t i = 0; i < size - 1; i += 2)
     insert_chunk(tmp, tmp.end(), begin + i * chunk, chunk);
 
 #ifdef DEBUG
-  std::cout << "Small: ";
-  for (size_t i = 0; i < small.size() / chunk; i++) {
-    for (size_t j = 0; j < chunk; j++) std::cout << small[i * chunk + j] << " ";
-    std::cout << "| ";
-  }
-  std::cout << std::endl;
   std::cout << "Main:  ";
   for (size_t i = 0; i < tmp.size() / chunk; i++) {
     for (size_t j = 0; j < chunk; j++) std::cout << tmp[i * chunk + j] << " ";

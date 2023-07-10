@@ -27,6 +27,9 @@ $(NAME) : $(OBJ)
 %.o : %.cpp
 	c++ -c $(FLAGS) $^
 
+debug:
+	make FLAGS="$(FLAGS) -D DEBUG"
+
 test:
 	c++ -o $(TESTER) -D COUNT tester.cpp PmergeMe.cpp
 
