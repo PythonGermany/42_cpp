@@ -125,7 +125,7 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
   typename C::iterator loc;
   size_t smlSize = (size + 1) / 2;
   size_t jacPrev = 1, jac = 3, insCnt = 1;
-  for (size_t j = 0; j < chunk; j++) tmp.insert(tmp.begin() + j, small[j]);
+  insert_chunk(tmp, tmp.begin(), small.begin(), chunk);
   while (jacPrev < smlSize) {
     for (size_t i = std::min(jac - 1, smlSize - 1); i >= jacPrev; i--) {
       typename C::iterator curr = small.begin() + i * chunk;
