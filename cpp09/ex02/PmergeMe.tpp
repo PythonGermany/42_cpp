@@ -88,10 +88,10 @@ void PmergeMe::mergeInsertSortWrong(T& data) {
 }
 
 // Doesn't work
-// template <typename C, typename T>
-// void insert_block(C& data, T dst, T src, size_t block) {
-//   for (size_t i = 0; i < block; i++) data.insert(dst++, src[i]);
-// }
+template <typename C, typename T>
+void insert_block(C& data, T dst, T src, size_t block) {
+  for (size_t i = 0; i < block; i++) data.insert(dst++, src[i]);
+}
 
 template <typename C, typename T>
 void PmergeMe::mergeInsertSort(T begin, T end, size_t block) {
@@ -113,6 +113,7 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t block) {
   C tmp, small;
   // Init big elements
   for (size_t i = 0; i < size - 1; i += 2)
+    // insert_block(tmp, tmp.end(), begin + i * block, block);
     for (size_t j = 0; j < block; j++)
       tmp.insert(tmp.end(), begin[i * block + j]);
   // Init small elements
@@ -171,7 +172,7 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t block) {
   std::cout << std::endl << std::endl;
 
   // Copy sorted data to original array
-  std::copy(tmp.begin(), tmp.end(), begin);
+  // std::copy(tmp.begin(), tmp.end(), begin);
 }
 
 #endif
