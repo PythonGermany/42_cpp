@@ -39,8 +39,10 @@ float RPN::processExpression(std::string expr) {
         stack.top().value -= temp.value;
       else if (data.top().value == '*')
         stack.top().value *= temp.value;
-      else if (data.top().value == '/')
+      else if (data.top().value == '/') {
+        if (temp.value == 0) handleError("Processing: Division by zero", 1);
         stack.top().value /= temp.value;
+      }
     }
     data.pop();
   }
