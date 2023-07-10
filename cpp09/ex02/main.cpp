@@ -22,18 +22,18 @@ int main(int argc, char **argv) {
   std::deque<int> que;
   std::vector<std::string> arg(argc - 1);
 
-  for (int i = 0; i < argc - 1; i++) arg[i] = argv[i + 1];
+  for (int i = 0; i < argc - 1; i++) {
+    arg[i] = argv[i + 1];
+    if (arg[i].size() >= 10 && arg[i].compare("2147483647") > 0)
+      PmergeMe::handleError("Argument overflow", 1);
+  }
   p.loadSequence(arg, vec, que);
   std::cout << "Container before: ";
   p.printContainer(vec);
-  // std::cout << "Container before: ";
-  // p.printContainer(que);
   std::string timeOne = p.sortContainer(vec);
   std::string timeTwo = p.sortContainer(que);
   std::cout << "Container after:  ";
   p.printContainer(vec);
-  // std::cout << "Container after:  ";
-  // p.printContainer(que);
   std::cout << "Container vector time for " << arg.size()
             << " elements: " << timeOne << "ms" << std::endl;
   std::cout << "Container dqueue time for " << arg.size()

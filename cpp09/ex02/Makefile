@@ -28,7 +28,7 @@ $(NAME) : $(OBJ)
 	c++ -c $(FLAGS) $^
 
 test:
-	c++ -o $(TESTER) tester.cpp PmergeMe.cpp
+	c++ -o $(TESTER) -D COUNT tester.cpp PmergeMe.cpp
 
 clean :
 	rm -rf $(OBJ)

@@ -22,7 +22,6 @@
 #include <sstream>
 
 // #define DEBUG
-#define COUNT
 
 class PmergeMe {
  public:
