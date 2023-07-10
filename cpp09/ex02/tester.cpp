@@ -29,7 +29,7 @@ void runTest(size_t range, size_t iterations) {
   T data;
 
   for (int i = 0; i < range; i++) {
-    data.push_back(i);
+    data.push_back(i + 1);
     for (int k = 0; k < iterations; k++) {
       T temp = data;
       std::shuffle(temp.begin(), temp.end(), g);

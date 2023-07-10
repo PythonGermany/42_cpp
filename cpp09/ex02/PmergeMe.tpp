@@ -96,15 +96,10 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
   T stop = end - size % 2 * chunk;
   mergeInsertSort<C>(begin, stop, chunk * 2);
 
-  C tmp, small;
+  C tmp;
   // Init big elements
   for (size_t i = 0; i < size - 1; i += 2)
     insert_chunk(tmp, tmp.end(), begin + i * chunk, chunk);
-  // Init small elements
-  for (size_t i = 1; i < size; i += 2)
-    insert_chunk(small, small.end(), begin + i * chunk, chunk);
-  // Init last element if size is odd
-  if (size % 2) insert_chunk(small, small.end(), end - chunk, chunk);
 
 #ifdef DEBUG
   std::cout << "Small: ";
@@ -123,12 +118,19 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
 
   // Insert smaller elements into main chain based on the Jacobsthal Numbers
   typename C::iterator loc;
+  typename C::iterator curr;
   size_t smlSize = (size + 1) / 2;
   size_t jacPrev = 1, jac = 3, insCnt = 1;
-  insert_chunk(tmp, tmp.begin(), small.begin(), chunk);
+  insert_chunk(tmp, tmp.begin(), begin + chunk, chunk);
   while (jacPrev < smlSize) {
-    for (size_t i = std::min(jac - 1, smlSize - 1); i >= jacPrev; i--) {
-      typename C::iterator curr = small.begin() + i * chunk;
+    size_t i = std::min(jac - 1, smlSize - 1);
+    if (size % 2 && i == smlSize - 1) {
+      loc = binarySearch(*(end - chunk), tmp.begin(),
+                         tmp.begin() + (insCnt++ + i--) * chunk, chunk);
+      insert_chunk(tmp, loc, end - chunk, chunk);
+    }
+    for (; i >= jacPrev; i--) {
+      curr = begin + (i * 2 + 1) * chunk;
       loc = binarySearch(*curr, tmp.begin(),
                          tmp.begin() + (insCnt++ + i) * chunk, chunk);
 #ifdef DEBUG
@@ -157,6 +159,8 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
     jac += 2 * jacPrev;
     jacPrev = temp;
   }
+
+  // Init last element if size is odd
 
 #ifdef DEBUG
   std::cout << "\033[33mOut for " << chunk << ":  \033[39m";
