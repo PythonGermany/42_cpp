@@ -45,8 +45,11 @@ void PmergeMe::mergeSort(T& data, size_t start, size_t end, C comp, T& sml) {
 
 template <typename T>
 T PmergeMe::binarySearch(int& target, T start, T end, size_t block) {
-  if (end - start < 1) return end;
+  if ((end - start) / block < 1) return end;
   T mid = start + (end - start) / 2;
+#ifdef COUNT
+  compCount++;
+#endif
   if (*mid < target) return binarySearch(target, mid + block, end, block);
   return binarySearch(target, start, mid, block);
 }
@@ -92,41 +95,58 @@ void PmergeMe::mergeInsertSortWrong(T& data) {
 
 template <typename C, typename T>
 void PmergeMe::mergeInsertSort(T begin, T end, size_t block) {
-  const size_t size = end - begin;
-  if (size < 2 * block) return;
+  const size_t size = (end - begin) / block;
+  if (size < 2) return;
 
-  for (size_t i = 0; i < size - block; i += 2 * block) {
-    if (begin[i] < begin[i + block])
-      for (size_t j = i; j < i + block; j++)
-        std::swap(begin[j], begin[j + block]);
+  // Swap pairs if needed
+  for (size_t i = 0; i < size - 1; i += 2) {
+    if (begin[i] < begin[(i + 1) * block])
+      for (size_t j = 0; j < block; j++)
+        std::swap(begin[i * block + j], begin[(i + 1) * block + j]);
+#ifdef COUNT
+    compCount++;
+#endif
   }
-  T stop = end - block * (size / block % 2);
+  T stop = end - size % 2 * block;
   mergeInsertSort<C>(begin, stop, block * 2);
 
   C tmp, small;
-  for (size_t i = 0; i < size - block; i += 2 * block)
-    for (size_t j = i; j < i + block; j++) tmp.insert(tmp.end(), begin[j]);
-  for (size_t i = block; i < size; i += 2 * block)
-    for (size_t j = i; j < i + block; j++) small.insert(small.end(), begin[j]);
-  if (size / block % 2)
-    for (size_t j = size - block; j < size; j++)
-      small.insert(small.end(), begin[j]);
+  // Init big elements
+  for (size_t i = 0; i < size - 1; i += 2)
+    for (size_t j = 0; j < block; j++)
+      tmp.insert(tmp.end(), begin[i * block + j]);
+  // Init small elements
+  for (size_t i = 1; i < size; i += 2)
+    for (size_t j = 0; j < block; j++)
+      small.insert(small.end(), begin[i * block + j]);
+  // Init last element if size is odd
+  if (size % 2)
+    for (size_t j = 0; j < block; j++)
+      small.insert(small.end(), begin[(size - 1) * block + j]);
+
+  // Debug
   std::cout << "Small for " << block << ": ";
-  for (size_t i = 0; i < small.size(); i += block) {
-    for (size_t j = i; j < i + block; j++) std::cout << small[j] << " ";
+  for (size_t i = 0; i < small.size() / block; i++) {
+    for (size_t j = 0; j < block; j++) std::cout << small[i * block + j] << " ";
+    std::cout << "| ";
+  }
+  std::cout << std::endl;
+  std::cout << "Main for " << block << ": ";
+  for (size_t i = 0; i < tmp.size() / block; i++) {
+    for (size_t j = 0; j < block; j++) std::cout << tmp[i * block + j] << " ";
     std::cout << "| ";
   }
   std::cout << std::endl;
 
   typename C::iterator loc;
-  size_t smlSize = size / block / 2 + size / block % 2;
-  size_t jacPrev = 1, jac = 3, insCnt = 0;
-  for (size_t i = 0; i < block; i++) tmp.insert(tmp.begin() + i, small[i]);
+  size_t smlSize = (size + 1) / 2;
+  size_t jacPrev = 1, jac = 3, insCnt = 1;
+  for (size_t j = 0; j < block; j++) tmp.insert(tmp.begin() + j, small[j]);
   while (jacPrev < smlSize) {
     // std::cout << "jac: " << jac << " | jacPrev: " << jacPrev << std::endl;
     for (size_t i = std::min(jac - 1, smlSize - 1); i >= jacPrev; i--) {
       loc = binarySearch(small[i * block], tmp.begin(),
-                         tmp.begin() + (++insCnt + i) * block, block);
+                         tmp.begin() + (insCnt++ + i) * block, block);
       // std::cout << "index: " << i << std::endl;
       for (size_t j = 0; j < block; j++)
         tmp.insert(loc + j, small[i * block + j]);
@@ -136,18 +156,21 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t block) {
     jacPrev = temp;
   }
 
+  // Debug
   std::cout << "Data for " << block << ": ";
-  for (size_t i = 0; i < size; i += block) {
-    for (size_t j = i; j < i + block; j++) std::cout << begin[j] << " ";
+  for (size_t i = 0; i < size; i++) {
+    for (size_t j = 0; j < block; j++) std::cout << begin[i * block + j] << " ";
     std::cout << "| ";
   }
   std::cout << std::endl;
   std::cout << "Tmp for " << block << ":  ";
-  for (size_t i = 0; i < tmp.size(); i += block) {
-    for (size_t j = i; j < i + block; j++) std::cout << tmp[j] << " ";
+  for (size_t i = 0; i < tmp.size() / block; i++) {
+    for (size_t j = 0; j < block; j++) std::cout << tmp[i * block + j] << " ";
     std::cout << "| ";
   }
   std::cout << std::endl << std::endl;
+
+  // Copy sorted data to original array
   std::copy(tmp.begin(), tmp.end(), begin);
 }
 
