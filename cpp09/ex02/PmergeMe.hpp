@@ -44,11 +44,9 @@ class PmergeMe {
   template <typename T, typename C>
   void mergeSort(T& data, size_t start, size_t end, C comp, T& sml);
   template <typename T>
-  T binarySearchOld(int& target, T start, T end);
+  T binarySearch(int& target, T start, T end, size_t range);
   template <typename T>
   void mergeInsertSortWrong(T& data);
-  template <typename T>
-  T binarySearch(int& target, T start, T end, size_t range);
   template <typename C, typename T>
   void mergeInsertSort(T begin, T end, size_t range);
 
