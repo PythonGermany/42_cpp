@@ -16,51 +16,39 @@
 #include <sys/time.h>
 
 #include <algorithm>
-#include <deque>
 #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <sstream>
-#include <vector>
 
-#define DEBUG
+// #define DEBUG
 #define COUNT
 
 class PmergeMe {
-#ifdef COUNT
  public:
+#ifdef COUNT
   int compCount;
 #endif
- private:
-  std::vector<int> vec;
-  std::deque<int> que;
 
- public:
   PmergeMe();
-  PmergeMe(std::vector<std::string> seq);
   PmergeMe(PmergeMe const& rhs);
   PmergeMe& operator=(PmergeMe const& rhs);
   ~PmergeMe();
 
-  template <typename T, typename C>
-  void mergeSort(T& data, size_t start, size_t end, C comp, T& sml);
+  template <typename T, typename C, typename S>
+  void loadSequence(S& seq, T& a, C& b);
+  template <typename T>
+  void printContainer(T& cont) const;
+  template <typename T>
+  std::string sortContainer(T& cont);
   template <typename T>
   T binarySearch(int& target, T start, T end, size_t range);
-  template <typename T>
-  void mergeInsertSortWrong(T& data);
   template <typename C, typename T>
   void mergeInsertSort(T begin, T end, size_t range);
 
-  void loadSequence(std::vector<std::string>& seq);
-  std::string sortContainerOne();
-  std::string sortContainerTwo();
-  void printContainerOne() const;
-  void printContainerTwo() const;
   static void handleError(std::string msg, int exitCode);
 
  private:
-  static bool comparePairs(std::pair<int, int>& a, std::pair<int, int>& b);
-  static bool compareInts(int& a, int& b);
   long long getTimeNanos() const;
   std::string valueToString(double val) const;
   std::string removeTrailingZeros(std::string str) const;
