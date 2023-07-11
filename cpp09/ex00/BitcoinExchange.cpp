@@ -73,9 +73,11 @@ void BitcoinExchange::processInput() {
       handleError("not a positive number.");
     else if (value > 1000)
       handleError("too large a number.");
-    else
-      std::cout << dateStr << " => " << value << " = "
-                << calculateValue(dateStr, value) << std::endl;
+    else {
+      float output = calculateValue(dateStr, value);
+      if (output >= 0)
+        std::cout << dateStr << " => " << value << " = " << output << std::endl;
+    }
   }
 }
 
@@ -84,8 +86,14 @@ float BitcoinExchange::calculateValue(std::string &date, float amount) {
 
   if (data.count(date))
     value = data[date];
-  else
-    value = (--data.upper_bound(date))->second;
+  else {
+    std::map<std::string, float>::iterator it = data.upper_bound(date);
+    if (it == data.begin()) {
+      handleError(std::string("no data available for this date => " + date));
+      value = -1;
+    } else
+      value = (--data.upper_bound(date))->second;
+  }
   return (value * amount);
 }
 
