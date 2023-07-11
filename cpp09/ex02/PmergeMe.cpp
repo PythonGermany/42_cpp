@@ -57,7 +57,8 @@ std::string PmergeMe::removeTrailingZeros(std::string str) const {
 
 int PmergeMe::verifyValue(std::string& value) const {
   if (value.empty()) return (1);
-  if (value.size() >= 10 && value.compare("2147483647") > 0) return 1;
+  size_t size = value.size();
+  if (size > 10 || (size == 10 && value.compare("2147483647") > 0)) return 1;
   for (size_t i = 0; i < value.length(); i++)
     if (!std::isdigit(value[i])) return (1);
   return (0);

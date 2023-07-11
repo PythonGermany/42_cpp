@@ -24,8 +24,6 @@ int main(int argc, char **argv) {
 
   for (int i = 0; i < argc - 1; i++) {
     arg[i] = argv[i + 1];
-    if (arg[i].size() >= 10 && arg[i].compare("2147483647") > 0)
-      PmergeMe::handleError("Argument overflow", 1);
   }
   p.loadSequence(arg, vec, que);
   std::cout << "Container before: ";
