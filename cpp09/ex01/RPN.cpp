@@ -73,14 +73,14 @@ std::stack<t_element> RPN::loadExpression(std::string& expr) {
     else {
       if (verifyValue(value))
         handleError("Loading: Invalid input expression", 1);
-      data.push(createElement(OPERAND, std::atof(value.c_str())));
+      data.push(createElement(OPERAND, std::atoi(value.c_str())));
     }
     expr.erase(start);
   }
   return (data);
 }
 
-t_element RPN::createElement(int type, float value) {
+t_element RPN::createElement(int type, int value) {
   t_element el;
 
   el.type = type;
@@ -88,16 +88,10 @@ t_element RPN::createElement(int type, float value) {
   return (el);
 }
 
-int RPN::verifyValue(std::string& value) {
-  bool precisionFound = false;
+int RPN::verifyValue(std::string& value) const {
   if (value.empty()) return (1);
-  for (size_t i = 0; i < value.length(); i++) {
-    if (i == 0 && (value[i] == '-' || value[i] == '+') && value.length() > 1)
-      continue;
-    else if (!precisionFound && value[i] == '.')
-      precisionFound = true;
-    else if (!std::isdigit(value[i]))
-      return (1);
-  }
+  if (value.size() >= 10 && value.compare("2147483647") > 0) return 1;
+  for (size_t i = 0; i < value.length(); i++)
+    if (!std::isdigit(value[i])) return (1);
   return (0);
 }

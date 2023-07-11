@@ -24,7 +24,7 @@
 
 typedef struct s_element {
   int type;
-  float value;
+  int value;
 } t_element;
 
 class RPN {
@@ -39,8 +39,8 @@ class RPN {
 
  private:
   std::stack<t_element> loadExpression(std::string& expr);
-  t_element createElement(int type, float value);
-  int verifyValue(std::string& value);
+  t_element createElement(int type, int value);
+  int verifyValue(std::string& value) const;
 };
 
 #endif
