@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:40:52 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/07/10 18:16:17 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:02:15 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,15 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
     insert_chunk(tmp, tmp.end(), begin + i * chunk, chunk);
 
 #ifdef DEBUG
-  std::cout << "Main:  ";
+  std::cout << "\033[33m" << chunk << ": Main:  \033[39m";
   for (size_t i = 0; i < tmp.size() / chunk; i++) {
     for (size_t j = 0; j < chunk; j++) std::cout << tmp[i * chunk + j] << " ";
+    std::cout << "| ";
+  }
+  std::cout << std::endl;
+  std::cout << "\033[33m" << chunk << ": Small: \033[39m";
+  for (size_t i = 1; i < size; i += 2) {
+    for (size_t j = 0; j < chunk; j++) std::cout << begin[i * chunk + j] << " ";
     std::cout << "| ";
   }
   std::cout << std::endl;
@@ -154,10 +160,8 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
     jacPrev = temp;
   }
 
-  // Init last element if size is odd
-
 #ifdef DEBUG
-  std::cout << "\033[33mOut for " << chunk << ":  \033[39m";
+  std::cout << "\033[36m" << chunk << ": Out:  \033[39m";
   for (size_t i = 0; i < tmp.size() / chunk; i++) {
     for (size_t j = 0; j < chunk; j++) std::cout << tmp[i * chunk + j] << " ";
     std::cout << "| ";

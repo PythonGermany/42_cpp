@@ -6,7 +6,7 @@
 /*   By: rburgsta <rburgsta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:18:59 by rburgsta          #+#    #+#             */
-/*   Updated: 2023/07/10 20:01:14 by rburgsta         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:00:43 by rburgsta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int main(int argc, char** argv) {
   int range = std::atoi(argv[1]);
   int iterations = std::atoi(argv[2]);
 
-  runTest<std::vector<int>>(range, iterations);
+  runTest<std::vector<int> >(range, iterations);
   std::cout << "std::vector<int> OK" << std::endl;
-  runTest<std::deque<int>>(range, iterations);
+  runTest<std::deque<int> >(range, iterations);
   std::cout << "std::deque<int> OK" << std::endl;
 }
