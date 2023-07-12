@@ -44,22 +44,10 @@ std::string PmergeMe::sortContainer(T& cont) {
 }
 
 template <typename T>
-T PmergeMe::binarySearch(int& target, T start, T end, size_t chunk) {
-  size_t size = (end - start) / chunk;
-  if (size < 1) return end;
-  T mid = start + (size / 2) * chunk;
-#ifdef COUNT
-  compCount++;
-#endif
-  if (*mid < target) return binarySearch(target, mid + chunk, end, chunk);
-  return binarySearch(target, start, mid, chunk);
-}
-
-template <typename T>
 void debugPrint(std::string color, std::string msg, T begin, T end,
                 size_t chunk, size_t stride = 1, bool newline = false) {
 #ifdef DEBUG
-  std::cout << color << chunk << ": " << msg << "\033[39m";
+  std::cout << color << chunk << ": " << msg << DEFAULT;
   for (T itr = begin; itr < end; itr += chunk * stride) {
     for (size_t i = 0; i < chunk; i++) std::cout << *(itr + i) << " ";
     std::cout << "| ";
@@ -78,6 +66,18 @@ void debugPrint(std::string color, std::string msg, T begin, T end,
 #endif
 }
 
+template <typename T>
+T PmergeMe::binarySearch(int& target, T start, T end, size_t chunk) {
+  size_t size = (end - start) / chunk;
+  if (size < 1) return end;
+  T mid = start + (size / 2) * chunk;
+#ifdef COUNT
+  compCount++;
+#endif
+  if (*mid < target) return binarySearch(target, mid + chunk, end, chunk);
+  return binarySearch(target, start, mid, chunk);
+}
+
 template <typename C, typename T>
 void insert_chunk(C& data, T dst, T src, size_t chunk) {
   for (size_t j = 0; j < chunk; j++) dst = data.insert(dst, src[chunk - j - 1]);
@@ -87,7 +87,7 @@ template <typename C, typename T>
 void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
   const size_t size = (end - begin) / chunk;
   if (size < 2) return;
-  debugPrint("\033[31m", "In:      ", begin, end, chunk);
+  debugPrint(RED, "In:      ", begin, end, chunk);
 
   // Swap pairs if needed
   for (size_t i = 0; i < size - 1; i += 2) {
@@ -98,7 +98,7 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
     compCount++;
 #endif
   }
-  debugPrint("\033[35m", "Swapped: ", begin, end, chunk, 1, true);
+  debugPrint(MAGENTA, "Swapped: ", begin, end, chunk, 1, true);
 
   T stop = end - size % 2 * chunk;
   mergeInsertSort<C>(begin, stop, chunk * 2);
@@ -108,9 +108,9 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
   for (size_t i = 0; i < size - 1; i += 2)
     insert_chunk(tmp, tmp.end(), begin + i * chunk, chunk);
 
-  debugPrint("\033[31m", "Data:  ", begin, end, chunk);
-  debugPrint("\033[33m", "Main:  ", tmp.begin(), tmp.end(), chunk);
-  debugPrint("\033[33m", "Small: ", begin + 1 * chunk, end, chunk, 2);
+  debugPrint(RED, "Data:  ", begin, end, chunk);
+  debugPrint(YELLOW, "Main:  ", tmp.begin(), tmp.end(), chunk);
+  debugPrint(YELLOW, "Small: ", begin + 1 * chunk, end, chunk, 2);
 
   // Insert smaller elements into main chain based on the Jacobsthal Numbers
   typename C::iterator loc;
@@ -130,14 +130,12 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
       loc = binarySearch(*curr, tmp.begin(),
                          tmp.begin() + (insCnt++ + i) * chunk, chunk);
 #ifdef DEBUG
-      std::cout << "\033[34m" << chunk << ": Insert: \033[39m"
-                << "index: " << i << " value: " << *curr << std::endl;
+      std::cout << BLUE << chunk << ": Insert: " << DEFAULT << "index: " << i
+                << " value: " << *curr << std::endl;
 #endif
-      debugPrint("\033[32m", "     Prev:  ", tmp.begin(), tmp.end(), chunk,
-                 chunk);
+      debugPrint(GREEN, "  Prev:  ", tmp.begin(), tmp.end(), chunk, chunk);
       insert_chunk(tmp, loc, curr, chunk);
-      debugPrint("\033[32m", "     After: ", tmp.begin(), tmp.end(), chunk,
-                 chunk);
+      debugPrint(GREEN, "  After: ", tmp.begin(), tmp.end(), chunk, chunk);
     }
     int temp = jac;
     jac += 2 * jacPrev;
