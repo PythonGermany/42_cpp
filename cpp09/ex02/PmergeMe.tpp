@@ -55,6 +55,29 @@ T PmergeMe::binarySearch(int& target, T start, T end, size_t chunk) {
   return binarySearch(target, start, mid, chunk);
 }
 
+template <typename T>
+void debugPrint(std::string color, std::string msg, T begin, T end,
+                size_t chunk, size_t stride = 1, bool newline = false) {
+#ifdef DEBUG
+  std::cout << color << chunk << ": " << msg << "\033[39m";
+  for (T itr = begin; itr < end; itr += chunk * stride) {
+    for (size_t i = 0; i < chunk; i++) std::cout << *(itr + i) << " ";
+    std::cout << "| ";
+  }
+  std::cout << std::endl;
+  if (newline) std::cout << std::endl;
+#endif
+#ifndef DEBUG
+  (void)color;
+  (void)msg;
+  (void)begin;
+  (void)end;
+  (void)chunk;
+  (void)stride;
+  (void)newline;
+#endif
+}
+
 template <typename C, typename T>
 void insert_chunk(C& data, T dst, T src, size_t chunk) {
   for (size_t j = 0; j < chunk; j++) dst = data.insert(dst, src[chunk - j - 1]);
@@ -64,15 +87,7 @@ template <typename C, typename T>
 void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
   const size_t size = (end - begin) / chunk;
   if (size < 2) return;
-
-#ifdef DEBUG
-  std::cout << "\033[31m" << chunk << ": In:      \033[39m";
-  for (size_t i = 0; i < size; i++) {
-    for (size_t j = 0; j < chunk; j++) std::cout << begin[i * chunk + j] << " ";
-    std::cout << "| ";
-  }
-  std::cout << std::endl;
-#endif
+  debugPrint("\033[31m", "In:      ", begin, end, chunk);
 
   // Swap pairs if needed
   for (size_t i = 0; i < size - 1; i += 2) {
@@ -83,15 +98,7 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
     compCount++;
 #endif
   }
-
-#ifdef DEBUG
-  std::cout << "\033[35m" << chunk << ": Swapped: \033[39m";
-  for (size_t i = 0; i < size; i++) {
-    for (size_t j = 0; j < chunk; j++) std::cout << begin[i * chunk + j] << " ";
-    std::cout << "| ";
-  }
-  std::cout << std::endl << std::endl;
-#endif
+  debugPrint("\033[35m", "Swapped: ", begin, end, chunk, 1, true);
 
   T stop = end - size % 2 * chunk;
   mergeInsertSort<C>(begin, stop, chunk * 2);
@@ -101,20 +108,9 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
   for (size_t i = 0; i < size - 1; i += 2)
     insert_chunk(tmp, tmp.end(), begin + i * chunk, chunk);
 
-#ifdef DEBUG
-  std::cout << "\033[33m" << chunk << ": Main:  \033[39m";
-  for (size_t i = 0; i < tmp.size() / chunk; i++) {
-    for (size_t j = 0; j < chunk; j++) std::cout << tmp[i * chunk + j] << " ";
-    std::cout << "| ";
-  }
-  std::cout << std::endl;
-  std::cout << "\033[33m" << chunk << ": Small: \033[39m";
-  for (size_t i = 1; i < size; i += 2) {
-    for (size_t j = 0; j < chunk; j++) std::cout << begin[i * chunk + j] << " ";
-    std::cout << "| ";
-  }
-  std::cout << std::endl;
-#endif
+  debugPrint("\033[31m", "Data:  ", begin, end, chunk);
+  debugPrint("\033[33m", "Main:  ", tmp.begin(), tmp.end(), chunk);
+  debugPrint("\033[33m", "Small: ", begin + 1 * chunk, end, chunk, 2);
 
   // Insert smaller elements into main chain based on the Jacobsthal Numbers
   typename C::iterator loc;
@@ -134,40 +130,21 @@ void PmergeMe::mergeInsertSort(T begin, T end, size_t chunk) {
       loc = binarySearch(*curr, tmp.begin(),
                          tmp.begin() + (insCnt++ + i) * chunk, chunk);
 #ifdef DEBUG
-      std::cout << "\033[34m Insert: \033[39m"
+      std::cout << "\033[34m" << chunk << ": Insert: \033[39m"
                 << "index: " << i << " value: " << *curr << std::endl;
-      std::cout << "\033[32m     Prev:  \033[39m";
-      for (size_t i = 0; i < tmp.size() / chunk; i++) {
-        for (size_t j = 0; j < chunk; j++)
-          std::cout << tmp[i * chunk + j] << " ";
-        std::cout << "| ";
-      }
-      std::cout << std::endl;
 #endif
+      debugPrint("\033[32m", "     Prev:  ", tmp.begin(), tmp.end(), chunk,
+                 chunk);
       insert_chunk(tmp, loc, curr, chunk);
-#ifdef DEBUG
-      std::cout << "\033[32m     After: \033[39m";
-      for (size_t i = 0; i < tmp.size() / chunk; i++) {
-        for (size_t j = 0; j < chunk; j++)
-          std::cout << tmp[i * chunk + j] << " ";
-        std::cout << "| ";
-      }
-      std::cout << std::endl;
-#endif
+      debugPrint("\033[32m", "     After: ", tmp.begin(), tmp.end(), chunk,
+                 chunk);
     }
     int temp = jac;
     jac += 2 * jacPrev;
     jacPrev = temp;
   }
 
-#ifdef DEBUG
-  std::cout << "\033[36m" << chunk << ": Out:  \033[39m";
-  for (size_t i = 0; i < tmp.size() / chunk; i++) {
-    for (size_t j = 0; j < chunk; j++) std::cout << tmp[i * chunk + j] << " ";
-    std::cout << "| ";
-  }
-  std::cout << std::endl << std::endl;
-#endif
+  debugPrint("\033[36m", "Out:   ", tmp.begin(), tmp.end(), chunk, 1, true);
 
   // Copy sorted data to original array
   std::copy(tmp.begin(), tmp.end(), begin);
